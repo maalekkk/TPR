@@ -9,8 +9,8 @@ namespace DL
     class LibraryContext
     {
         private List<Employee> _staff;
-        private ReadersCollection _readers;
-        private BooksCollection _booksCatalog;
+        private ICrudOperations<Reader> _readers;
+        private ICrudOperations<Book> _booksCatalog;
         private ObservableCollection<Rent> _rentsList;
         private ObservableCollection<CopyOfBook> _copiesOfBooks;
 
@@ -22,5 +22,11 @@ namespace DL
             _rentsList = new ObservableCollection<Rent>();
             _copiesOfBooks = new ObservableCollection<CopyOfBook>();
         }
+
+        internal List<Employee> Staff { get => _staff; set => _staff = value; }
+        internal ICrudOperations<Reader> Readers { get => _readers; set => _readers = value; }
+        internal ICrudOperations<Book> BooksCatalog { get => _booksCatalog; set => _booksCatalog = value; }
+        internal ObservableCollection<Rent> RentsList { get => _rentsList; set => _rentsList = value; }
+        internal ObservableCollection<CopyOfBook> CopiesOfBooks { get => _copiesOfBooks; set => _copiesOfBooks = value; }
     }
 }

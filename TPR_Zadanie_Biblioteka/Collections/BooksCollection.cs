@@ -15,6 +15,7 @@ namespace DL
             {
                 throw new Exception("Book with this ID already exists!");
             }
+            _books.Add(obj.Id, obj);
         }
 
         public void Delete(Book obj)

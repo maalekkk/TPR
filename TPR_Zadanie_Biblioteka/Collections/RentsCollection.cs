@@ -34,18 +34,34 @@ namespace DL.Collections
             return _rents;
         }
 
-        public void Update(string id, Rent obj)
+        public void Update(string id, int option, Object newValue)
         {
-            if (!id.Equals(obj.Id))
+            //if (!id.Equals(obj.Id))
+            //{
+            //    throw new Exception("ID is permament, it cant be different from old object");
+            //}
+            //for (int i = 0; i < _rents.Count; i++)
+            //{
+            //    if (_rents[i].Id.Equals(id))
+            //    {
+            //        _rents[i] = obj;
+            //    }
+            //}
+            Rent updatingRent = _rents.Single(rent => rent.Id.Equals(id));
+            if(updatingRent == null)
             {
-                throw new Exception("ID is permament, it cant be different from old object");
+                throw new Exception("Employee with this ID doesn't exist");
             }
-            for (int i = 0; i < _rents.Count; i++)
+            switch (option)
             {
-                if (_rents[i].Id.Equals(id))
-                {
-                    _rents[i] = obj;
-                }
+                case Consts.RentDateOfReturn:
+                    updatingRent.DateOfReturn = (DateTime)newValue;
+                    break;
+                case Consts.RentTotalPricePerDay:
+                    updatingRent.TotalPricePerDay = (double)newValue;
+                    break;
+                default:
+                    throw new Exception("Invalid option!");
             }
         }
     }

@@ -36,18 +36,43 @@ namespace DL.Collections
             return _employees;
         }
 
-        public void Update(string id, Employee obj)
+        public void Update(string id, int option, Object newValue)
         {
-            if (!id.Equals(obj.Id))
+            //if (!id.Equals(obj.Id))
+            //{
+            //    throw new Exception("ID is permament, it cant be different from old object");
+            //}
+            //for (int i = 0; i < _employees.Count; i++)
+            //{
+            //    if (_employees[i].Id.Equals(id))
+            //    {
+            //        _employees[i] = obj;
+            //    }
+            //}
+            Employee updatingEmployee = _employees.Find(employee => employee.Id.Equals(id));
+            if(updatingEmployee == null)
             {
-                throw new Exception("ID is permament, it cant be different from old object");
+                throw new Exception("Employee with this ID doesn't exist");
             }
-            for (int i = 0; i < _employees.Count; i++)
+            switch (option)
             {
-                if (_employees[i].Id.Equals(id))
-                {
-                    _employees[i] = obj;
-                }
+                case Consts.PersonName:
+                    updatingEmployee.Name = (string)newValue;
+                    break;
+                case Consts.PersonSurname:
+                    updatingEmployee.Surname = (string)newValue;
+                    break;
+                case Consts.PersonPhoneNumber:
+                    updatingEmployee.PhoneNumber = (string)newValue;
+                    break;
+                case Consts.PersonEmail:
+                    updatingEmployee.Email = (string)newValue;
+                    break;
+                case Consts.EmployeeDateOfEmployment:
+                    updatingEmployee.DateOfEmployment = (DateTime)newValue;
+                    break;
+                default:
+                    throw new Exception("Invalid option!");
             }
         }
     }

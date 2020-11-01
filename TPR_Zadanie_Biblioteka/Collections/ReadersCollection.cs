@@ -40,18 +40,43 @@ namespace DL
             return _readers;
         }
 
-        public void Update(string id, Reader obj)
+        public void Update(string id, int option, Object newValue)
         {
-            if (!id.Equals(obj.Id))
+            //if (!id.Equals(obj.Id))
+            //{
+            //    throw new Exception("ID is permament, it cant be different from old object");
+            //}
+            //for(int i = 0; i < _readers.Count; i++)
+            //{
+            //    if (_readers[i].Id.Equals(id))
+            //    {
+            //        _readers[i] = obj;
+            //    }
+            //}
+            Reader updatingReader = _readers.Find(reader => reader.Equals(id));
+            if(updatingReader == null)
             {
-                throw new Exception("ID is permament, it cant be different from old object");
+                throw new Exception("Employee with this ID doesn't exist");
             }
-            for(int i = 0; i < _readers.Count; i++)
+            switch (option)
             {
-                if (_readers[i].Id.Equals(id))
-                {
-                    _readers[i] = obj;
-                }
+                case Consts.PersonName:
+                    updatingReader.Name = (string)newValue;
+                    break;
+                case Consts.PersonSurname:
+                    updatingReader.Surname = (string)newValue;
+                    break;
+                case Consts.PersonPhoneNumber:
+                    updatingReader.PhoneNumber = (string)newValue;
+                    break;
+                case Consts.PersonEmail:
+                    updatingReader.Email = (string)newValue;
+                    break;
+                case Consts.ReaderDateOfRegistration:
+                    updatingReader.DateOfRegistration = (DateTime)newValue;
+                    break;
+                default:
+                    throw new Exception("Invalid option!");
             }
         }
     }

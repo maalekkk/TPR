@@ -38,11 +38,32 @@ namespace DL
             return returnList;
         }
 
-        public void Update(string id, Book obj)
+        public void Update(string id, int option, Object newValue)
         {
-            if (id.Equals(obj.Id)) 
+            //if (id.Equals(obj.Id)) 
+            //{
+            //    _books[id] = obj;
+            //}
+            if (!_books.ContainsKey(id))
             {
-                _books[id] = obj;
+                throw new Exception("Book with this ID doesn't exist");
+            }
+            switch (option)
+            {
+                case Consts.BookName:
+                    _books[id].Name = (string)newValue;
+                    break;
+                case Consts.BookAuthor:
+                    _books[id].Author = (Author)newValue;
+                    break;
+                case Consts.BookDescription:
+                    _books[id].Description = (string)newValue;
+                    break;
+                case Consts.BookBookType:
+                    _books[id].BookType1 = (Book.BookType)newValue;
+                    break;
+                default:
+                    throw new Exception("Invalid option!");
             }
         }
     }

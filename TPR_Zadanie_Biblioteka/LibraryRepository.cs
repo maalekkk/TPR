@@ -26,19 +26,25 @@ namespace DL
             }
         }
 
-        public void AddBook(Book book)
+        public void AddBook(Object[] props)
         {
-            _libraryContext.BooksCatalog.Add(book);
+            if(props.Length != 5)
+            {
+                throw new Exception("Invalid number of properties!");
+            }
+            Book newBook = new Book((string)props[0], (string)props[1], (Author)props[2],
+                (string)props[3], (Book.BookType)props[4]);
+            _libraryContext.BooksCatalog.Add(newBook);
         }
 
-        public void GetBook(string id)
+        public Book GetBook(string id)
         {
-            _libraryContext.BooksCatalog.Get(id);
+           return _libraryContext.BooksCatalog.Get(id);
         }
 
-        public void GetAllBooks()
+        public IEnumerable<Book> GetAllBooks()
         {
-            _libraryContext.BooksCatalog.GetAll();
+           return _libraryContext.BooksCatalog.GetAll();
         }
 
         public void UpdateBook(string id, Book book)
@@ -51,19 +57,26 @@ namespace DL
             _libraryContext.BooksCatalog.Delete(book);
         }
 
-        public void AddReader(Reader reader)
+        public void AddReader(Object[] props)
         {
-            _libraryContext.Readers.Add(reader);
+            if(props.Length != 8)
+            {
+                throw new Exception("Invalid number of properties!");
+            }
+            Reader newReader = new Reader((string)props[0], (string)props[1], (string)props[2],
+                (DateTime)props[3], (string)props[4], (string)props[5], (Person.Gender)props[6],
+                (DateTime)props[7]);
+            _libraryContext.Readers.Add(newReader);
         }
 
-        public void GetReader(string id)
+        public Reader GetReader(string id)
         {
-            _libraryContext.Readers.Get(id);
+            return _libraryContext.Readers.Get(id);
         }
 
-        public void GetAllReaders()
+        public IEnumerable<Reader> GetAllReaders()
         {
-            _libraryContext.Readers.GetAll();
+            return _libraryContext.Readers.GetAll();
         }
 
         public void UpdateReader(string id, Reader reader)

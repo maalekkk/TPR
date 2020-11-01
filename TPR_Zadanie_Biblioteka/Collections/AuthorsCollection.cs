@@ -39,18 +39,34 @@ namespace DL.Collections
             return Authors;
         }
 
-        public void Update(string id, Author obj)
+        public void Update(string id, int option, Object newValue)
         {
-            if (!id.Equals(obj.Id))
+            //if (!id.Equals(obj.Id))
+            //{
+            //    throw new Exception("ID is permament, it cant be different from old object");
+            //}
+            //for(int i = 0; i < Authors.Count; i++)
+            //{
+            //    if (Authors[i].Id.Equals(id))
+            //    {
+            //        Authors[i] = obj;
+            //    }
+            //}
+            Author updatingAuthor = _authors.Find(author => author.Id.Equals(id));
+            if(updatingAuthor == null)
             {
-                throw new Exception("ID is permament, it cant be different from old object");
+                throw new Exception("Author with this ID doesn't exist");
             }
-            for(int i = 0; i < Authors.Count; i++)
+            switch (option)
             {
-                if (Authors[i].Id.Equals(id))
-                {
-                    Authors[i] = obj;
-                }
+                case Consts.AuthorName:
+                    updatingAuthor.Name = (string)newValue;
+                    break;
+                case Consts.AuthorSurname:
+                    updatingAuthor.Surname = (string)newValue;
+                    break;
+                default:
+                    throw new Exception("Invalid option!");
             }
         }
     }

@@ -11,7 +11,7 @@ namespace DL
         void Add(T obj);
         T Get(string id);
         IEnumerable<T> GetAll();
-        void Update(string id, T obj);
+        void Update(string id, int option, Object newValue);
         void Delete(T obj);
     }
 }

@@ -40,6 +40,6 @@ namespace DL
         public DateTime DateOfRental { get => _dateOfRental; private set => _dateOfRental = value; }
         public DateTime DateOfReturn { get => _dateOfReturn; set => _dateOfReturn = value; }
         public List<CopyOfBook> Book { get => _books; private set => _books = value; }
-        public double TotalPrice { get => _totalPricePerDay; set => _totalPricePerDay = value; }
+        public double TotalPricePerDay { get => _totalPricePerDay; set => _totalPricePerDay = value; }
     }
 }

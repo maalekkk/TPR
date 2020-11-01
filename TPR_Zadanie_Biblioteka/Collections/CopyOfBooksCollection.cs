@@ -15,6 +15,14 @@ namespace DL.Collections
             {
                 throw new Exception("Copy of book with this ID already exists!");
             }
+            if(obj.PurchaseDate.CompareTo(DateTime.Now) > 0)
+            {
+                throw new Exception("Invalid purchase date! (date from future)");
+            }
+            if(obj.PricePerDay < 0)
+            {
+                throw new Exception("Price cannot be negative!");
+            }
             _copiesOfBooks.Add(obj);                       
         }
 

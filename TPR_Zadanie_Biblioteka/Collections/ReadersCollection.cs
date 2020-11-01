@@ -21,6 +21,10 @@ namespace DL
             {
                 throw new Exception("Unborn Reader! (birth day is future date)");
             }
+            if (obj.DateOfRegistration.CompareTo(DateTime.Now) > 0)
+            {
+                throw new Exception("Date of registration is future date!");
+            }
 
             _readers.Add(obj);
         }

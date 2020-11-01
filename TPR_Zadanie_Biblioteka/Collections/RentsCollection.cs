@@ -16,6 +16,14 @@ namespace DL.Collections
             {
                 throw new Exception("Rent with this ID already exists!");
             }
+            if(obj.DateOfRental.CompareTo(DateTime.Now) > 0)
+            {
+                throw new Exception("Invalid date of rental! (future date)");
+            }
+            if(obj.TotalPricePerDay < 0)
+            {
+                throw new Exception("Total price per day cannot be negative!");
+            }
             _rents.Add(obj);
         }
 

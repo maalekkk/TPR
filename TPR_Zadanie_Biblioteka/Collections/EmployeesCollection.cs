@@ -18,6 +18,10 @@ namespace DL.Collections
             {
                 throw new Exception("Unborn employee! (birth day is future date)");
             }
+            if(obj.DateOfEmployment.CompareTo(DateTime.Now) > 0)
+            {
+                throw new Exception("Invalid Date of employment! (future date)");
+            }
             _employees.Add(obj);
         }
 

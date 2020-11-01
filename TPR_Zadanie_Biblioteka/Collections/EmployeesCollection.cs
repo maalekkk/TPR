@@ -38,6 +38,10 @@ namespace DL.Collections
 
         public void Update(string id, Employee obj)
         {
+            if (!id.Equals(obj.Id))
+            {
+                throw new Exception("ID is permament, it cant be different from old object");
+            }
             for (int i = 0; i < _employees.Count; i++)
             {
                 if (_employees[i].Id.Equals(id))

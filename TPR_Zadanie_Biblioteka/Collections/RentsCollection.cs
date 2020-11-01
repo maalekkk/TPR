@@ -36,6 +36,10 @@ namespace DL.Collections
 
         public void Update(string id, Rent obj)
         {
+            if (!id.Equals(obj.Id))
+            {
+                throw new Exception("ID is permament, it cant be different from old object");
+            }
             for (int i = 0; i < _rents.Count; i++)
             {
                 if (_rents[i].Id.Equals(id))

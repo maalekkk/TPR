@@ -20,6 +20,7 @@ namespace DL
         {
             _staff = new EmployeesCollection();
             _readers = new ReadersCollection();
+            _authors = new AuthorsCollection();
             _booksCatalog = new BooksCollection();
             _rentsList = new RentsCollection();
             _copiesOfBooks = new CopyOfBooksCollection();

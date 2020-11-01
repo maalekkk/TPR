@@ -8,6 +8,11 @@ namespace DL.Collections
     {
         private List<Employee> _employees;
 
+        public EmployeesCollection()
+        {
+            _employees = new List<Employee>();
+        }
+
         public void Add(Employee obj)
         {
             if (_employees.Find(reader => reader.Id.Equals(obj.Id)) != null)

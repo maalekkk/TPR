@@ -10,6 +10,11 @@ namespace DL.Collections
     {
         private ObservableCollection<Rent> _rents;
 
+        public RentsCollection()
+        {
+            _rents = new ObservableCollection<Rent>();
+        }
+
         public void Add(Rent obj)
         {
             if (_rents.Where(rent => rent.Id.Equals(obj.Id)) != null)

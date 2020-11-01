@@ -1,0 +1,6 @@
+author[id=;name=Henryk;surname=Sienkiewicz]
+book[id=1;name=W pustyni i w puszczy;author=1;description=Staś Tarkowski i Nel Rawlison mieszkają w Port Saidzie. Czternastoletni chłopiec uważa się już za dorosłego mężczyznę, siedmioletnia dziewczynka woli natomiast, by w pobliżu był jej tatuś. Nagle w ich spokojne życie wkracza historia i polityka. Nawet ojcowie dzieci nie spodziewają się, że powstanie Sudańczyków pod wodzą Mahdiego będzie dla nich miało osobiste konsekwencje. Na skutek spisku tajemniczej Fatmy dzieci zostają porwane. Przed nimi bardzo daleka droga;bookType=Novel]
+copyOfBook[id=1;book=1;purchaseDate=01.01.2020;pricePerDay=1.20]
+employee[id=1;name=Jan;surname=Kowalski;birthDate=11.06.1991;phoneNumber=123456789;email=jan.kowalski@gmail.com;gender=Male;dateOfEmployment=22.06.2005]
+reader[id=1;name=Piotr;surname=Nowak;birthDate=21.11.1987;phoneNumber=987654321;email=piotr.nowak@gmail.com;gender=Male;dateOfRegistration=23.11.2018]
+rent[id=1;reader=1;employee=1;rentBooks=1;dateOfRental=29.10.2020;dateOfReturn=;totalPricePerDay=1.20]

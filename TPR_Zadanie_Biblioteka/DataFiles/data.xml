@@ -1,0 +1,68 @@
+<libraryContext>
+
+	<authors>
+		<author>
+			<id>1</id>
+			<name>Henryk</name>
+			<surname>Sienkiewicz</surname>
+		</author>
+	</authors>
+
+	<books>
+		<book>
+			<id>1</id>
+			<name>W pustyni i w puszczy</name>
+			<author>1</author>
+			<description>Staś Tarkowski i Nel Rawlison mieszkają w Port Saidzie. Czternastoletni chłopiec uważa się już za dorosłego mężczyznę, siedmioletnia dziewczynka woli natomiast, by w pobliżu był jej tatuś. Nagle w ich spokojne życie wkracza historia i polityka. Nawet ojcowie dzieci nie spodziewają się, że powstanie Sudańczyków pod wodzą Mahdiego będzie dla nich miało osobiste konsekwencje. Na skutek spisku tajemniczej Fatmy dzieci zostają porwane. Przed nimi bardzo daleka droga.</description>
+			<bookType>Novel</bookType>
+		</book>
+	</books>
+	
+	<copiesOfBooks>
+		<copyOfBook>
+			<id>1</id>
+			<book>1</book>
+			<purchaseDate>01.01.2020</purchaseDate>
+			<pricePerDay>1.20</pricePerDay>
+		</copyOfBook>
+	</copiesOfBooks>
+	
+	<employees>
+		<employee>
+			<id>1</id>
+			<name>Jan</name>
+			<surname>Kowalski</surname>
+			<birthDate>11.06.1991</birthDate>
+			<phoneNumber>123456789</phoneNumber>
+			<email>jan.kowalski@gmail.com</email>
+			<gender>Male</gender>
+			<dateOfEmployment>22.06.2005</dateOfEmployment>
+		</employee>
+	</employees>
+	
+	<readers>
+		<reader>
+			<id>1</id>
+			<name>Piotr</name>
+			<surname>Nowak</surname>
+			<birthDate>21.11.1987</birthDate>
+			<phoneNumber>987654321</phoneNumber>
+			<email>piotr.nowak@gmail.com</email>
+			<gender>Male</gender>
+			<dateOfRegistration>23.11.2018</dateOfRegistration>
+		</reader>
+	</readers>
+	
+	<rents>
+		<rent>
+			<id>1</id>
+			<reader>1</reader>
+			<employee>1</employee>
+			<rentBooks>1</rentBooks>
+			<dateOfRental>29.10.2020</dateOfRental>
+			<dateOfReturn></dateOfReturn>
+			<totalPricePerDay>1.20</totalPricePerDay>
+		</rent>
+	</rents>
+	
+</libraryContext>

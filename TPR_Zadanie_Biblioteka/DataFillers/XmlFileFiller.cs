@@ -7,13 +7,11 @@ namespace DL.DataFillers
 {
     class XmlFileFiller : IDataFiller
     {
-        public LibraryContext Fill(string path)
+        public void Fill(LibraryContext _libraryContext, string path)
         {
             LibraryContext libraryContext = new LibraryContext();
-
-
-
-            return libraryContext;
+            // parsowanie z xml'a
         }
+
     }
 }

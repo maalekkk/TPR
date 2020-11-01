@@ -22,7 +22,7 @@ namespace DL
         {
             if (_fillWithConsts != null)
             {
-                _libraryContext = _fillWithConsts.Fill(path);
+                _fillWithConsts.Fill(_libraryContext, path);
             }
         }
 

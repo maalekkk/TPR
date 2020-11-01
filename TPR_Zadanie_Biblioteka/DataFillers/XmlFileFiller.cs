@@ -10,11 +10,7 @@ namespace DL.DataFillers
         public LibraryContext Fill(string path)
         {
             LibraryContext libraryContext = new LibraryContext();
-            XmlReader xmlReader = XmlReader.Create(path);
-            while (xmlReader.Read())
-            {
 
-            }
 
 
             return libraryContext;

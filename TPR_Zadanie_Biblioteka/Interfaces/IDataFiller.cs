@@ -6,6 +6,6 @@ namespace DL
 {
     interface IDataFiller
     {
-        void Fill(LibraryContext context);
+        LibraryContext Fill(String path);
     }
 }

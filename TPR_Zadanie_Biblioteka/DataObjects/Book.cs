@@ -14,7 +14,8 @@ namespace DL
             Fantasy,
             Horror,
             Romance,
-            Biographie
+            Biographie,
+            Novel
         };
 
         private string _id;
@@ -25,11 +26,11 @@ namespace DL
 
         public Book(string id, string name, Author author, string description, BookType bookType)
         {
-            this._id = id;
-            this._name = name;
-            this._author = author;
-            this._description = description;
-            this._bookType = bookType;
+            _id = id;
+            _name = name;
+            _author = author;
+            _description = description;
+            _bookType = bookType;
         }
 
         public string Id { get => _id; set => _id = value; }

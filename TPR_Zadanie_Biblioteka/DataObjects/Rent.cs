@@ -9,11 +9,12 @@ namespace DL
         private string _id;
         private Reader _reader;
         private Employee _employee;
-        private List<CopyOfBook> _books;    //zmienione na liste książek (zastanowić się czy dodać pole łacznej ceny)
+        private List<CopyOfBook> _books;
         private DateTime _dateOfRental;
         private DateTime _dateOfReturn;
+        private double _totalPricePerDay;
 
-        public Rent(string id, Reader reader, Employee employee, List<CopyOfBook> books, DateTime dateOfRental, DateTime dateOfReturn)
+        public Rent(string id, Reader reader, Employee employee, List<CopyOfBook> books, DateTime dateOfRental, DateTime dateOfReturn, double totalPricePerDay)
         {
             _id = id;
             _reader = reader;
@@ -21,6 +22,7 @@ namespace DL
             _books = books;
             _dateOfRental = dateOfRental;
             _dateOfReturn = dateOfReturn;
+            _totalPricePerDay = totalPricePerDay;
         }
 
         public Rent(string id, Reader reader, Employee employee, List<CopyOfBook> books, DateTime dateOfRental)
@@ -38,5 +40,6 @@ namespace DL
         public DateTime DateOfRental { get => _dateOfRental; private set => _dateOfRental = value; }
         public DateTime DateOfReturn { get => _dateOfReturn; set => _dateOfReturn = value; }
         public List<CopyOfBook> Book { get => _books; private set => _books = value; }
+        public double TotalPrice { get => _totalPricePerDay; set => _totalPricePerDay = value; }
     }
 }

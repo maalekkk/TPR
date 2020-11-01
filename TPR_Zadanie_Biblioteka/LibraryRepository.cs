@@ -9,13 +9,21 @@ namespace DL
     class LibraryRepository
     {
         private LibraryContext _libraryContext;
-        private IDataFiller _fillWithConsts;
+        private IDataFiller _fillWithConsts = null;
 
         public IDataFiller FillWithConsts { get => _fillWithConsts; set => _fillWithConsts = value; }
 
         public LibraryRepository()
         {
             _libraryContext = new LibraryContext();
+        }
+
+        public void FillData(String path)
+        {
+            if (_fillWithConsts != null)
+            {
+                _libraryContext = _fillWithConsts.Fill(path);
+            }
         }
 
         public void AddBook(Book book)

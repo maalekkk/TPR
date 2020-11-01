@@ -13,10 +13,10 @@ namespace DL
 
         public CopyOfBook(string id, Book book, DateTime purchaseDate, double pricePerDay)
         {
-            this._id = id;
-            this._book = book;
-            this._purchaseDate = purchaseDate;
-            this._pricePerDay = pricePerDay;
+            _id = id;
+            _book = book;
+            _purchaseDate = purchaseDate;
+            _pricePerDay = pricePerDay;
         }
         public string Id { get => _id; set => _id = value; }
         public Book Book { get => _book; set => _book = value; }

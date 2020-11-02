@@ -15,5 +15,12 @@ namespace DL
         }
 
         public DateTime DateOfEmployment { get => _dateOfEmployment; set => _dateOfEmployment = value; }
+
+        public override string ToString()
+        {
+            return "Employee: " + base.ToString();
+        }
+
+
     }
 }

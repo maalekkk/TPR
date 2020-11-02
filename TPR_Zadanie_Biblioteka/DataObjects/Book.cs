@@ -38,5 +38,15 @@ namespace DL
         public Author Author { get => _author; set => _author = value; }
         public string Description { get => _description; set => _description = value; }
         internal BookType BookType1 { get => _bookType; set => _bookType = value; }
+
+        public override bool Equals(object obj)
+        {
+            return Id.Equals(((Book)obj).Id);
+        }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

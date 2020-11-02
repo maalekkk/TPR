@@ -16,5 +16,10 @@ namespace DL
         }
 
         public DateTime DateOfRegistration { get => _dateOfRegistration; set => _dateOfRegistration = value; }
+
+        public override string ToString()
+        {
+            return "Reader: " + base.ToString();
+        }
     }
 }

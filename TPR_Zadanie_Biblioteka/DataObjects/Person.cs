@@ -37,5 +37,15 @@ namespace DL
         public string PhoneNumber { get => _phoneNumber; set => _phoneNumber = value; }
         public string Email { get => _email; set => _email = value; }
         public Gender Gender1 { get => _gender; set => _gender = value; }
+
+        public override bool Equals(object obj)
+        {
+            return Id.Equals(((Person)obj).Id);
+        }
+
+        public override string ToString()
+        {
+            return Name + " " + Surname;
+        }
     }
 }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace DL
 {
-    interface IDataFiller
+    public interface IDataFiller
     {
         void Fill(LibraryContext libraryContext, String path);
     }

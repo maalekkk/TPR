@@ -34,11 +34,11 @@ namespace DL
             {
                 throw new Exception("Invalid number of properties!");
             }
-            Author newAuthor = new Author((string)props[0], (string)props[1], (string)props[2]);
+            Author newAuthor = new Author((Guid)props[0], (string)props[1], (string)props[2]);
             _libraryContext.Authors.Add(newAuthor);
         }
 
-        public Author GetAuthor(string id)
+        public Author GetAuthor(Guid id)
         {
             return _libraryContext.Authors.Get(id);
         }
@@ -48,7 +48,7 @@ namespace DL
             return _libraryContext.Authors.GetAll();
         }
 
-        public void UpdateAuthor(string id, int option,params Object[] newValue)
+        public void UpdateAuthor(Guid id, int option,params Object[] newValue)
         {
             _libraryContext.Authors.Update(id, option, newValue);
         }
@@ -65,12 +65,12 @@ namespace DL
             {
                 throw new Exception("Invalid number of properties!");
             }
-            Book newBook = new Book((string)props[0], (string)props[1], (Author)props[2],
+            Book newBook = new Book((Guid)props[0], (string)props[1], (Author)props[2],
                 (string)props[3], (Book.BookType)props[4]);
             _libraryContext.BooksCatalog.Add(newBook);
         }
 
-        public Book GetBook(string id)
+        public Book GetBook(Guid id)
         {
            return _libraryContext.BooksCatalog.Get(id);
         }
@@ -80,7 +80,7 @@ namespace DL
            return _libraryContext.BooksCatalog.GetAll();
         }
 
-        public void UpdateBook(string id, int option,params Object[] newValue)
+        public void UpdateBook(Guid id, int option,params Object[] newValue)
         {
             _libraryContext.BooksCatalog.Update(id, option, newValue);
         }
@@ -97,13 +97,13 @@ namespace DL
             {
                 throw new Exception("Invalid number of properties!");
             }
-            Reader newReader = new Reader((string)props[0], (string)props[1], (string)props[2],
+            Reader newReader = new Reader((Guid)props[0], (string)props[1], (string)props[2],
                 (DateTime)props[3], (string)props[4], (string)props[5], (Person.Gender)props[6],
                 (DateTime)props[7]);
             _libraryContext.Readers.Add(newReader);
         }
 
-        public Reader GetReader(string id)
+        public Reader GetReader(Guid id)
         {
             return _libraryContext.Readers.Get(id);
         }
@@ -113,7 +113,7 @@ namespace DL
             return _libraryContext.Readers.GetAll();
         }
 
-        public void UpdateReader(string id, int option, Object newValue)
+        public void UpdateReader(Guid id, int option, Object newValue)
         {
             _libraryContext.Readers.Update(id, option, newValue);
         }
@@ -130,12 +130,12 @@ namespace DL
             {
                 throw new Exception("Invalid number of properties!");
             }
-            CopyOfBook newCopyOfBook = new CopyOfBook((string)props[0], (Book)props[1], (DateTime)props[2],
+            CopyOfBook newCopyOfBook = new CopyOfBook((Guid)props[0], (Book)props[1], (DateTime)props[2],
                 (double)props[3]);
             _libraryContext.CopiesOfBooks.Add(newCopyOfBook);
         }
 
-        public CopyOfBook GetCopyOfBook(string id)
+        public CopyOfBook GetCopyOfBook(Guid id)
         {
             return _libraryContext.CopiesOfBooks.Get(id);
         }
@@ -145,7 +145,7 @@ namespace DL
             return _libraryContext.CopiesOfBooks.GetAll();
         }
         
-        public void UpdateCopyOfBook(string id, int option, Object newValue)
+        public void UpdateCopyOfBook(Guid id, int option, Object newValue)
         {
             _libraryContext.CopiesOfBooks.Update(id, option, newValue);
         }
@@ -162,14 +162,14 @@ namespace DL
             {
                 throw new Exception("Invalid number of parameters!");
             }
-            Employee newEmployee = new Employee((string)props[0], (string)props[1], (string)props[2],
+            Employee newEmployee = new Employee((Guid)props[0], (string)props[1], (string)props[2],
                 (DateTime)props[3], (string)props[4], (string)props[5], (Person.Gender)props[6],
                 (DateTime)props[7]);
             _libraryContext.Staff.Add(newEmployee);
 
         }
 
-        public Employee GetEmployee(string id)
+        public Employee GetEmployee(Guid id)
         {
             return _libraryContext.Staff.Get(id);
         }
@@ -179,7 +179,7 @@ namespace DL
             return _libraryContext.Staff.GetAll();
         }
 
-        public void UpdateEmployee(string id, int option, Object newValue)
+        public void UpdateEmployee(Guid id, int option, Object newValue)
         {
             _libraryContext.Staff.Update(id, option, newValue);
         }
@@ -196,7 +196,7 @@ namespace DL
             {
                 throw new Exception("Invalid number of parameters!");
             }
-            Rent newRent = new Rent((string)props[0], (Reader)props[1], (Employee)props[2], 
+            Rent newRent = new Rent((Guid)props[0], (Reader)props[1], (Employee)props[2], 
                 (List<CopyOfBook>)props[3], (DateTime)props[4], (double)props[5]);
             if(props.Length == 7)
             {
@@ -205,7 +205,7 @@ namespace DL
             _libraryContext.RentsList.Add(newRent);
         }
 
-        public Rent GetRent(string id)
+        public Rent GetRent(Guid id)
         {
             return _libraryContext.RentsList.Get(id);
         }
@@ -215,7 +215,7 @@ namespace DL
             return _libraryContext.RentsList.GetAll();
         }
 
-        public void UpdateRents(string id, int option, Object newValue)
+        public void UpdateRents(Guid id, int option, Object newValue)
         {
             _libraryContext.RentsList.Update(id, option, newValue);
         }

@@ -7,7 +7,7 @@ using System.Text;
 namespace DL
 {
     // Some kind of database in program's memory
-    class LibraryContext
+    public class LibraryContext
     {
         private ICrudOperations<Employee> _staff;
         private ICrudOperations<Reader> _readers;

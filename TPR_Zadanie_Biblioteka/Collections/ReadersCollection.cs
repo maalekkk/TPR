@@ -34,7 +34,7 @@ namespace DL
             _readers.Remove(obj);
         }
 
-        public Reader Get(string id)
+        public Reader Get(Guid id)
         {
             return _readers.Find(reader => reader.Id.Equals(id));
         }
@@ -44,7 +44,7 @@ namespace DL
             return _readers;
         }
 
-        public void Update(string id, int option, Object newValue)
+        public void Update(Guid id, int option, Object newValue)
         {
             //if (!id.Equals(obj.Id))
             //{

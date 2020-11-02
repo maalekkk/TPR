@@ -29,7 +29,7 @@ namespace DL.Collections
             Authors.Remove(obj);
         }
 
-        public Author Get(string id)
+        public Author Get(Guid id)
         {
             return Authors.Find(reader => reader.Id.Equals(id));
         }
@@ -39,7 +39,7 @@ namespace DL.Collections
             return Authors;
         }
 
-        public void Update(string id, int option, Object newValue)
+        public void Update(Guid id, int option, Object newValue)
         {
             //if (!id.Equals(obj.Id))
             //{

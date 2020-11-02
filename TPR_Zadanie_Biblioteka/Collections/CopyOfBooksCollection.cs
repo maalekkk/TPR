@@ -31,7 +31,7 @@ namespace DL.Collections
             _copiesOfBooks.Remove(obj);
         }
 
-        public CopyOfBook Get(string id)
+        public CopyOfBook Get(Guid id)
         {
             return _copiesOfBooks.Find(copyOfBook => copyOfBook.Id.Equals(id));
         }
@@ -41,7 +41,7 @@ namespace DL.Collections
             return _copiesOfBooks;
         }
 
-        public void Update(string id, int option, Object newValue)
+        public void Update(Guid id, int option, Object newValue)
         {
             //if (!id.Equals(obj.Id))
             //{

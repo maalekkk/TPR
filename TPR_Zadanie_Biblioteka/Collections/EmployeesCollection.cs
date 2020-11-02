@@ -30,7 +30,7 @@ namespace DL.Collections
             _employees.Remove(obj);
         }
 
-        public Employee Get(string id)
+        public Employee Get(Guid id)
         {
             return _employees.Find(reader => reader.Id.Equals(id));
         }
@@ -40,7 +40,7 @@ namespace DL.Collections
             return _employees;
         }
 
-        public void Update(string id, int option, Object newValue)
+        public void Update(Guid id, int option, Object newValue)
         {
             //if (!id.Equals(obj.Id))
             //{

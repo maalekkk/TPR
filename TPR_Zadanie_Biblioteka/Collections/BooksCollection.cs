@@ -7,7 +7,7 @@ namespace DL
     // Books Dictionary with implemented CRUD operations 
     class BooksCollection : ICrudOperations<Book>
     {
-        private Dictionary<string, Book> _books;
+        private Dictionary<Guid, Book> _books;
 
         public void Add(Book obj)
         {
@@ -23,7 +23,7 @@ namespace DL
             _books.Remove(obj.Id);
         }
 
-        public Book Get(string id)
+        public Book Get(Guid id)
         {
             return _books[id];
         }
@@ -31,14 +31,14 @@ namespace DL
         public IEnumerable<Book> GetAll()
         {
             List<Book> returnList = new List<Book>();
-            foreach(KeyValuePair<string, Book> book in _books)
+            foreach(KeyValuePair<Guid, Book> book in _books)
             {
                 returnList.Add(book.Value);
             }
             return returnList;
         }
 
-        public void Update(string id, int option, Object newValue)
+        public void Update(Guid id, int option, Object newValue)
         {
             //if (id.Equals(obj.Id)) 
             //{

@@ -32,7 +32,7 @@ namespace DL.Collections
             _rents.Remove(obj);
         }
 
-        public Rent Get(string id)
+        public Rent Get(Guid id)
         {
             return (Rent)_rents.Where(rent => rent.Id.Equals(id));
         }
@@ -42,7 +42,7 @@ namespace DL.Collections
             return _rents;
         }
 
-        public void Update(string id, int option, Object newValue)
+        public void Update(Guid id, int option, Object newValue)
         {
             //if (!id.Equals(obj.Id))
             //{

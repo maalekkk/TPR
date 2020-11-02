@@ -8,7 +8,7 @@ namespace DL
     class Reader : Person
     {
         private DateTime _dateOfRegistration;
-        public Reader(string id, string name, string surname, DateTime birthDate,
+        public Reader(Guid id, string name, string surname, DateTime birthDate,
             string phoneNumber, string email, Gender gender, DateTime dateOfRegistration)
             : base(id, name, surname, birthDate, phoneNumber, email, gender)
         {

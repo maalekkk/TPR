@@ -6,7 +6,7 @@ namespace DL
 {
     class Rent
     {
-        private string _id;
+        private Guid _id;
         private Reader _reader;
         private Employee _employee;
         private List<CopyOfBook> _books;
@@ -14,7 +14,7 @@ namespace DL
         private DateTime _dateOfReturn;
         private double _totalPricePerDay;
 
-        public Rent(string id, Reader reader, Employee employee, List<CopyOfBook> books, DateTime dateOfRental, double totalPricePerDay, DateTime dateOfReturn)
+        public Rent(Guid id, Reader reader, Employee employee, List<CopyOfBook> books, DateTime dateOfRental, double totalPricePerDay, DateTime dateOfReturn)
         {
             _id = id;
             _reader = reader;
@@ -25,7 +25,7 @@ namespace DL
             _totalPricePerDay = totalPricePerDay;
         }
 
-        public Rent(string id, Reader reader, Employee employee, List<CopyOfBook> books, DateTime dateOfRental, double totalPricePerDay)
+        public Rent(Guid id, Reader reader, Employee employee, List<CopyOfBook> books, DateTime dateOfRental, double totalPricePerDay)
         {
             _id = id;
             _reader = reader;
@@ -35,7 +35,7 @@ namespace DL
             _totalPricePerDay = totalPricePerDay;
         }
 
-        public string Id { get => _id; private set => _id = value; }
+        public Guid Id { get => _id; private set => _id = value; }
         public Reader Reader { get => _reader; private set => _reader = value; }
         public Employee Employee { get => _employee; private set => _employee = value; }
         public DateTime DateOfRental { get => _dateOfRental; private set => _dateOfRental = value; }

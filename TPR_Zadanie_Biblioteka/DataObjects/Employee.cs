@@ -7,7 +7,7 @@ namespace DL
     class Employee : Person
     {
         private DateTime _dateOfEmployment;
-        public Employee(string id, string name, string surname, DateTime birthDate,
+        public Employee(Guid id, string name, string surname, DateTime birthDate,
             string phoneNumber, string email, Gender gender, DateTime dateOfEmployment)
             : base(id, name, surname, birthDate, phoneNumber, email, gender)
         {

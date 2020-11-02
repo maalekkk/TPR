@@ -9,9 +9,9 @@ namespace DL
     public interface ICrudOperations <T>
     {
         void Add(T obj);
-        T Get(string id);
+        T Get(Guid id);
         IEnumerable<T> GetAll();
-        void Update(string id, int option, Object newValue);
+        void Update(Guid id, int option, Object newValue);
         void Delete(T obj);
     }
 }

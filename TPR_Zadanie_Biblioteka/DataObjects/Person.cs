@@ -11,7 +11,7 @@ namespace DL
             Male, Female
         };
 
-        private string _id;
+        private Guid _id;
         private string _name;
         private string _surname;
         private DateTime _birthDate;
@@ -19,7 +19,7 @@ namespace DL
         private string _email;
         private Gender _gender;
 
-        public Person(string id, string name, string surname, DateTime birthDate, string phoneNumber, string email, Gender gender)
+        public Person(Guid id, string name, string surname, DateTime birthDate, string phoneNumber, string email, Gender gender)
         {
             _id = id;
             _name = name;
@@ -29,7 +29,7 @@ namespace DL
             _email = email;
             _gender = gender;
         }
-        public string Id { get => _id; private set => _id = value; }
+        public Guid Id { get => _id; private set => _id = value; }
         public string Name { get => _name; set => _name = value; }
         public string Surname { get => _surname; set => _surname = value; }
         

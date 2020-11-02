@@ -11,6 +11,11 @@ namespace DL
     {
         private List<Reader> _readers;
 
+        public ReadersCollection()
+        {
+            _readers = new List<Reader>();
+        }
+
         public void Add(Reader obj)
         {
             if (_readers.Find(reader => reader.Id.Equals(obj.Id)) != null)

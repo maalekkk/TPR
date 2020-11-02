@@ -9,6 +9,11 @@ namespace DL.Collections
     {
         private List<CopyOfBook> _copiesOfBooks;
 
+        public CopyOfBooksCollection()
+        {
+            _copiesOfBooks = new List<CopyOfBook>();
+        }
+
         public void Add(CopyOfBook obj)
         {
             if (_copiesOfBooks.Find(copyOfBook => copyOfBook.Id.Equals(obj.Id)) != null)

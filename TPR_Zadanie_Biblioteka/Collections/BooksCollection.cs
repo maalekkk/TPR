@@ -9,6 +9,11 @@ namespace DL
     {
         private Dictionary<Guid, Book> _books;
 
+        public BooksCollection()
+        {
+            _books = new Dictionary<string, Book>();
+        }
+
         public void Add(Book obj)
         {
             if (_books.ContainsKey(obj.Id))

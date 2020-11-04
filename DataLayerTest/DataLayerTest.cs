@@ -10,7 +10,6 @@ namespace DataLayerTest
         [TestMethod]
         public void TestCase1()
         {
-            LibraryRepository
         }
     }
 }

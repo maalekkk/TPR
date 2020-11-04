@@ -11,7 +11,7 @@ namespace DL
 
         public BooksCollection()
         {
-            _books = new Dictionary<string, Book>();
+            _books = new Dictionary<Guid, Book>();
         }
 
         public void Add(Book obj)

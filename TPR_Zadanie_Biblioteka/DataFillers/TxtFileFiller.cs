@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using DL.DataObjects;
+using DL.DataObjects.EventsObjects;
 using DL.Interfaces;
 using System.Text;
 
@@ -33,10 +34,10 @@ namespace DL.DataFillers
                         libraryContext.Authors.Add(new Author(Guid.Parse(elements["id"]), elements["name"], elements["surname"]));
                         break;
                     case "books":
-                        libraryContext.Books.Add(Guid.Parse(elements["id"]), new Book(Guid.Parse(elements["id"]), elements["name"], libraryContext.Authors.Find(a => a.Id.Equals(Guid.Parse(elements["author"]))), elements["decription"], (Book.BookType)Enum.Parse(typeof(Book.BookType), elements["bBookType"])));
+                        libraryContext.Books.Add(int.Parse(elements["id"]), new Book(elements["name"], libraryContext.Authors.Find(a => a.Id.Equals(Guid.Parse(elements["author"]))), elements["decription"], (Book.BookType)Enum.Parse(typeof(Book.BookType), elements["bBookType"])));
                         break;
                     case "copiesOfBooks":
-                        libraryContext.CopiesOfBooks.Add(new CopyOfBook(Guid.Parse(elements["id"]), libraryContext.Books[Guid.Parse(elements["book"])], Convert.ToDateTime(elements["purchaseDate"]), Double.Parse(elements["pricePerDay"])));
+                        libraryContext.CopiesOfBooks.Add(new CopyOfBook(Guid.Parse(elements["id"]), libraryContext.Books[int.Parse(elements["book"])], Convert.ToDateTime(elements["purchaseDate"]), Double.Parse(elements["pricePerDay"])));
                         break;
                     case "employees":
                         libraryContext.Employees.Add(new Employee(Guid.Parse(elements["id"]), elements["name"], elements["surname"], Convert.ToDateTime(elements["birthDate"]), elements["phoneNumber"], elements["email"], (Person.Gender)Enum.Parse(typeof(Person.Gender), elements["gender"]), Convert.ToDateTime(elements["dateOfEmployment"])));
@@ -51,7 +52,7 @@ namespace DL.DataFillers
                         {
                             rentBooks.Add(libraryContext.CopiesOfBooks.Find(c => c.Id.Equals(Guid.Parse(rentBookId))));
                         }
-                        libraryContext.Rents.Add(new Rent(Guid.Parse(elements["id"]), libraryContext.Readers.Find(r => r.Id.Equals(Guid.Parse(elements["reader"]))), libraryContext.Employees.Find(e => e.Id.Equals(Guid.Parse(elements["employee"]))), rentBooks, Convert.ToDateTime(elements["dateOfRental"]), Double.Parse(elements["totalPricePerDay"]), Convert.ToDateTime(elements["dateOfReturn"])));
+                        libraryContext.Rents.Add(new Rent(Guid.Parse(elements["id"]), libraryContext.Readers.Find(r => r.Id.Equals(Guid.Parse(elements["reader"]))), libraryContext.Employees.Find(e => e.Id.Equals(Guid.Parse(elements["employee"]))), rentBooks, Convert.ToDateTime(elements["dateOfRental"]), Convert.ToDateTime(elements["dateOfReturn"])));
                         break;
                 }
             }

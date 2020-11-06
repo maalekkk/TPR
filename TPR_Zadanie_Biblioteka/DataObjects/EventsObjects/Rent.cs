@@ -17,6 +17,7 @@ namespace DL.DataObjects.EventsObjects
             _reader = reader;
             _employee = employee;
             _dateOfReturn = dateOfReturn;
+            _books = new Dictionary<CopyOfBook, double>();
             addBooksToDictionary(books);
         }
 
@@ -25,6 +26,7 @@ namespace DL.DataObjects.EventsObjects
         {
             _reader = reader;
             _employee = employee;
+            _books = new Dictionary<CopyOfBook, double>();
             addBooksToDictionary(books);
         }
 
@@ -49,12 +51,20 @@ namespace DL.DataObjects.EventsObjects
             return returnString;
         }
 
+
+
         private void addBooksToDictionary(List<CopyOfBook> books)
         {
             foreach (CopyOfBook book in books)
             {
                 _books.Add(book, book.PricePerDay);
             }
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is Rent rent &&
+                   Id.Equals(rent.Id);
         }
     }
 }

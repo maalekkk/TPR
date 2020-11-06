@@ -37,7 +37,7 @@ namespace DL
     public class LibraryContext
     {
         private List<Author> _authors;
-        private Dictionary<Guid, Book> _books;
+        private Dictionary<int, Book> _books;
         private List<CopyOfBook> _copiesOfBooks;
         private List<Employee> _employees;
         private List<Reader> _readers;
@@ -47,7 +47,7 @@ namespace DL
         public LibraryContext()
         {
             _authors = new List<Author>();
-            _books = new Dictionary<Guid, Book>();
+            _books = new Dictionary<int, Book>();
             _copiesOfBooks = new List<CopyOfBook>();
             _employees = new List<Employee>();
             _readers = new List<Reader>();
@@ -56,7 +56,7 @@ namespace DL
         }
 
         public List<Author> Authors { get => _authors;}
-        public Dictionary<Guid, Book> Books { get => _books;}
+        public Dictionary<int, Book> Books { get => _books;}
         public List<CopyOfBook> CopiesOfBooks { get => _copiesOfBooks;}
         public List<Employee> Employees { get => _employees;}
         public List<Reader> Readers { get => _readers;}

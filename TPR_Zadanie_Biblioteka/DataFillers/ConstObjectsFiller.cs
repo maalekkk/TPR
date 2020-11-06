@@ -20,12 +20,12 @@ namespace DL.DataFillers
             Author tolkien = new Author(Guid.NewGuid(), "John Ronald Reuel", "Tolkien");
             Author fDostojewski = new Author(Guid.NewGuid(), "Fiodor", "Dostojewski");
 
-            Book hobbit = new Book(Guid.NewGuid(), "Hobbit, czyli tam i z powrotem", tolkien,
+            Book hobbit = new Book("Hobbit, czyli tam i z powrotem", tolkien,
                 "Powieść fantasy dla dzieci autorstwa J.R.R. Tolkiena.", Book.BookType.Fantasy);
-            Book zik = new Book(Guid.NewGuid(), "Zbrodnia i Kara", fDostojewski,
+            Book zik = new Book("Zbrodnia i Kara", fDostojewski,
                 "Tematem powieści są losy byłego studenta, Rodiona Raskolnikowa, który postanawia zamordować i obrabować starą lichwiarkę."
                 , Book.BookType.Classics);
-            Book wp = new Book(Guid.NewGuid(), "Wladca Pierscieni", tolkien,
+            Book wp = new Book("Wladca Pierscieni", tolkien,
                 "Powieść high fantasy J.R.R. Tolkiena, której akcja rozgrywa się w mitologicznym świecie Śródziemia.Jest ona kontynuacją innej powieści tego autora zatytułowanej Hobbit, czyli tam i z powrotem.", 
                 Book.BookType.Fantasy);
 
@@ -43,9 +43,9 @@ namespace DL.DataFillers
             context.Authors.Add(fDostojewski);
             context.Employees.Add(person2);
             context.Readers.Add(person1);
-            context.Books.Add(hobbit.Id, hobbit);
-            context.Books.Add(wp.Id, wp);
-            context.Books.Add(zik.Id, zik);
+            context.Books.Add(1, hobbit);
+            context.Books.Add(2, wp);
+            context.Books.Add(3, zik);
             context.CopiesOfBooks.Add(hobbit1);
             context.CopiesOfBooks.Add(hobbit2);
             context.CopiesOfBooks.Add(zik1);

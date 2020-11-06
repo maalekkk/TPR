@@ -18,16 +18,16 @@ namespace DL.Collections
 
         public void Add(Book obj)
         {
-            if (_books.ContainsKey(obj.Id))
-            {
-                throw new Exception("Book with this ID already exists!");
-            }
-            _books.Add(obj.Id, obj);
+            //if (_books.ContainsKey(obj.Id))
+            //{
+            //    throw new Exception("Book with this ID already exists!");
+            //}
+            //_books.Add(obj.Id, obj);
         }
 
         public void Delete(Book obj)
         {
-            _books.Remove(obj.Id);
+            //_books.Remove(obj.Id);
         }
 
         public Book Get(Guid id)

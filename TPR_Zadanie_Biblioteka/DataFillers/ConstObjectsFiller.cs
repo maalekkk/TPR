@@ -7,7 +7,7 @@ using System.Text;
 
 namespace DL.DataFillers
 {
-    class ConstObjectsFiller : IDataFiller
+    public class ConstObjectsFiller : IDataFiller
     {
         public void Fill(LibraryContext context, string path)
         {

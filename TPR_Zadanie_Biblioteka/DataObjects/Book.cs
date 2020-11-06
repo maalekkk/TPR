@@ -39,14 +39,9 @@ namespace DL.DataObjects
         public string Description { get => _description; set => _description = value; }
         internal BookType BookType1 { get => _bookType; set => _bookType = value; }
 
-        public override bool Equals(object obj)
-        {
-            return Id.Equals(((Book)obj).Id);
-        }
-
         public override string ToString()
         {
-            return Name;
+            return $"{{{nameof(Id)}={Id.ToString()}, {nameof(Name)}={Name}, {nameof(Author)}={Author}, {nameof(Description)}={Description}}}";
         }
     }
 }

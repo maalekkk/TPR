@@ -38,14 +38,9 @@ namespace DL.DataObjects
         public string Email { get => _email; set => _email = value; }
         public Gender Gender1 { get => _gender; set => _gender = value; }
 
-        public override bool Equals(object obj)
-        {
-            return Id.Equals(((Person)obj).Id);
-        }
-
         public override string ToString()
         {
-            return Name + " " + Surname;
+            return $"{{{nameof(Id)}={Id.ToString()}, {nameof(Name)}={Name}, {nameof(Surname)}={Surname}, {nameof(BirthDate)}={BirthDate.ToString()}, {nameof(PhoneNumber)}={PhoneNumber}, {nameof(Email)}={Email}, {nameof(Gender1)}={Gender1.ToString()}}}";
         }
     }
 }

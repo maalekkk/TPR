@@ -43,11 +43,6 @@ namespace DL.DataObjects
         public List<CopyOfBook> Book { get => _books; private set => _books = value; }
         public double TotalPricePerDay { get => _totalPricePerDay; set => _totalPricePerDay = value; }
 
-        public override bool Equals(object obj)
-        {
-            return Id.Equals(((Rent)obj).Id);
-        }
-
         public override string ToString()
         {
             string returnString = "Rent[GUID{" + Id.ToString() + "}, Reader{" + Reader.ToString() + "}, Employee{" + Employee.ToString()

@@ -18,9 +18,7 @@ namespace DL.DataObjects
 
         public override string ToString()
         {
-            return "Employee: " + base.ToString();
+            return $"{{{nameof(Id)}={Id.ToString()}, {nameof(Name)}={Name}, {nameof(Surname)}={Surname}, {nameof(BirthDate)}={BirthDate.ToString()}, {nameof(PhoneNumber)}={PhoneNumber}, {nameof(Email)}={Email}, {nameof(Gender1)}={Gender1.ToString()}, {nameof(DateOfEmployment)}={DateOfEmployment.ToString()}}}";
         }
-
-
     }
 }

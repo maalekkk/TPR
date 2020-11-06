@@ -19,7 +19,7 @@ namespace DL.DataObjects
 
         public override string ToString()
         {
-            return "Reader: " + base.ToString();
+            return $"{{{nameof(DateOfRegistration)}={DateOfRegistration.ToString()}, {nameof(Id)}={Id.ToString()}, {nameof(Name)}={Name}, {nameof(Surname)}={Surname}, {nameof(BirthDate)}={BirthDate.ToString()}, {nameof(PhoneNumber)}={PhoneNumber}, {nameof(Email)}={Email}, {nameof(Gender1)}={Gender1.ToString()}}}";
         }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace DL
 {
-    class Author
+    public class Author
     {
         private Guid _id;
         private string _name;

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace DL
 {
-    class Book
+    public class Book
     {
         public enum BookType
         {

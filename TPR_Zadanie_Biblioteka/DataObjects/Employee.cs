@@ -4,7 +4,7 @@ using System.Text;
 
 namespace DL
 {
-    class Employee : Person
+    public class Employee : Person
     {
         private DateTime _dateOfEmployment;
         public Employee(Guid id, string name, string surname, DateTime birthDate,

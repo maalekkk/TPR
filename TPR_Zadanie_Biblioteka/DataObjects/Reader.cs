@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DL
 {
-    class Reader : Person
+    public class Reader : Person
     {
         private DateTime _dateOfRegistration;
         public Reader(Guid id, string name, string surname, DateTime birthDate,

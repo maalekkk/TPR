@@ -7,9 +7,11 @@ namespace DataLayerTest
     [TestClass]
     public class DataLayerTest
     {
+        private DataLayerAPI dataLayer;
         [TestMethod]
-        public void TestCase1()
+        public void InitTest()
         {
+            Assert.Inconclusive();
         }
     }
 }

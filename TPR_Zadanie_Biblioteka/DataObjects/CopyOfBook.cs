@@ -4,7 +4,7 @@ using System.Text;
 
 namespace DL
 {
-    class CopyOfBook
+    public class CopyOfBook
     {
         private Guid _id;
         private Book _book;

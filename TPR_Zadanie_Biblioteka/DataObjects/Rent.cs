@@ -4,7 +4,7 @@ using System.Text;
 
 namespace DL
 {
-    class Rent
+    public class Rent
     {
         private Guid _id;
         private Reader _reader;

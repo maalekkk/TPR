@@ -10,50 +10,50 @@ namespace DL.Interfaces
     {
         // Author methods
 
-        void AddAuthor(params Object[] props);
+        void AddAuthor(Author author);
         void DeleteAuthor(Author author);
         Author GetAuthor(Guid id);
         IEnumerable<Author> GetAllAuthors();
-        void UpdateAuthor(Guid id, int option, params Object[] newValue);
+        void UpdateAuthor(Guid id, Author author);
 
         // Book methods
 
-        void AddBook(params Object[] props);
+        void AddBook(Book book);
         void DeleteBook(Book book);
         Book GetBook(Guid id);
         IEnumerable<Book> GetAllBooks();
-        void UpdateBook(Guid id, int option, params Object[] newValue);
+        void UpdateBook(Guid id, Book book);
 
         // CopyOfBook methods
 
-        void AddCopyOfBook(params Object[] props);
+        void AddCopyOfBook(CopyOfBook copyOfBook);
         void DeleteCopyOfBook(CopyOfBook copyOfBook);
         CopyOfBook GetCopyOfBook(Guid id);
         IEnumerable<CopyOfBook> GetAllCopiesOfBook();
-        void UpdateCopyOfBook(Guid id, int option, Object newValue);
+        void UpdateCopyOfBook(Guid id, CopyOfBook copyOfBook);
 
         // Employee methods
 
-        void AddEmployee(params Object[] props);
+        void AddEmployee(Employee employee);
         void DeleteEmployee(Employee employee);
         Employee GetEmployee(Guid id);
         IEnumerable<Employee> GetAllEmployees();
-        void UpdateEmployee(Guid id, int option, Object newValue);
+        void UpdateEmployee(Guid id, Employee employee);
 
         //Readers methods
 
-        void AddReader(params Object[] props);
+        void AddReader(Reader reader);
         void DeleteReader(Reader reader);
         Reader GetReader(Guid id);
         IEnumerable<Reader> GetAllReaders();
-        void UpdateReader(Guid id, int option, Object newValue);
+        void UpdateReader(Guid id, Reader reader);
 
         //Rent methods
 
-        void AddRent(params Object[] props);
+        void AddRent(Rent rent);
         void DeleteRent(Rent rent);
         Rent GetRent(Guid id);
         IEnumerable<Rent> GetAllRents();
-        void UpdateRents(Guid id, int option, Object newValue);
+        void UpdateRents(Guid id, Rent rent);
     }
 }

@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.Text;
 using System.Xml.Serialization;
 using System.Linq;
+using System.Net.Sockets;
 
 namespace DL
 {
@@ -31,201 +32,245 @@ namespace DL
         }
 
         //Author CRUD
-        public void AddAuthor(params Object[] props)
+        public void AddAuthor(Author author)
         {
-            if(props.Length != 3)
+            if (_libraryContext.Authors.Find(a => a.Id.Equals(author.Id)) != null)
             {
-                throw new Exception("Invalid number of properties!");
+                throw new Exception("Author with this ID already exists");
             }
-            Author newAuthor = new Author((Guid)props[0], (string)props[1], (string)props[2]);
-            _libraryContext.Authors.Add(newAuthor);
+            _libraryContext.Authors.Add(author);
         }
 
         public Author GetAuthor(Guid id)
         {
-            return _libraryContext.Authors.Get(id);
+            return _libraryContext.Authors.Find(a => a.Id.Equals(id));
         }
 
         public IEnumerable<Author> GetAllAuthors()
         {
-            return _libraryContext.Authors.GetAll();
+            return _libraryContext.Authors;
         }
 
-        public void UpdateAuthor(Guid id, int option,params Object[] newValue)
+        public void UpdateAuthor(Guid id, Author author)
         {
-            _libraryContext.Authors.Update(id, option, newValue);
+            Author updatingAuthor = _libraryContext.Authors.Find(a => a.Id.Equals(id));
+            if (updatingAuthor == null)
+            {
+                throw new Exception("Author with this ID doesn't exist");
+            }
+            _libraryContext.Authors[_libraryContext.Authors.IndexOf(updatingAuthor)] = author;
         }
 
         public void DeleteAuthor(Author author)
         {
-            _libraryContext.Authors.Delete(author);
+            _libraryContext.Authors.Remove(author);
         }
 
         //Book CRUD
-        public void AddBook(params Object[] props)
+        public void AddBook(Book book)
         {
-            if(props.Length != 5)
+            if (_libraryContext.Books.ContainsKey(book.Id))
             {
-                throw new Exception("Invalid number of properties!");
+                throw new Exception("Book with this ID already exists!");
             }
-            Book newBook = new Book((Guid)props[0], (string)props[1], (Author)props[2],
-                (string)props[3], (Book.BookType)props[4]);
-            _libraryContext.BooksCatalog.Add(newBook);
+            _libraryContext.Books.Add(book.Id, book);
         }
 
         public Book GetBook(Guid id)
         {
-           return _libraryContext.BooksCatalog.Get(id);
+            return _libraryContext.Books[id];
         }
 
         public IEnumerable<Book> GetAllBooks()
         {
-           return _libraryContext.BooksCatalog.GetAll();
+            return _libraryContext.Books.Values;
         }
 
-        public void UpdateBook(Guid id, int option,params Object[] newValue)
+        public void UpdateBook(Guid id, Book book)
         {
-            _libraryContext.BooksCatalog.Update(id, option, newValue);
+            if (!_libraryContext.Books.ContainsKey(id))
+            {
+                throw new Exception("Book with this ID doesn't exist");
+            }
+            _libraryContext.Books[id] = book;
         }
 
         public void DeleteBook(Book book)
         {
-            _libraryContext.BooksCatalog.Delete(book);
+            _libraryContext.Books.Remove(book.Id);
         }
 
         //Reader CRUD
-        public void AddReader(params Object[] props)
+        public void AddReader(Reader reader)
         {
-            if(props.Length != 8)
+            if (_libraryContext.Readers.Find(r => r.Id.Equals(reader.Id)) != null)
             {
-                throw new Exception("Invalid number of properties!");
+                throw new Exception("Reader with this ID already exists!");
             }
-            Reader newReader = new Reader((Guid)props[0], (string)props[1], (string)props[2],
-                (DateTime)props[3], (string)props[4], (string)props[5], (Person.Gender)props[6],
-                (DateTime)props[7]);
-            _libraryContext.Readers.Add(newReader);
+            if (reader.BirthDate.CompareTo(DateTime.Now) >= 0)
+            {
+                throw new Exception("Unborn Reader! (birth day is future date)");
+            }
+            if (reader.DateOfRegistration.CompareTo(DateTime.Now) > 0)
+            {
+                throw new Exception("Date of registration is future date!");
+            }
+
+            _libraryContext.Readers.Add(reader);
         }
 
         public Reader GetReader(Guid id)
         {
-            return _libraryContext.Readers.Get(id);
+            return _libraryContext.Readers.Find(r => r.Id.Equals(id));
         }
 
         public IEnumerable<Reader> GetAllReaders()
         {
-            return _libraryContext.Readers.GetAll();
+            return _libraryContext.Readers;
         }
 
-        public void UpdateReader(Guid id, int option, Object newValue)
+        public void UpdateReader(Guid id, Reader reader)
         {
-            _libraryContext.Readers.Update(id, option, newValue);
+            Reader updatingReader = _libraryContext.Readers.Find(r => r.Equals(id));
+            if (updatingReader == null)
+            {
+                throw new Exception("Employee with this ID doesn't exist");
+            }
+            _libraryContext.Readers[_libraryContext.Readers.IndexOf(updatingReader)] = reader;
         }
 
         public void DeleteReader(Reader reader)
         {
-            _libraryContext.Readers.Delete(reader);
+            _libraryContext.Readers.Remove(reader);
         }
 
         //CopyOfBook CRUD
-        public void AddCopyOfBook(params Object[] props)
+        public void AddCopyOfBook(CopyOfBook copyOfBook)
         {
-            if(props.Length != 4)
+            if (_libraryContext.CopiesOfBooks.Find(c => c.Id.Equals(copyOfBook.Id)) != null)
             {
-                throw new Exception("Invalid number of properties!");
+                throw new Exception("Copy of book with this ID already exists!");
             }
-            CopyOfBook newCopyOfBook = new CopyOfBook((Guid)props[0], (Book)props[1], (DateTime)props[2],
-                (double)props[3]);
-            _libraryContext.CopiesOfBooks.Add(newCopyOfBook);
+            if (copyOfBook.PurchaseDate.CompareTo(DateTime.Now) > 0)
+            {
+                throw new Exception("Invalid purchase date! (date from future)");
+            }
+            if (copyOfBook.PricePerDay < 0)
+            {
+                throw new Exception("Price cannot be negative!");
+            }
+            _libraryContext.CopiesOfBooks.Add(copyOfBook);
         }
 
         public CopyOfBook GetCopyOfBook(Guid id)
         {
-            return _libraryContext.CopiesOfBooks.Get(id);
+            return _libraryContext.CopiesOfBooks.Find(c => c.Id.Equals(id));
         }
 
         public IEnumerable<CopyOfBook> GetAllCopiesOfBook()
         {
-            return _libraryContext.CopiesOfBooks.GetAll();
+            return _libraryContext.CopiesOfBooks;
         }
         
-        public void UpdateCopyOfBook(Guid id, int option, Object newValue)
+        public void UpdateCopyOfBook(Guid id, CopyOfBook copyOfBook)
         {
-            _libraryContext.CopiesOfBooks.Update(id, option, newValue);
+            CopyOfBook updatingCopyOfBook = _libraryContext.CopiesOfBooks.Find(c => c.Id.Equals(id));
+            if (updatingCopyOfBook == null)
+            {
+                throw new Exception("Copy of book with this ID doesn't exist");
+            }
+            _libraryContext.CopiesOfBooks[_libraryContext.CopiesOfBooks.IndexOf(updatingCopyOfBook)] = copyOfBook;
         }
 
         public void DeleteCopyOfBook(CopyOfBook copyOfBook)
         {
-            _libraryContext.CopiesOfBooks.Delete(copyOfBook);
+            _libraryContext.CopiesOfBooks.Remove(copyOfBook);
         }
 
         //Employee CRUD
-        public void AddEmployee(params Object[] props)
+        public void AddEmployee(Employee employee)
         {
-            if(props.Length != 8)
+            if (_libraryContext.Employees.Find(e => e.Id.Equals(employee.Id)) != null)
             {
-                throw new Exception("Invalid number of parameters!");
+                throw new Exception("Employee with this ID already exists!");
             }
-            Employee newEmployee = new Employee((Guid)props[0], (string)props[1], (string)props[2],
-                (DateTime)props[3], (string)props[4], (string)props[5], (Person.Gender)props[6],
-                (DateTime)props[7]);
-            _libraryContext.Staff.Add(newEmployee);
-
+            if (employee.BirthDate.CompareTo(DateTime.Now) >= 0)
+            {
+                throw new Exception("Unborn employee! (birth day is future date)");
+            }
+            if (employee.DateOfEmployment.CompareTo(DateTime.Now) > 0)
+            {
+                throw new Exception("Invalid Date of employment! (future date)");
+            }
+            _libraryContext.Employees.Add(employee);
         }
 
         public Employee GetEmployee(Guid id)
         {
-            return _libraryContext.Staff.Get(id);
+            return _libraryContext.Employees.Find(e => e.Id.Equals(id));
         }
 
         public IEnumerable<Employee> GetAllEmployees()
         {
-            return _libraryContext.Staff.GetAll();
+            return _libraryContext.Employees;
         }
 
-        public void UpdateEmployee(Guid id, int option, Object newValue)
+        public void UpdateEmployee(Guid id, Employee employee)
         {
-            _libraryContext.Staff.Update(id, option, newValue);
+            Employee updatingEmployee = _libraryContext.Employees.Find(e => e.Id.Equals(id));
+            if (updatingEmployee == null)
+            {
+                throw new Exception("Employee with this ID doesn't exist");
+            }
+            _libraryContext.Employees[_libraryContext.Employees.IndexOf(updatingEmployee)] = employee;
         }
 
         public void DeleteEmployee(Employee employee)
         {
-            _libraryContext.Staff.Delete(employee);
+            _libraryContext.Employees.Remove(employee);
         }
 
         //Rent CRUD
-        public void AddRent(params Object[] props)
+        public void AddRent(Rent rent)
         {
-            if(props.Length != 7 && props.Length != 6)
+            if (_libraryContext.Rents.Where(r => r.Id.Equals(rent.Id)) != null)
             {
-                throw new Exception("Invalid number of parameters!");
+                throw new Exception("Rent with this ID already exists!");
             }
-            Rent newRent = new Rent((Guid)props[0], (Reader)props[1], (Employee)props[2], 
-                (List<CopyOfBook>)props[3], (DateTime)props[4], (double)props[5]);
-            if(props.Length == 7)
+            if (rent.DateOfRental.CompareTo(DateTime.Now) > 0)
             {
-                newRent.DateOfReturn = (DateTime)props[6];
+                throw new Exception("Invalid date of rental! (future date)");
             }
-            _libraryContext.RentsList.Add(newRent);
+            if (rent.TotalPricePerDay < 0)
+            {
+                throw new Exception("Total price per day cannot be negative!");
+            }
+            _libraryContext.Rents.Add(rent);
         }
 
         public Rent GetRent(Guid id)
         {
-            return _libraryContext.RentsList.Get(id);
+            return (Rent)_libraryContext.Rents.Where(r => r.Id.Equals(id));
         }
 
         public IEnumerable<Rent> GetAllRents()
         {
-            return _libraryContext.RentsList.GetAll();
+            return _libraryContext.Rents;
         }
 
-        public void UpdateRents(Guid id, int option, Object newValue)
+        public void UpdateRents(Guid id, Rent rent)
         {
-            _libraryContext.RentsList.Update(id, option, newValue);
+            Rent updatingRent = _libraryContext.Rents.Single(r => r.Id.Equals(id));
+            if (updatingRent == null)
+            {
+                throw new Exception("Employee with this ID doesn't exist");
+            }
+            _libraryContext.Rents[_libraryContext.Rents.IndexOf(updatingRent)] = rent;
         }
 
         public void DeleteRent(Rent rent)
         {
-            _libraryContext.RentsList.Delete(rent);
+            _libraryContext.Rents.Remove(rent);
         }
     }
 }

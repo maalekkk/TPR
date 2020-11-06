@@ -11,6 +11,7 @@ namespace DataLayerTest
     public class DataLayerTest
     {
         private LibraryRepository _dataLayer;
+
         [TestMethod]
         public void InitTest()
         {

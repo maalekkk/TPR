@@ -33,13 +33,13 @@ namespace DL.DataFillers
                         libraryContext.Authors.Add(new Author(Guid.Parse(elements["id"]), elements["name"], elements["surname"]));
                         break;
                     case "books":
-                        libraryContext.BooksCatalog.Add(new Book(Guid.Parse(elements["id"]), elements["name"], libraryContext.Authors.Get(Guid.Parse(elements["author"])), elements["decription"], (Book.BookType)Enum.Parse(typeof(Book.BookType), elements["bBookType"])));
+                        libraryContext.Books.Add(new Book(Guid.Parse(elements["id"]), elements["name"], libraryContext.Authors.Get(Guid.Parse(elements["author"])), elements["decription"], (Book.BookType)Enum.Parse(typeof(Book.BookType), elements["bBookType"])));
                         break;
                     case "copiesOfBooks":
-                        libraryContext.CopiesOfBooks.Add(new CopyOfBook(Guid.Parse(elements["id"]), libraryContext.BooksCatalog.Get(Guid.Parse(elements["book"])), Convert.ToDateTime(elements["purchaseDate"]), Double.Parse(elements["pricePerDay"])));
+                        libraryContext.CopiesOfBooks.Add(new CopyOfBook(Guid.Parse(elements["id"]), libraryContext.Books.Get(Guid.Parse(elements["book"])), Convert.ToDateTime(elements["purchaseDate"]), Double.Parse(elements["pricePerDay"])));
                         break;
                     case "employees":
-                        libraryContext.Staff.Add(new Employee(Guid.Parse(elements["id"]), elements["name"], elements["surname"], Convert.ToDateTime(elements["birthDate"]), elements["phoneNumber"], elements["email"], (Person.Gender)Enum.Parse(typeof(Person.Gender), elements["gender"]), Convert.ToDateTime(elements["dateOfEmployment"])));
+                        libraryContext.Employees.Add(new Employee(Guid.Parse(elements["id"]), elements["name"], elements["surname"], Convert.ToDateTime(elements["birthDate"]), elements["phoneNumber"], elements["email"], (Person.Gender)Enum.Parse(typeof(Person.Gender), elements["gender"]), Convert.ToDateTime(elements["dateOfEmployment"])));
                         break;
                     case "readers":
                         libraryContext.Readers.Add(new Reader(Guid.Parse(elements["id"]), elements["name"], elements["surname"], Convert.ToDateTime(elements["birthDate"]), elements["phoneNumber"], elements["email"], (Person.Gender)Enum.Parse(typeof(Person.Gender), elements["gender"]), Convert.ToDateTime(elements["dateOfRegistration"])));
@@ -51,7 +51,7 @@ namespace DL.DataFillers
                         {
                             rentBooks.Add(libraryContext.CopiesOfBooks.Get(Guid.Parse(rentBookId)));
                         }
-                        libraryContext.RentsList.Add(new Rent(Guid.Parse(elements["id"]), libraryContext.Readers.Get(Guid.Parse(elements["reader"])), libraryContext.Staff.Get(Guid.Parse(elements["employee"])), rentBooks, Convert.ToDateTime(elements["dateOfRental"]), Double.Parse(elements["totalPricePerDay"]), Convert.ToDateTime(elements["dateOfReturn"])));
+                        libraryContext.Rents.Add(new Rent(Guid.Parse(elements["id"]), libraryContext.Readers.Get(Guid.Parse(elements["reader"])), libraryContext.Staff.Get(Guid.Parse(elements["employee"])), rentBooks, Convert.ToDateTime(elements["dateOfRental"]), Double.Parse(elements["totalPricePerDay"]), Convert.ToDateTime(elements["dateOfReturn"])));
                         break;
                 }
             }

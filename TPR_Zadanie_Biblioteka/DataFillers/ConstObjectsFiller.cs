@@ -40,17 +40,17 @@ namespace DL.DataFillers
 
             context.Authors.Add(tolkien);
             context.Authors.Add(fDostojewski);
-            context.Staff.Add(person2);
+            context.Employees.Add(person2);
             context.Readers.Add(person1);
-            context.BooksCatalog.Add(hobbit);
-            context.BooksCatalog.Add(wp);
-            context.BooksCatalog.Add(zik);
+            context.Books.Add(hobbit.Id, hobbit);
+            context.Books.Add(wp.Id, wp);
+            context.Books.Add(zik.Id, zik);
             context.CopiesOfBooks.Add(hobbit1);
             context.CopiesOfBooks.Add(hobbit2);
             context.CopiesOfBooks.Add(zik1);
             context.CopiesOfBooks.Add(zik2);
             context.CopiesOfBooks.Add(wp1);
-            context.RentsList.Add(rent1);
+            context.Rents.Add(rent1);
         }
     }
 }

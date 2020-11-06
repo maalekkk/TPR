@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
 using System.Xml;
 using DL.DataObjects;
 using DL.DataObjects.EventsObjects;
@@ -18,12 +20,14 @@ namespace DL.DataFillers
             }
             return dictionary;
         }
-        public void Fill(LibraryContext libraryContext, string path)
+        public void Fill(LibraryContext libraryContext)
         {
-            libraryContext = new LibraryContext();
             XmlDocument xmlDocument = new XmlDocument();
+            NumberFormatInfo nfi = new NumberFormatInfo();
+            nfi.NumberDecimalSeparator = ".";
+            string solutionDir = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName;
+            string path = solutionDir + "\\TPR_Zadanie_Biblioteka\\DataFiles\\data.xml";
             xmlDocument.Load(path);
-
             foreach (XmlNode node in xmlDocument.DocumentElement)
             {
                 foreach (XmlNode child in node.ChildNodes)
@@ -35,10 +39,10 @@ namespace DL.DataFillers
                             libraryContext.Authors.Add(new Author(Guid.Parse(elements["id"]), elements["name"], elements["surname"]));
                             break;
                         case "books":
-                            libraryContext.Books.Add(int.Parse(elements["id"]), new Book(elements["name"], libraryContext.Authors.Find(a => a.Id.Equals(Guid.Parse(elements["author"]))), elements["decription"], (Book.BookType)Enum.Parse(typeof(Book.BookType), elements["bBookType"])));
+                            libraryContext.Books.Add(int.Parse(elements["id"]), new Book(elements["name"], libraryContext.Authors.Find(a => a.Id.Equals(Guid.Parse(elements["author"]))), elements["description"], (Book.BookType)Enum.Parse(typeof(Book.BookType), elements["bookType"])));
                             break;
                         case "copiesOfBooks":
-                            libraryContext.CopiesOfBooks.Add(new CopyOfBook(Guid.Parse(elements["id"]), libraryContext.Books[int.Parse(elements["book"])], Convert.ToDateTime(elements["purchaseDate"]), Double.Parse(elements["pricePerDay"])));
+                            libraryContext.CopiesOfBooks.Add(new CopyOfBook(Guid.Parse(elements["id"]), libraryContext.Books[int.Parse(elements["book"])], Convert.ToDateTime(elements["purchaseDate"]), Double.Parse(elements["pricePerDay"], nfi)));
                             break;
                         case "employees":
                             libraryContext.Employees.Add(new Employee(Guid.Parse(elements["id"]), elements["name"], elements["surname"], Convert.ToDateTime(elements["birthDate"]), elements["phoneNumber"], elements["email"], (Person.Gender)Enum.Parse(typeof(Person.Gender), elements["gender"]), Convert.ToDateTime(elements["dateOfEmployment"])));

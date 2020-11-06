@@ -25,11 +25,11 @@ namespace DL
             _libraryContext = new LibraryContext();
         }
 
-        public void FillData(String path)
+        public void FillData()
         {
             if (_dataFiller != null)
             {
-                _dataFiller.Fill(_libraryContext, path);
+                _dataFiller.Fill(_libraryContext);
             }
         }
 

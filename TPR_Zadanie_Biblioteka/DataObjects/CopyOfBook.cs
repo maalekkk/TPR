@@ -23,9 +23,17 @@ namespace DL.DataObjects
         public DateTime PurchaseDate { get => _purchaseDate; set => _purchaseDate = value; }
         public double PricePerDay { get => _pricePerDay; set => _pricePerDay = value; }
 
+        public override bool Equals(object obj)
+        {
+            return obj is CopyOfBook book &&
+                   _id.Equals(book._id);
+        }
+
         public override string ToString()
         {
             return $"{{{nameof(Id)}={Id.ToString()}, {nameof(Book)}={Book}, {nameof(PurchaseDate)}={PurchaseDate.ToString()}, {nameof(PricePerDay)}={PricePerDay.ToString()}}}";
         }
+
+
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Xml;
 using DL.DataObjects;
+using DL.DataObjects.EventsObjects;
 using DL.Interfaces;
 
 namespace DL.DataFillers
@@ -52,7 +53,7 @@ namespace DL.DataFillers
                             {
                                 rentBooks.Add(libraryContext.CopiesOfBooks.Get(new Guid(rentBookId)));
                             }
-                            libraryContext.Rents.Add(new Rent(Guid.Parse(elements["id"]), libraryContext.Readers.Get(Guid.Parse(elements["reader"])), libraryContext.Staff.Get(Guid.Parse(elements["employee"])), rentBooks, Convert.ToDateTime(elements["dateOfRental"]), Double.Parse(elements["totalPricePerDay"]), Convert.ToDateTime(elements["dateOfReturn"])));
+                            libraryContext.Rents.Add(new Rent(Guid.Parse(elements["id"]), libraryContext.Readers.Get(Guid.Parse(elements["reader"])), libraryContext.Staff.(Guid.Parse(elements["employee"])), rentBooks, Convert.ToDateTime(elements["dateOfRental"]), Double.Parse(elements["totalPricePerDay"]), Convert.ToDateTime(elements["dateOfReturn"])));
                             break;
                     }
                 }

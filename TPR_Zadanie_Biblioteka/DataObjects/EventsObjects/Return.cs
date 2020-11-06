@@ -9,9 +9,10 @@ namespace DL.DataObjects.EventsObjects
         private List<CopyOfBook> _books;
         private Rent _rent;
 
-        public Return(DateTime returnDate, List<CopyOfBook> books, Rent _rent) : base(returnDate)
+        public Return(Guid id, DateTime returnDate, List<CopyOfBook> books, Rent rent) : base(id, returnDate)
         {
             _books = books;
+            _rent = rent;
             
         }
 

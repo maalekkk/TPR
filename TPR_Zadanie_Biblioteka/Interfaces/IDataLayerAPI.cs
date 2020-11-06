@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using DL.DataObjects;
+using DL.DataObjects.EventsObjects;
 using System.Xml.Serialization;
 
 namespace DL.Interfaces

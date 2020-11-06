@@ -11,8 +11,8 @@ namespace DL.DataObjects.EventsObjects
         private Dictionary<CopyOfBook, double> _books;
         private DateTime _dateOfReturn;
 
-        public Rent(Reader reader, Employee employee, List<CopyOfBook> books, DateTime dateOfRental, 
-            DateTime dateOfReturn) : base(dateOfRental)
+        public Rent(Guid id, Reader reader, Employee employee, List<CopyOfBook> books, DateTime dateOfRental, 
+            DateTime dateOfReturn) : base(id, dateOfRental)
         {
             _reader = reader;
             _employee = employee;
@@ -20,8 +20,8 @@ namespace DL.DataObjects.EventsObjects
             addBooksToDictionary(books);
         }
 
-        public Rent(Reader reader, Employee employee, List<CopyOfBook> books, DateTime dateOfRental) : 
-            base(dateOfRental)
+        public Rent(Guid id, Reader reader, Employee employee, List<CopyOfBook> books, DateTime dateOfRental) : 
+            base(id, dateOfRental)
         {
             _reader = reader;
             _employee = employee;

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using DL.Interfaces;
 using DL.DataObjects;
+using DL.DataObjects.EventsObjects;
 using System.Collections.ObjectModel;
 using System.Text;
 using System.Xml.Serialization;
@@ -233,17 +234,13 @@ namespace DL
         //Rent CRUD
         public void AddRent(Rent rent)
         {
-            if (_libraryContext.Rents.Where(r => r.Id.Equals(rent.Id)) != null)
+            if (_libraryContext.Rents.First(r => r.Id.Equals(rent.Id)) != null)
             {
                 throw new Exception("Rent with this ID already exists!");
             }
-            if (rent.DateOfRental.CompareTo(DateTime.Now) > 0)
+            if (rent.Date.CompareTo(DateTime.Now) > 0)
             {
                 throw new Exception("Invalid date of rental! (future date)");
-            }
-            if (rent.TotalPricePerDay < 0)
-            {
-                throw new Exception("Total price per day cannot be negative!");
             }
             _libraryContext.Rents.Add(rent);
         }

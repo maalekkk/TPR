@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using DL.Interfaces;
 using DL.DataObjects;
+using DL.DataObjects.EventsObjects;
 
 namespace DL.Collections
 {
@@ -19,18 +20,18 @@ namespace DL.Collections
 
         public void Add(Rent obj)
         {
-            if (_rents.Where(rent => rent.Id.Equals(obj.Id)) != null)
-            {
-                throw new Exception("Rent with this ID already exists!");
-            }
-            if(obj.DateOfRental.CompareTo(DateTime.Now) > 0)
-            {
-                throw new Exception("Invalid date of rental! (future date)");
-            }
-            if(obj.TotalPricePerDay < 0)
-            {
-                throw new Exception("Total price per day cannot be negative!");
-            }
+            //if (_rents.Where(rent => rent.Id.Equals(obj.Id)) != null)
+            //{
+            //    throw new Exception("Rent with this ID already exists!");
+            //}
+            //if(obj.DateOfRental.CompareTo(DateTime.Now) > 0)
+            //{
+            //    throw new Exception("Invalid date of rental! (future date)");
+            //}
+            //if(obj.TotalPricePerDay < 0)
+            //{
+            //    throw new Exception("Total price per day cannot be negative!");
+            //}
             _rents.Add(obj);
         }
 
@@ -41,7 +42,7 @@ namespace DL.Collections
 
         public Rent Get(Guid id)
         {
-            return (Rent)_rents.Where(rent => rent.Id.Equals(id));
+            return (Rent)_rents.Where(rent => rent.Id.Equals(id)); 
         }
 
         public IEnumerable<Rent> GetAll()
@@ -62,22 +63,22 @@ namespace DL.Collections
             //        _rents[i] = obj;
             //    }
             //}
-            Rent updatingRent = _rents.Single(rent => rent.Id.Equals(id));
-            if(updatingRent == null)
-            {
-                throw new Exception("Employee with this ID doesn't exist");
-            }
-            switch (option)
-            {
-                case Consts.RentDateOfReturn:
-                    updatingRent.DateOfReturn = (DateTime)newValue;
-                    break;
-                case Consts.RentTotalPricePerDay:
-                    updatingRent.TotalPricePerDay = (double)newValue;
-                    break;
-                default:
-                    throw new Exception("Invalid option!");
-            }
+            //Rent updatingRent = _rents.Single(rent => rent.Id.Equals(id));
+            //if(updatingRent == null)
+            //{
+            //    throw new Exception("Employee with this ID doesn't exist");
+            //}
+            //switch (option)
+            //{
+            //    case Consts.RentDateOfReturn:
+            //        updatingRent.DateOfReturn = (DateTime)newValue;
+            //        break;
+            //    case Consts.RentTotalPricePerDay:
+            //        updatingRent.TotalPricePerDay = (double)newValue;
+            //        break;
+            //    default:
+            //        throw new Exception("Invalid option!");
+            //}
         }
     }
 }

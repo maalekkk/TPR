@@ -45,7 +45,7 @@ namespace DL.DataObjects
         {
             return obj is Book book &&
                    _name == book._name &&
-                   EqualityComparer<Author>.Default.Equals(_author, book._author);
+                   Author.Equals(_author, book._author);
         }
     }
 }

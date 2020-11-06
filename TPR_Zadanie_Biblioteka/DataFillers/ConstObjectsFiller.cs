@@ -10,6 +10,8 @@ namespace DL.DataFillers
 {
     public class ConstObjectsFiller : IDataFiller
     {
+
+        public ConstObjectsFiller() { }
         public void Fill(LibraryContext context, string path)
         {
             Reader person1 = new Reader(Guid.NewGuid(), "Adam", "Nowak", new DateTime(1998, 05, 23), 

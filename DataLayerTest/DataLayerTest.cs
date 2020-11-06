@@ -225,10 +225,9 @@ namespace DataLayerTest
         public void GetAuthorTest()
         {
             AddAuthorTest();
-            Author author = new Author(Guid.NewGuid(), "Alan", "Nieznaniec");
             Author authorFromCollection = _dataLayer.GetAllAuthors().First();
             Assert.AreEqual(_dataLayer.GetAuthor(authorFromCollection.Id), authorFromCollection);
-            Assert.AreEqual(null, _dataLayer.GetAuthor(author.Id));
+            Assert.AreEqual(null, _dataLayer.GetAuthor(Guid.NewGuid()));
         }
 
         [TestMethod]
@@ -244,9 +243,6 @@ namespace DataLayerTest
         public void GetCopyOfBookTest()
         {
             AddCopyOfBookTest();
-            Author author = new Author(Guid.NewGuid(), "Alan", "Nieznaniec");
-            Book book = new Book("Book name", author, "Description", Book.BookType.Action);
-            CopyOfBook copyOfBook = new CopyOfBook(Guid.NewGuid(), book, new DateTime(2019, 10, 19), 0.8);
             CopyOfBook copyOfBookFromCollection = _dataLayer.GetAllCopiesOfBook().First();
             Assert.AreEqual(copyOfBookFromCollection, _dataLayer.GetCopyOfBook(copyOfBookFromCollection.Id));
             Assert.AreEqual(null, _dataLayer.GetCopyOfBook(Guid.NewGuid()));

@@ -2,7 +2,7 @@
 
 	<authors>
 		<author>
-			<id>1</id>
+			<id>12345678-9123-4567-8912-345678912345</id>
 			<name>Henryk</name>
 			<surname>Sienkiewicz</surname>
 		</author>
@@ -12,7 +12,7 @@
 		<book>
 			<id>1</id>
 			<name>W pustyni i w puszczy</name>
-			<author>1</author>
+			<author>12345678-9123-4567-8912-345678912345</author>
 			<description>Staś Tarkowski i Nel Rawlison mieszkają w Port Saidzie. Czternastoletni chłopiec uważa się już za dorosłego mężczyznę, siedmioletnia dziewczynka woli natomiast, by w pobliżu był jej tatuś. Nagle w ich spokojne życie wkracza historia i polityka. Nawet ojcowie dzieci nie spodziewają się, że powstanie Sudańczyków pod wodzą Mahdiego będzie dla nich miało osobiste konsekwencje. Na skutek spisku tajemniczej Fatmy dzieci zostają porwane. Przed nimi bardzo daleka droga.</description>
 			<bookType>Novel</bookType>
 		</book>
@@ -20,7 +20,7 @@
 	
 	<copiesOfBooks>
 		<copyOfBook>
-			<id>1</id>
+			<id>12345679-9129-4569-8919-345678912349</id>
 			<book>1</book>
 			<purchaseDate>01.01.2020</purchaseDate>
 			<pricePerDay>1.20</pricePerDay>
@@ -29,7 +29,7 @@
 	
 	<employees>
 		<employee>
-			<id>1</id>
+			<id>12365678-9163-4667-6912-346678912345</id>
 			<name>Jan</name>
 			<surname>Kowalski</surname>
 			<birthDate>11.06.1991</birthDate>
@@ -42,7 +42,7 @@
 	
 	<readers>
 		<reader>
-			<id>1</id>
+			<id>12165678-1163-4617-6112-146678912345</id>
 			<name>Piotr</name>
 			<surname>Nowak</surname>
 			<birthDate>21.11.1987</birthDate>
@@ -55,12 +55,12 @@
 	
 	<rents>
 		<rent>
-			<id>1</id>
-			<reader>1</reader>
-			<employee>1</employee>
-			<rentBooks>1</rentBooks>
+			<id>12583678-9163-4667-6912-341938912345</id>
+			<reader>12165678-1163-4617-6112-146678912345</reader>
+			<employee>12365678-9163-4667-6912-346678912345</employee>
+			<rentBooks>12345679-9129-4569-8919-345678912349</rentBooks>
 			<dateOfRental>29.10.2020</dateOfRental>
-			<dateOfReturn></dateOfReturn>
+			<dateOfReturn>29.10.2020</dateOfReturn>
 			<totalPricePerDay>1.20</totalPricePerDay>
 		</rent>
 	</rents>

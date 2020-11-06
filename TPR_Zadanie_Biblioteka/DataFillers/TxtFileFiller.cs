@@ -5,14 +5,18 @@ using DL.DataObjects;
 using DL.DataObjects.EventsObjects;
 using DL.Interfaces;
 using System.Text;
+using System.Globalization;
 
 namespace DL.DataFillers
 {
     public class TxtFileFiller : IDataFiller
     {
-        public void Fill(LibraryContext libraryContext, string path)
+        public void Fill(LibraryContext libraryContext)
         {
-            libraryContext = new LibraryContext();
+            NumberFormatInfo nfi = new NumberFormatInfo();
+            nfi.NumberDecimalSeparator = ".";
+            string solutionDir = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName;
+            string path = solutionDir + "\\TPR_Zadanie_Biblioteka\\DataFiles\\data.txt";
             string[] lines = File.ReadAllLines(path);
             foreach (string line in lines)
             {
@@ -34,18 +38,18 @@ namespace DL.DataFillers
                         libraryContext.Authors.Add(new Author(Guid.Parse(elements["id"]), elements["name"], elements["surname"]));
                         break;
                     case "books":
-                        libraryContext.Books.Add(int.Parse(elements["id"]), new Book(elements["name"], libraryContext.Authors.Find(a => a.Id.Equals(Guid.Parse(elements["author"]))), elements["decription"], (Book.BookType)Enum.Parse(typeof(Book.BookType), elements["bBookType"])));
+                        libraryContext.Books.Add(int.Parse(elements["id"]), new Book(elements["name"], libraryContext.Authors.Find(a => a.Id.Equals(Guid.Parse(elements["author"]))), elements["description"], (Book.BookType)Enum.Parse(typeof(Book.BookType), elements["bookType"])));
                         break;
-                    case "copiesOfBooks":
-                        libraryContext.CopiesOfBooks.Add(new CopyOfBook(Guid.Parse(elements["id"]), libraryContext.Books[int.Parse(elements["book"])], Convert.ToDateTime(elements["purchaseDate"]), Double.Parse(elements["pricePerDay"])));
+                    case "copiesOfBook":
+                        libraryContext.CopiesOfBooks.Add(new CopyOfBook(Guid.Parse(elements["id"]), libraryContext.Books[int.Parse(elements["book"])], Convert.ToDateTime(elements["purchaseDate"]), Double.Parse(elements["pricePerDay"], nfi)));
                         break;
-                    case "employees":
+                    case "employee":
                         libraryContext.Employees.Add(new Employee(Guid.Parse(elements["id"]), elements["name"], elements["surname"], Convert.ToDateTime(elements["birthDate"]), elements["phoneNumber"], elements["email"], (Person.Gender)Enum.Parse(typeof(Person.Gender), elements["gender"]), Convert.ToDateTime(elements["dateOfEmployment"])));
                         break;
-                    case "readers":
+                    case "reader":
                         libraryContext.Readers.Add(new Reader(Guid.Parse(elements["id"]), elements["name"], elements["surname"], Convert.ToDateTime(elements["birthDate"]), elements["phoneNumber"], elements["email"], (Person.Gender)Enum.Parse(typeof(Person.Gender), elements["gender"]), Convert.ToDateTime(elements["dateOfRegistration"])));
                         break;
-                    case "rents":
+                    case "rent":
                         string[] rentBooksId = elements["rentBooks"].Split(',');
                         List<CopyOfBook> rentBooks = new List<CopyOfBook>();
                         foreach (string rentBookId in rentBooksId)

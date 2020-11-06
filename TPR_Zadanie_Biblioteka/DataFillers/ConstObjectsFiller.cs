@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using DL.DataObjects;
+using DL.DataObjects.EventsObjects;
 using DL.Interfaces;
 using System.ComponentModel;
 using System.Text;
@@ -36,7 +37,7 @@ namespace DL.DataFillers
 
             List<CopyOfBook> booksForRent1 = new List<CopyOfBook>();
             booksForRent1.Add(hobbit1);
-            Rent rent1 = new Rent(Guid.NewGuid(), person1, person2, booksForRent1, new DateTime(2010, 1, 6, 0, 0, 0), hobbit1.PricePerDay);
+            Rent rent1 = new Rent(person1, person2, booksForRent1, new DateTime(2010, 1, 6, 0, 0, 0));
 
             context.Authors.Add(tolkien);
             context.Authors.Add(fDostojewski);

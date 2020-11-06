@@ -1,4 +1,5 @@
 ﻿using DL.DataObjects;
+using DL.DataObjects.EventsObjects;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -41,6 +42,7 @@ namespace DL
         private List<Employee> _employees;
         private List<Reader> _readers;
         private ObservableCollection<Rent> _rents;
+        private ObservableCollection<Return> _returns;
 
         public LibraryContext()
         {
@@ -50,6 +52,7 @@ namespace DL
             _employees = new List<Employee>();
             _readers = new List<Reader>();
             _rents = new ObservableCollection<Rent>();
+            _returns = new ObservableCollection<Return>();
         }
 
         public List<Author> Authors { get => _authors;}
@@ -58,5 +61,6 @@ namespace DL
         public List<Employee> Employees { get => _employees;}
         public List<Reader> Readers { get => _readers;}
         public ObservableCollection<Rent> Rents { get => _rents;}
+        internal ObservableCollection<Return> Returns { get => _returns; set => _returns = value; }
     }
 }

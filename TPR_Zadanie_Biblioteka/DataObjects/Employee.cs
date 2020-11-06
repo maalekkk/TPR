@@ -16,9 +16,17 @@ namespace DL.DataObjects
 
         public DateTime DateOfEmployment { get => _dateOfEmployment; set => _dateOfEmployment = value; }
 
+        public override bool Equals(object obj)
+        {
+            return obj is Employee employee &&
+                   Id.Equals(employee.Id);
+        }
+
         public override string ToString()
         {
             return $"{{{nameof(Id)}={Id.ToString()}, {nameof(Name)}={Name}, {nameof(Surname)}={Surname}, {nameof(BirthDate)}={BirthDate.ToString()}, {nameof(PhoneNumber)}={PhoneNumber}, {nameof(Email)}={Email}, {nameof(Gender1)}={Gender1.ToString()}, {nameof(DateOfEmployment)}={DateOfEmployment.ToString()}}}";
         }
+
+
     }
 }

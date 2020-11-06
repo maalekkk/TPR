@@ -18,22 +18,19 @@ namespace DL.DataObjects
             Novel
         };
 
-        private Guid _id;
         private string _name;
         private Author _author;
         private string _description;
         private BookType _bookType;
 
-        public Book(Guid id, string name, Author author, string description, BookType bookType)
+        public Book(string name, Author author, string description, BookType bookType)
         {
-            _id = id;
             _name = name;
             _author = author;
             _description = description;
             _bookType = bookType;
         }
 
-        public Guid Id { get => _id; set => _id = value; }
         public string Name { get => _name; set => _name = value; }
         public Author Author { get => _author; set => _author = value; }
         public string Description { get => _description; set => _description = value; }
@@ -41,7 +38,14 @@ namespace DL.DataObjects
 
         public override string ToString()
         {
-            return $"{{{nameof(Id)}={Id.ToString()}, {nameof(Name)}={Name}, {nameof(Author)}={Author}, {nameof(Description)}={Description}}}";
+            return $"{{{nameof(Name)}={Name}, {nameof(Author)}={Author}, {nameof(Description)}={Description}}}";
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is Book book &&
+                   _name == book._name &&
+                   EqualityComparer<Author>.Default.Equals(_author, book._author);
         }
     }
 }

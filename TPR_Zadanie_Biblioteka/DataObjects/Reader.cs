@@ -17,9 +17,18 @@ namespace DL.DataObjects
 
         public DateTime DateOfRegistration { get => _dateOfRegistration; set => _dateOfRegistration = value; }
 
+        public override bool Equals(object obj)
+        {
+            return obj is Reader reader &&
+                   base.Equals(obj) &&
+                   Id.Equals(reader.Id);
+        }
+
         public override string ToString()
         {
             return $"{{{nameof(DateOfRegistration)}={DateOfRegistration.ToString()}, {nameof(Id)}={Id.ToString()}, {nameof(Name)}={Name}, {nameof(Surname)}={Surname}, {nameof(BirthDate)}={BirthDate.ToString()}, {nameof(PhoneNumber)}={PhoneNumber}, {nameof(Email)}={Email}, {nameof(Gender1)}={Gender1.ToString()}}}";
         }
+
+
     }
 }

@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using DL.Interfaces;
 using DL.DataObjects;
+using DL.DataObjects.EventsObjects;
 using System.Collections.ObjectModel;
 using System.Text;
 using System.Xml.Serialization;
 using System.Linq;
 using System.Net.Sockets;
+using DL.Collections;
 
 namespace DL
 {
@@ -67,18 +69,18 @@ namespace DL
         }
 
         //Book CRUD
-        public void AddBook(Book book)
+        public void AddBook(Book book, int position)
         {
-            if (_libraryContext.Books.ContainsKey(book.Id))
+            if (_libraryContext.Books.ContainsKey(position))
             {
-                throw new Exception("Book with this ID already exists!");
+                throw new Exception("Book on this position already exists!");
             }
-            _libraryContext.Books.Add(book.Id, book);
+            _libraryContext.Books.Add(position, book);
         }
 
-        public Book GetBook(Guid id)
+        public Book GetBook(int position)
         {
-            return _libraryContext.Books[id];
+            return _libraryContext.Books[position];
         }
 
         public IEnumerable<Book> GetAllBooks()
@@ -86,18 +88,19 @@ namespace DL
             return _libraryContext.Books.Values;
         }
 
-        public void UpdateBook(Guid id, Book book)
+        public void UpdateBook(int position, Book book)
         {
-            if (!_libraryContext.Books.ContainsKey(id))
+            if (!_libraryContext.Books.ContainsKey(position))
             {
                 throw new Exception("Book with this ID doesn't exist");
             }
-            _libraryContext.Books[id] = book;
+            _libraryContext.Books[position] = book;
         }
 
         public void DeleteBook(Book book)
         {
-            _libraryContext.Books.Remove(book.Id);
+            KeyValuePair<int, Book> deletingBook = _libraryContext.Books.First(kvp => kvp.Value.Equals(book));
+            _libraryContext.Books.Remove(deletingBook.Key);
         }
 
         //Reader CRUD
@@ -233,17 +236,13 @@ namespace DL
         //Rent CRUD
         public void AddRent(Rent rent)
         {
-            if (_libraryContext.Rents.Where(r => r.Id.Equals(rent.Id)) != null)
+            if (_libraryContext.Rents.Contains(rent))
             {
                 throw new Exception("Rent with this ID already exists!");
             }
-            if (rent.DateOfRental.CompareTo(DateTime.Now) > 0)
+            if (rent.Date.CompareTo(DateTime.Now) > 0)
             {
                 throw new Exception("Invalid date of rental! (future date)");
-            }
-            if (rent.TotalPricePerDay < 0)
-            {
-                throw new Exception("Total price per day cannot be negative!");
             }
             _libraryContext.Rents.Add(rent);
         }

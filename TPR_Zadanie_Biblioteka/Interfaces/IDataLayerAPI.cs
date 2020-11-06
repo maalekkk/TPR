@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using DL.DataObjects;
+using DL.DataObjects.EventsObjects;
 using System.Xml.Serialization;
 
 namespace DL.Interfaces
@@ -18,11 +19,11 @@ namespace DL.Interfaces
 
         // Book methods
 
-        void AddBook(Book book);
+        void AddBook(Book book, int position);
         void DeleteBook(Book book);
-        Book GetBook(Guid id);
+        Book GetBook(int position);
         IEnumerable<Book> GetAllBooks();
-        void UpdateBook(Guid id, Book book);
+        void UpdateBook(int position, Book book);
 
         // CopyOfBook methods
 

@@ -42,5 +42,11 @@ namespace DL.DataObjects
         {
             return $"{{{nameof(Id)}={Id.ToString()}, {nameof(Name)}={Name}, {nameof(Surname)}={Surname}, {nameof(BirthDate)}={BirthDate.ToString()}, {nameof(PhoneNumber)}={PhoneNumber}, {nameof(Email)}={Email}, {nameof(Gender1)}={Gender1.ToString()}}}";
         }
+
+        public override bool Equals(object obj)
+        {
+            return obj is Person person &&
+                   _id.Equals(person._id);
+        }
     }
 }

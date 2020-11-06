@@ -20,9 +20,17 @@ namespace DL.DataObjects
         public string Name { get => _name; set => _name = value; }
         public string Surname { get => _surname; set => _surname = value; }
 
+        public override bool Equals(object obj)
+        {
+            return obj is Author author &&
+                   _id.Equals(author._id);
+        }
+
         public override string ToString()
         {
             return $"{{{nameof(Id)}={Id.ToString()}, {nameof(Name)}={Name}, {nameof(Surname)}={Surname}}}";
         }
+
+
     }
 }

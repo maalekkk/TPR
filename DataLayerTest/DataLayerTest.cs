@@ -42,6 +42,7 @@ namespace DataLayerTest
             Author fDostojewski = new Author(Guid.NewGuid(), "Fiodor", "Dostojewski");
             _dataLayer.AddAuthor(fDostojewski);
             Assert.AreEqual(2, _dataLayer.GetAllAuthors().Count());
+            Assert.ThrowsException<Exception>(() => _dataLayer.AddAuthor(fDostojewski));
         }
 
         [TestMethod]
@@ -65,6 +66,7 @@ namespace DataLayerTest
                 Book.BookType.Fantasy);
             _dataLayer.AddBook(wp, 3);
             Assert.AreEqual(3, _dataLayer.GetAllBooks().Count());
+            Assert.ThrowsException<Exception>(() => _dataLayer.AddBook(wp, 3));
         }
 
         [TestMethod]
@@ -82,6 +84,7 @@ namespace DataLayerTest
             Assert.AreEqual(1, _dataLayer.GetAllCopiesOfBook().Count());
             _dataLayer.AddCopyOfBook(hobbit2);
             Assert.AreEqual(2, _dataLayer.GetAllCopiesOfBook().Count());
+            Assert.ThrowsException<Exception>(() => _dataLayer.AddCopyOfBook(hobbit1));
         }
 
         [TestMethod]
@@ -93,6 +96,7 @@ namespace DataLayerTest
              "123456789", "kaska123@outlook.com", Person.Gender.Female, new DateTime(2019, 9, 11));
             _dataLayer.AddEmployee(person2);
             Assert.AreEqual(1, _dataLayer.GetAllEmployees().Count());
+            Assert.ThrowsException<Exception>(() => _dataLayer.AddEmployee(person2));
         }
 
         [TestMethod]
@@ -104,6 +108,7 @@ namespace DataLayerTest
             "111222333", "adam.nowak@gmail.com", Person.Gender.Male, new DateTime(2019, 9, 11));
             _dataLayer.AddReader(person1);
             Assert.AreEqual(1, _dataLayer.GetAllReaders().Count());
+            Assert.ThrowsException<Exception>(() => _dataLayer.AddReader(person1));
         }
 
         [TestMethod]
@@ -133,11 +138,6 @@ namespace DataLayerTest
             List<CopyOfBook> booksForRent = new List<CopyOfBook>();
             booksForRent.Add(hobbit1);
             booksForRent.Add(hobbit2);
-            double totalPrice = 0;
-            foreach (CopyOfBook book in booksForRent)
-            {
-                totalPrice += book.PricePerDay;
-            }
             Rent rent1 = new Rent(Guid.NewGuid(), person1, person2, booksForRent, new DateTime(2010, 1, 6, 0, 0, 0));
             _dataLayer.AddRent(rent1);
             Assert.AreEqual(1, _dataLayer.GetAllRents().Count());
@@ -145,14 +145,10 @@ namespace DataLayerTest
             booksForRent2.Add(zik1);
             booksForRent2.Add(zik2);
             booksForRent2.Add(wp1);
-            totalPrice = 0;
-            foreach (CopyOfBook book in booksForRent2)
-            {
-                totalPrice += book.PricePerDay;
-            }
             Rent rent2 = new Rent(Guid.NewGuid(), person1, person2, booksForRent2, new DateTime(2019, 11, 6, 0, 0, 0));
             _dataLayer.AddRent(rent2);
             Assert.AreEqual(2, _dataLayer.GetAllRents().Count());
+            Assert.ThrowsException<Exception>(() => _dataLayer.AddRent(rent2));
         }
 
         // Delete Tests
@@ -164,8 +160,9 @@ namespace DataLayerTest
             AddRentTest();
             Assert.AreEqual(2, _dataLayer.GetAllRents().Count());
             Rent rent = _dataLayer.GetAllRents().First();
-            _dataLayer.DeleteRent(_dataLayer.GetAllRents().First());
+            _dataLayer.DeleteRent(rent);
             Assert.AreEqual(1, _dataLayer.GetAllRents().Count());
+            Assert.ThrowsException<InvalidOperationException>(() => _dataLayer.GetRent(rent.Id));
         }
 
         [TestMethod]
@@ -174,8 +171,10 @@ namespace DataLayerTest
             _dataLayer = new LibraryRepository();
             AddReaderTest();
             Assert.AreEqual(1, _dataLayer.GetAllReaders().Count());
-            _dataLayer.DeleteReader(_dataLayer.GetAllReaders().First());
+            Reader reader = _dataLayer.GetAllReaders().First();
+            _dataLayer.DeleteReader(reader);
             Assert.AreEqual(0, _dataLayer.GetAllReaders().Count());
+            Assert.AreEqual(null, _dataLayer.GetReader(reader.Id));
         }
 
         [TestMethod]
@@ -184,8 +183,10 @@ namespace DataLayerTest
             _dataLayer = new LibraryRepository();
             AddEmployeeTest();
             Assert.AreEqual(1, _dataLayer.GetAllEmployees().Count());
-            _dataLayer.DeleteEmployee(_dataLayer.GetAllEmployees().First());
+            Employee employee = _dataLayer.GetAllEmployees().First();
+            _dataLayer.DeleteEmployee(employee);
             Assert.AreEqual(0, _dataLayer.GetAllEmployees().Count());
+            Assert.AreEqual(null, _dataLayer.GetEmployee(employee.Id));
         }
 
         [TestMethod]
@@ -194,23 +195,34 @@ namespace DataLayerTest
             _dataLayer = new LibraryRepository();
             AddCopyOfBookTest();
             Assert.AreEqual(2, _dataLayer.GetAllCopiesOfBook().Count());
-            _dataLayer.DeleteCopyOfBook(_dataLayer.GetAllCopiesOfBook().First());
+            CopyOfBook copy = _dataLayer.GetAllCopiesOfBook().First();
+            _dataLayer.DeleteCopyOfBook(copy);
             Assert.AreEqual(1, _dataLayer.GetAllCopiesOfBook().Count());
-
+            Assert.AreEqual(null, _dataLayer.GetCopyOfBook(copy.Id));
         }
 
         [TestMethod]
         public void DeleteBookTest()
         {
             _dataLayer = new LibraryRepository();
-            Assert.Inconclusive();
+            AddBookTest();
+            Assert.AreEqual(3, _dataLayer.GetAllBooks().Count());
+            Book book = _dataLayer.GetAllBooks().First();
+            _dataLayer.DeleteBook(book);
+            Assert.AreEqual(2, _dataLayer.GetAllBooks().Count());
+            Assert.ThrowsException<KeyNotFoundException>(() => _dataLayer.GetBook(4));
         }
 
         [TestMethod]
         public void DeleteAuthorTest()
         {
             _dataLayer = new LibraryRepository();
-            Assert.Inconclusive();
+            AddAuthorTest();
+            Assert.AreEqual(2, _dataLayer.GetAllAuthors().Count());
+            Author author = _dataLayer.GetAllAuthors().First();
+            _dataLayer.DeleteAuthor(author);
+            Assert.AreEqual(1, _dataLayer.GetAllAuthors().Count());
+            Assert.AreEqual(null, _dataLayer.GetAuthor(author.Id));
         }
 
         // Get Object Tests
@@ -218,13 +230,20 @@ namespace DataLayerTest
         [TestMethod]
         public void GetAuthorTest()
         {
-            Assert.Inconclusive();
+            AddAuthorTest();
+            Author author = new Author(Guid.NewGuid(), "Alan", "Nieznaniec");
+            Author authorFromCollection = _dataLayer.GetAllAuthors().First();
+            Assert.AreEqual(_dataLayer.GetAuthor(authorFromCollection.Id), authorFromCollection);
+            Assert.AreEqual(null, _dataLayer.GetAuthor(author.Id));
         }
 
         [TestMethod]
         public void GetBookTest()
         {
-            Assert.Inconclusive();
+            AddBookTest();
+            Author author = new Author(Guid.NewGuid(), "Alan", "Nieznaniec");
+            Book book = new Book("Book name", author, "Description", Book.BookType.Action);
+            Book bookFromColletion = _dataLayer.GetAllBooks().First();
         }
 
         [TestMethod]

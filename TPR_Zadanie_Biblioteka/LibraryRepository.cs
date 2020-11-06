@@ -249,7 +249,7 @@ namespace DL
 
         public Rent GetRent(Guid id)
         {
-            return (Rent)_libraryContext.Rents.Where(r => r.Id.Equals(id));
+            return _libraryContext.Rents.Single(r => r.Id.Equals(id));
         }
 
         public IEnumerable<Rent> GetAllRents()

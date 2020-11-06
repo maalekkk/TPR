@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using DL.Interfaces;
+using DL.DataObjects;
 using System.Text;
 
-namespace DL
+namespace DL.Collections
 {
     // Books Dictionary with implemented CRUD operations 
     class BooksCollection : ICrudOperations<Book>

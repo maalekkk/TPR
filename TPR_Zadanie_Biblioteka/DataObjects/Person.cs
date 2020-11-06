@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DL
+namespace DL.DataObjects
 {
-    class Person
+    public class Person
     {
         public enum Gender
         {

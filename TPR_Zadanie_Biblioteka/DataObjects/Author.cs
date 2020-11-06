@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DL
+namespace DL.DataObjects
 {
     public class Author
     {

@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Data;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using DL.Interfaces;
+using DL.DataObjects;
 
-namespace DL
+namespace DL.Collections
 {
     // Readers List with implemented CRUD operations 
     class ReadersCollection : ICrudOperations<Reader>

@@ -1,17 +1,18 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Net;
 using DL;
+using DL.Interfaces;
 
 namespace DataLayerTest
 {
     [TestClass]
     public class DataLayerTest
     {
-        private DataLayerAPI dataLayer;
+        private IDataLayerAPI _dataLayer;
         [TestMethod]
         public void InitTest()
         {
-            Assert.Inconclusive();
+            _dataLayer = new LibraryRepository();
         }
     }
 }

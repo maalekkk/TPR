@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DL
+namespace DL.DataObjects
 {
     public class Rent
     {

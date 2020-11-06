@@ -37,12 +37,7 @@ namespace DL.Collections
         // I really want to simply return _books Dictionary, but i can't change returned type because it's generic :(  
         public IEnumerable<Book> GetAll()
         {
-            List<Book> returnList = new List<Book>();
-            foreach(KeyValuePair<Guid, Book> book in _books)
-            {
-                returnList.Add(book.Value);
-            }
-            return returnList;
+            return _books.Values;
         }
 
         public void Update(Guid id, int option, Object newValue)

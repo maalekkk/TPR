@@ -9,12 +9,12 @@ using System.Xml.Serialization;
 namespace DL
 {
     // LibraryRepository contains all collections of data objects. 
-    class LibraryRepository
+    public class LibraryRepository : IDataLayerAPI
     {
         private LibraryContext _libraryContext;
-        private IDataFiller _fillWithConsts = null;
+        private IDataFiller _dataFiller = null;
 
-        public IDataFiller FillWithConsts { get => _fillWithConsts; set => _fillWithConsts = value; }
+        public IDataFiller DataFiller { get => _dataFiller; set => _dataFiller = value; }
 
         public LibraryRepository()
         {
@@ -23,9 +23,9 @@ namespace DL
 
         public void FillData(String path)
         {
-            if (_fillWithConsts != null)
+            if (_dataFiller != null)
             {
-                _fillWithConsts.Fill(_libraryContext, path);
+                _dataFiller.Fill(_libraryContext, path);
             }
         }
 

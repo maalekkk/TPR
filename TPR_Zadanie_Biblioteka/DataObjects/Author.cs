@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace DL.DataObjects
 {
@@ -14,8 +15,6 @@ namespace DL.DataObjects
             _name = name;
             _surname = surname;
         }
-
-
 
         public Guid Id { get => _id; private set => _id = value; }
         public string Name { get => _name; set => _name = value; }

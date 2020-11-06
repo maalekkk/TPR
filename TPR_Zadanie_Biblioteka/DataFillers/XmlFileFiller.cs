@@ -6,7 +6,7 @@ using DL.Interfaces;
 
 namespace DL.DataFillers
 {
-    class XmlFileFiller : IDataFiller
+    public class XmlFileFiller : IDataFiller
     {
         public Dictionary<string, string> Parse(XmlNode child)
         {

@@ -25,11 +25,11 @@ namespace DL
             _libraryContext = new LibraryContext();
         }
 
-        public void FillData()
+        public void FillData(String path)
         {
             if (_dataFiller != null)
             {
-                _dataFiller.Fill(_libraryContext);
+                _dataFiller.Fill(_libraryContext, path);
             }
         }
 
@@ -55,10 +55,6 @@ namespace DL
 
         public void UpdateAuthor(Guid id, Author author)
         {
-            if(id != author.Id)
-            {
-                throw new Exception("You can't change authors id");
-            }
             Author updatingAuthor = _libraryContext.Authors.Find(a => a.Id.Equals(id));
             if (updatingAuthor == null)
             {
@@ -138,11 +134,7 @@ namespace DL
 
         public void UpdateReader(Guid id, Reader reader)
         {
-            if (!id.Equals(reader.Id))
-            {
-                throw new Exception("You can't change Id");
-            }
-            Reader updatingReader = _libraryContext.Readers.Find(r => r.Equals(reader));
+            Reader updatingReader = _libraryContext.Readers.Find(r => r.Equals(id));
             if (updatingReader == null)
             {
                 throw new Exception("Employee with this ID doesn't exist");
@@ -185,10 +177,6 @@ namespace DL
         
         public void UpdateCopyOfBook(Guid id, CopyOfBook copyOfBook)
         {
-            if (!id.Equals(copyOfBook.Id))
-            {
-                throw new Exception("You can't change id");
-            }
             CopyOfBook updatingCopyOfBook = _libraryContext.CopiesOfBooks.Find(c => c.Id.Equals(id));
             if (updatingCopyOfBook == null)
             {
@@ -232,10 +220,6 @@ namespace DL
 
         public void UpdateEmployee(Guid id, Employee employee)
         {
-            if (!id.Equals(employee.Id))
-            {
-                throw new Exception("You can't change Id");
-            }
             Employee updatingEmployee = _libraryContext.Employees.Find(e => e.Id.Equals(id));
             if (updatingEmployee == null)
             {
@@ -265,7 +249,7 @@ namespace DL
 
         public Rent GetRent(Guid id)
         {
-            return _libraryContext.Rents.First(r => r.Id.Equals(id));
+            return _libraryContext.Rents.Single(r => r.Id.Equals(id));
         }
 
         public IEnumerable<Rent> GetAllRents()
@@ -275,11 +259,7 @@ namespace DL
 
         public void UpdateRents(Guid id, Rent rent)
         {
-            if (!id.Equals(rent.Id))
-            {
-                throw new Exception("You can't change Id");
-            }
-            Rent updatingRent = _libraryContext.Rents.Single(r => r.Equals(rent));
+            Rent updatingRent = _libraryContext.Rents.Single(r => r.Id.Equals(id));
             if (updatingRent == null)
             {
                 throw new Exception("Employee with this ID doesn't exist");

@@ -89,6 +89,11 @@ namespace DL
             return _libraryContext.Books[position];
         }
 
+        public int GetBookPosition(Book book)
+        {
+            return _libraryContext.Books.First(kav => kav.Value.Equals(book)).Key;
+        }
+
         public IEnumerable<Book> GetAllBooks()
         {
             return _libraryContext.Books.Values;

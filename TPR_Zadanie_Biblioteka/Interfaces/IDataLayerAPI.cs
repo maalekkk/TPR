@@ -22,6 +22,7 @@ namespace DL.Interfaces
         void AddBook(Book book);
         void DeleteBook(Book book);
         Book GetBook(int position);
+        int GetBookPosition(Book book);
         IEnumerable<Book> GetAllBooks();
         void UpdateBook(int position, Book book);
 

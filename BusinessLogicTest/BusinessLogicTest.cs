@@ -89,6 +89,7 @@ namespace BusinessLogicTest
             Assert.AreEqual(1, _dataService.GetAllRents().Count());
             Assert.AreEqual(1, _dataService.GetRentedCopiesOfBooks().Count());
             Assert.AreEqual(true, _dataService.IsCopyOfBookRented(_dataService.GetAllCopiesOfBook().ElementAt(0)));
+            Assert.AreEqual(1, _dataService.GetAllCurrentRents().Count());
             Assert.ThrowsException<ArgumentException>(() => _dataService.AddRent(_dataService.GetAllReaders().ElementAt(0), _dataService.GetAllEmployees().ElementAt(0), books));
         }
 
@@ -104,6 +105,7 @@ namespace BusinessLogicTest
             Assert.ThrowsException<ArgumentException>(() => _dataService.AddReturn(null, null));
             Assert.ThrowsException<ArgumentException>(() => _dataService.AddReturn(_dataService.GetAllRents().ElementAt(0), booksRandom));
             _dataService.AddReturn(_dataService.GetAllRents().ElementAt(0), booksFromCollection);
+            Assert.AreEqual(0, _dataService.GetAllCurrentRents().Count());
             Assert.ThrowsException<ArgumentException>(() => _dataService.AddReturn(_dataService.GetAllRents().ElementAt(0), booksFromCollection));
             Assert.AreNotEqual(DateTime.MinValue, _dataService.GetAllRents().ElementAt(0).DateOfReturn);
         }
@@ -166,6 +168,5 @@ namespace BusinessLogicTest
             _dataService.DeleteCopyOfBook(_dataService.GetAllCopiesOfBook().ElementAt(0));
             Assert.AreEqual(0, _dataService.GetAllCopiesOfBook().Count());
         }
-
     }
 }

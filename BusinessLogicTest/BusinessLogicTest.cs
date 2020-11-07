@@ -142,7 +142,10 @@ namespace BusinessLogicTest
             Assert.ThrowsException<ArgumentException>(() => _dataService.DeleteReader(_dataService.GetAllReaders().ElementAt(0)));
             _dataService = new DataService(new LibraryRepository());
             AddReturnTest();
-            _dataService.DeleteReader(_dataService.GetAllReaders().ElementAt(0));
+            Assert.ThrowsException<ArgumentException>(() => _dataService.DeleteReader(_dataService.GetAllReaders().ElementAt(0)));
+            Reader reader = _dataService.GetAllReaders().ElementAt(0);
+            _dataService.AddPayment(reader, -reader.Balance);
+            _dataService.DeleteReader(reader);
             Assert.AreEqual(0, _dataService.GetAllReaders().Count());
         }
 

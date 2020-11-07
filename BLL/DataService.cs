@@ -175,6 +175,10 @@ namespace BLL
             {
                 throw new ArgumentException("Reader has got rent currently!");
             }
+            if(reader.Balance < 0)
+            {
+                throw new ArgumentException("Reader has negative balance!");
+            }
             _dataLayer.DeleteReader(reader);
         }
 
@@ -204,6 +208,10 @@ namespace BLL
             if (!_dataLayer.GetAllEmployees().Contains(employee))
             {
                 throw new ArgumentException("Employee doesn't exist in repository!");
+            }
+            if (reader.Balance < 0)
+            {
+                throw new ArgumentException("Reader has negative balance!");
             }
             foreach(CopyOfBook book in books)
             {
@@ -279,6 +287,13 @@ namespace BLL
             {
                 rent.DateOfReturn = DateTime.Now;
             }
+            int numberOfDays = DateTime.Now.Subtract(rent.Date).Days + 1;
+            double cash = 0.0;
+            foreach(CopyOfBook book in books)
+            {
+                cash += numberOfDays * rent.Book[book];
+            }
+            rent.Reader.Balance -= cash;
         }
 
         public IEnumerable<Return> GetAllReturns()
@@ -333,6 +348,29 @@ namespace BLL
                 }
             }
             return rentedCopiesOfBooks;
+        }
+
+        // Payments methods
+
+        public void AddPayment(Reader reader, double cash)
+        {
+            if (Math.Round(cash, 2) != cash)
+                throw new ArgumentException("Cash is invalid value!");
+            _dataLayer.AddEvent(new Payment(Guid.NewGuid(), DateTime.Now, reader, cash));
+            reader.Balance += cash;
+        }
+
+        public List<Payment> GetAllPayments()
+        {
+            List<Payment> payments = new List<Payment>();
+            foreach (Event _event in _dataLayer.GetAllEvents())
+            {
+                if (typeof(Payment).Equals(_event.GetType()))
+                {
+                    payments.Add((Payment)_event);
+                }
+            }
+            return payments;
         }
 
         private List<T> MergeCollections<T>(List<T> enum1, IEnumerable<T> enum2)

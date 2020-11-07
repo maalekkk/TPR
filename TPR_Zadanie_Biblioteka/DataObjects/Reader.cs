@@ -8,14 +8,17 @@ namespace DL.DataObjects
     public class Reader : Person
     {
         private DateTime _dateOfRegistration;
+        private double _balance;
         public Reader(Guid id, string name, string surname, DateTime birthDate,
             string phoneNumber, string email, Gender gender, DateTime dateOfRegistration)
             : base(id, name, surname, birthDate, phoneNumber, email, gender)
         {
             _dateOfRegistration = dateOfRegistration;
+            Balance = 0.0;
         }
 
         public DateTime DateOfRegistration { get => _dateOfRegistration; set => _dateOfRegistration = value; }
+        public double Balance { get => _balance; set => _balance = value; }
 
         public override bool Equals(object obj)
         {

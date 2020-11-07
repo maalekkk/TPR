@@ -16,6 +16,7 @@ namespace DL.Interfaces
         Author GetAuthor(Guid id);
         IEnumerable<Author> GetAllAuthors();
         void UpdateAuthor(Guid id, Author author);
+        Author FindAuthor(Predicate<Author> parameter);
 
         // Book methods
 
@@ -25,6 +26,7 @@ namespace DL.Interfaces
         int GetBookPosition(Book book);
         IEnumerable<Book> GetAllBooks();
         void UpdateBook(int position, Book book);
+        Book FindBook(Predicate<Book> parameter);
 
         // CopyOfBook methods
 
@@ -33,6 +35,7 @@ namespace DL.Interfaces
         CopyOfBook GetCopyOfBook(Guid id);
         IEnumerable<CopyOfBook> GetAllCopiesOfBook();
         void UpdateCopyOfBook(Guid id, CopyOfBook copyOfBook);
+        CopyOfBook FindCopyOfBook(Predicate<CopyOfBook> parameter);
 
         // Employee methods
 
@@ -41,6 +44,7 @@ namespace DL.Interfaces
         Employee GetEmployee(Guid id);
         IEnumerable<Employee> GetAllEmployees();
         void UpdateEmployee(Guid id, Employee employee);
+        Employee FindEmployee(Predicate<Employee> parameter);
 
         //Readers methods
 
@@ -49,11 +53,13 @@ namespace DL.Interfaces
         Reader GetReader(Guid id);
         IEnumerable<Reader> GetAllReaders();
         void UpdateReader(Guid id, Reader reader);
+        Reader FindReader(Predicate<Reader> parameter);
 
         //Event methods
 
         void AddEvent(Event eventObject);
         Event GetEvent(Guid id);
         IEnumerable<Event> GetAllEvents();
+        Event FindEvent(Predicate<Event> parameter);
     }
 }

@@ -27,7 +27,7 @@ namespace BLL
 
         public void DeleteAuthor(Author author)
         {
-            if (_dataLayer.GetAllBooks().First(b => b.Author.Equals(author)) != null)
+            if (_dataLayer.GetAllBooks().FirstOrDefault(b => b.Author.Equals(author)) != default)
                 throw new ArgumentException("At least one book has reference to author!");
             _dataLayer.DeleteAuthor(author);
         }
@@ -42,6 +42,11 @@ namespace BLL
             return _dataLayer.GetAllAuthors();
         }
 
+        public Author FindAuthor(Predicate<Author> parameter)
+        {
+            return _dataLayer.FindAuthor(parameter);
+        }
+
         // Books methods
 
         public void AddBook(string name, Author author, string description, Book.BookType bookType)
@@ -53,7 +58,7 @@ namespace BLL
 
         public void DeleteBook(Book book)
         {
-            if (_dataLayer.GetAllCopiesOfBook().First(b => b.Book.Equals(book)) != null)
+            if (_dataLayer.GetAllCopiesOfBook().FirstOrDefault(b => b.Book.Equals(book)) != default)
                 throw new ArgumentException("At least one copy of book has reference to book!");
             _dataLayer.DeleteBook(book);
         }
@@ -68,11 +73,16 @@ namespace BLL
             return _dataLayer.GetAllBooks();
         }
 
+        public Book FindBook(Predicate<Book> parameter)
+        {
+            return _dataLayer.FindBook(parameter);
+        }
+
         // Copies of Books methods
 
         public void AddCopyOfBook(Book book, DateTime purchaseDate, double pricePerDay)
         {
-            if (GetBook(book) == null)
+            if (book == null)
                 throw new ArgumentException("This book doesn't exists in repository!");
             _dataLayer.AddCopyOfBook(new CopyOfBook(Guid.NewGuid(), book, purchaseDate, pricePerDay));
         } 
@@ -102,15 +112,23 @@ namespace BLL
             return _dataLayer.GetAllCopiesOfBook();
         }
 
+        public CopyOfBook FindCopyOfBook(Predicate<CopyOfBook> parameter)
+        {
+            return _dataLayer.FindCopyOfBook(parameter);
+        }
+
         // Employees methods
 
         public void AddEmployee(string name, string surname, DateTime birthDate,
             string phoneNumber, string email, Employee.Gender gender, DateTime dateOfEmployment)
         {
-            if ((_dataLayer.GetAllEmployees().First(e => e.PhoneNumber.Equals(phoneNumber)) == null) && (_dataLayer.GetAllEmployees().First(e => e.Email.Equals(email)) == null))
-                _dataLayer.AddEmployee(new Employee(Guid.NewGuid(), name, surname, birthDate, phoneNumber, email, gender, dateOfEmployment));
-            else
+            if ((_dataLayer.GetAllEmployees().FirstOrDefault(e => e.PhoneNumber.Equals(phoneNumber)) != default) || (_dataLayer.GetAllEmployees().FirstOrDefault(e => e.Email.Equals(email)) != default))
                 throw new ArgumentException("Person with the same email or phone number exists!");
+            if (!IsValidEmail(email))
+                throw new ArgumentException("Invalid email format!");
+            if (!IsValidPhoneNumber(phoneNumber))
+                throw new ArgumentException("Invalid phone number format!");
+            _dataLayer.AddEmployee(new Employee(Guid.NewGuid(), name, surname, birthDate, phoneNumber, email, gender, dateOfEmployment));
         }
 
         public void DeleteEmployee(Employee employee)
@@ -126,6 +144,53 @@ namespace BLL
         public void UpdateEmployee(Guid id, Employee employee)
         {
             _dataLayer.UpdateEmployee(id, employee);
+        }
+
+        public Employee FindEmployee(Predicate<Employee> parameter)
+        {
+            return _dataLayer.FindEmployee(parameter);
+        }
+
+        // Readers methods
+
+        public void AddReader(string name, string surname, DateTime birthDate,
+            string phoneNumber, string email, Employee.Gender gender, DateTime dateOfRegistration)
+        {
+            if ((_dataLayer.GetAllReaders().FirstOrDefault(e => e.PhoneNumber.Equals(phoneNumber)) != default || (_dataLayer.GetAllEmployees().FirstOrDefault(e => e.Email.Equals(email)) != default)))
+                throw new ArgumentException("Person with the same email or phone number exists!");
+            if (!IsValidEmail(email))
+            {
+                throw new ArgumentException("Invalid email format!");
+            }
+            if (!IsValidPhoneNumber(phoneNumber))
+            {
+               throw new ArgumentException("Invalid phone number format!");
+            }
+            _dataLayer.AddReader(new Reader(Guid.NewGuid(), name, surname, birthDate, phoneNumber, email, gender, dateOfRegistration));
+        }
+
+        public void DeleteReader(Reader reader)
+        {
+            if(GetAllCurrentRents().FirstOrDefault(r => r.Reader.Equals(reader)) != default)
+            {
+                throw new ArgumentException("Reader has got rent currently!");
+            }
+            _dataLayer.DeleteReader(reader);
+        }
+
+        public IEnumerable<Reader> GetAllReaders()
+        {
+            return _dataLayer.GetAllReaders();
+        }
+
+        public void UpdateReader(Guid id, Reader reader)
+        {
+            _dataLayer.UpdateReader(id, reader);
+        }
+
+        public Reader FindReader(Predicate<Reader> parameter)
+        {
+            return _dataLayer.FindReader(parameter);
         }
 
         // Rents methods
@@ -152,7 +217,7 @@ namespace BLL
                 }
             }
             IEnumerable<Rent> rents = GetAllCurrentRents();
-            if(rents.First(rent => rent.Reader.Equals(reader)) != null)
+            if(rents.FirstOrDefault(rent => rent.Reader.Id.Equals(reader.Id)) != default)
             {
                 throw new ArgumentException("This reader already has rent");
             }
@@ -177,12 +242,17 @@ namespace BLL
             List<Rent> rents = GetAllRents().ToList();
             foreach(Rent rent in GetAllRents())
             {
-                if (rent.DateOfReturn != null)
+                if (rent.DateOfReturn != DateTime.MinValue)
                 {
                     rents.Remove(rent);
                 }
             }
             return rents;
+        }
+
+        public Event FindEvent(Predicate<Event> parameter)
+        {
+            return _dataLayer.FindEvent(parameter);
         }
 
         // Returns methods
@@ -242,7 +312,7 @@ namespace BLL
             List<CopyOfBook> rentedCopiesOfBooks = new List<CopyOfBook>();
             foreach(Rent rent in GetAllRents())
             {
-                if(rent.DateOfReturn == null)
+                if(rent.DateOfReturn == DateTime.MinValue)
                 {
                     rentedCopiesOfBooks = MergeCollections<CopyOfBook>(rentedCopiesOfBooks, GetRentedCopiesOfBooks(rent));
                 }
@@ -272,6 +342,28 @@ namespace BLL
                 enum1.Add(item);
             }
             return enum1;
+        }
+
+        private bool IsValidEmail(string email)
+        {
+            try
+            {
+                var addr = new System.Net.Mail.MailAddress(email);
+                return addr.Address == email;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        private bool IsValidPhoneNumber(string phone)
+        {
+            if(phone.Length != 9)
+            {
+                return false;
+            }
+            return true;
         }
     }
 }

@@ -12,7 +12,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BLL", "BLL\BLL.csproj", "{CC38D351-5587-4A9E-B342-A9EF97A2D4BE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BLL", "BLL\BLL.csproj", "{CC38D351-5587-4A9E-B342-A9EF97A2D4BE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLogicTest", "BusinessLogicTest\BusinessLogicTest.csproj", "{51D115E7-0757-418D-A8F4-E47A60C8A223}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,6 +34,10 @@ Global
 		{CC38D351-5587-4A9E-B342-A9EF97A2D4BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CC38D351-5587-4A9E-B342-A9EF97A2D4BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CC38D351-5587-4A9E-B342-A9EF97A2D4BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51D115E7-0757-418D-A8F4-E47A60C8A223}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51D115E7-0757-418D-A8F4-E47A60C8A223}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51D115E7-0757-418D-A8F4-E47A60C8A223}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51D115E7-0757-418D-A8F4-E47A60C8A223}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

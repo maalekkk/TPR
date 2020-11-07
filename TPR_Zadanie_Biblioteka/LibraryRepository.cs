@@ -71,6 +71,11 @@ namespace DL
             _libraryContext.Authors.Remove(author);
         }
 
+        public Author FindAuthor(Predicate<Author> parameter)
+        {
+            return _libraryContext.Authors.Find(parameter);
+        }
+
         //Book CRUD
         public void AddBook(Book book)
         {
@@ -112,6 +117,11 @@ namespace DL
         {
             KeyValuePair<int, Book> deletingBook = _libraryContext.Books.First(kvp => kvp.Value.Equals(book));
             _libraryContext.Books.Remove(deletingBook.Key);
+        }
+
+        public Book FindBook(Predicate<Book> parameter)
+        {
+            return _libraryContext.Books.Values.ToList().Find(parameter);
         }
 
         //Reader CRUD
@@ -162,6 +172,11 @@ namespace DL
             _libraryContext.Readers.Remove(reader);
         }
 
+        public Reader FindReader(Predicate<Reader> parameter)
+        {
+            return _libraryContext.Readers.Find(parameter);
+        }
+
         //CopyOfBook CRUD
         public void AddCopyOfBook(CopyOfBook copyOfBook)
         {
@@ -207,6 +222,11 @@ namespace DL
         public void DeleteCopyOfBook(CopyOfBook copyOfBook)
         {
             _libraryContext.CopiesOfBooks.Remove(copyOfBook);
+        }
+
+        public CopyOfBook FindCopyOfBook(Predicate<CopyOfBook> parameter)
+        {
+            return _libraryContext.CopiesOfBooks.Find(parameter);
         }
 
         //Employee CRUD
@@ -256,7 +276,12 @@ namespace DL
             _libraryContext.Employees.Remove(employee);
         }
 
-        //Rent CRUD
+        public Employee FindEmployee(Predicate<Employee> parameter)
+        {
+            return _libraryContext.Employees.Find(parameter);
+        }
+
+        //Event CRUD
         public void AddEvent(Event eventObject)
         {
             if (_libraryContext.Events.Contains(eventObject))
@@ -278,6 +303,11 @@ namespace DL
         public IEnumerable<Event> GetAllEvents()
         {
             return _libraryContext.Events;
+        }
+
+        public Event FindEvent(Predicate<Event> parameter)
+        {
+            return _libraryContext.Events.ToList().Find(parameter);
         }
     }
 }

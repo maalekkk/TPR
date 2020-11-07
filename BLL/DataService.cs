@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using DL;
 using DL.DataObjects;
 using DL.Interfaces;
 using DL.DataObjects.EventsObjects;
-using System.ComponentModel;
 
 namespace BLL
 {

@@ -5,8 +5,6 @@ using System.Linq;
 using System;
 using DL.DataObjects;
 using System.Collections.Generic;
-using DL.DataObjects.EventsObjects;
-using System.Threading;
 
 namespace BusinessLogicTest
 {

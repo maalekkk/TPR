@@ -3,11 +3,7 @@ using System.Collections.Generic;
 using DL.Interfaces;
 using DL.DataObjects;
 using DL.DataObjects.EventsObjects;
-using System.Collections.ObjectModel;
-using System.Text;
-using System.Xml.Serialization;
 using System.Linq;
-using System.Net.Sockets;
 
 namespace DL
 {

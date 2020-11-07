@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace DL.DataObjects
 {
@@ -9,7 +7,7 @@ namespace DL.DataObjects
         private Guid _id;
         private Book _book;
         private DateTime _purchaseDate;
-        private double _pricePerDay;      //double is better than float imo
+        private double _pricePerDay;
 
         public CopyOfBook(Guid id, Book book, DateTime purchaseDate, double pricePerDay)
         {

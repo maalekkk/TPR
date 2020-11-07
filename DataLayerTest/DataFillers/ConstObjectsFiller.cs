@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using DL.DataObjects;
 using DL.DataObjects.EventsObjects;
 using DL.Interfaces;
-using System.ComponentModel;
-using System.Text;
 
 namespace DL.DataFillers
 {

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace DL.DataObjects
+﻿namespace DL.DataObjects
 {
     public class Book
     {

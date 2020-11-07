@@ -76,6 +76,21 @@ namespace BLL
                 throw new ArgumentException("This book doesn't exists in repository!");
             _dataLayer.AddCopyOfBook(new CopyOfBook(Guid.NewGuid(), book, purchaseDate, pricePerDay));
         } 
+
+        public void DeleteCopyOfBook(CopyOfBook copyOfBook)
+        {
+            if (IsCopyOfBookRented(copyOfBook))
+            {
+                throw new ArgumentException("This copy of book is already rented!");
+            }
+            _dataLayer.DeleteCopyOfBook(copyOfBook);
+        }
+
+        public bool IsCopyOfBookRented(CopyOfBook copyOfBook)
+        {
+            IEnumerable<CopyOfBook> rentedBooks = GetRentedCopiesOfBooks();
+            return rentedBooks.Contains(copyOfBook);
+        } 
     
         public CopyOfBook GetCopyOfBook(CopyOfBook copyOfBook)
         {
@@ -115,7 +130,36 @@ namespace BLL
 
         // Rents methods
 
-        public IEnumerable<Rent> GetAllRents()
+        public void AddRent(Reader reader, Employee employee, List<CopyOfBook> books)
+        {
+            if (!_dataLayer.GetAllReaders().Contains(reader))
+            {
+                throw new ArgumentException("Reader doesn't exist in repository!");
+            }
+            if (!_dataLayer.GetAllEmployees().Contains(employee))
+            {
+                throw new ArgumentException("Employee doesn't exist in repository!");
+            }
+            foreach(CopyOfBook book in books)
+            {
+                if (!_dataLayer.GetAllCopiesOfBook().Contains(book))
+                {
+                    throw new ArgumentException("At least one of book doesn't exists in repository!");
+                }
+                if (IsCopyOfBookRented(book))
+                {
+                    throw new ArgumentException("This copy of book is already rented!");
+                }
+            }
+            IEnumerable<Rent> rents = GetAllCurrentRents();
+            if(rents.First(rent => rent.Reader.Equals(reader)) != null)
+            {
+                throw new ArgumentException("This reader already has rent");
+            }
+            _dataLayer.AddEvent(new Rent(Guid.NewGuid(), reader, employee, books, DateTime.Now));
+        }
+
+        public IEnumerable<Rent> GetAllRents() 
         {
             List<Rent> rents = new List<Rent>();
             foreach(Event _event in _dataLayer.GetAllEvents())
@@ -126,6 +170,45 @@ namespace BLL
                 }
             }
             return rents;
+        }
+
+        public IEnumerable<Rent> GetAllCurrentRents()
+        {
+            List<Rent> rents = GetAllRents().ToList();
+            foreach(Rent rent in GetAllRents())
+            {
+                if (rent.DateOfReturn != null)
+                {
+                    rents.Remove(rent);
+                }
+            }
+            return rents;
+        }
+
+        // Returns methods
+
+        public void AddReturn(Rent rent, List<CopyOfBook> books)
+        {
+            if (!GetAllRents().Contains(rent))
+            {
+                throw new ArgumentException("Rent didn't happen!");
+            }
+            if (!GetAllCurrentRents().Contains(rent))
+            {
+                throw new ArgumentException("Rent is closed!");
+            }
+            foreach (CopyOfBook book in books)
+            {
+                if (!GetRentedCopiesOfBooks(rent).Contains(book))
+                {
+                    throw new ArgumentException("At least one of returned copies doesn't contain in rent or has been already returned!");
+                }
+            }
+            _dataLayer.AddEvent(new Return(Guid.NewGuid(), DateTime.Now, books, rent));
+            if(GetRentedCopiesOfBooks(rent).Count() == 0)
+            {
+                rent.DateOfReturn = DateTime.Now;
+            }
         }
 
         public IEnumerable<Return> GetAllReturns()
@@ -159,7 +242,11 @@ namespace BLL
             List<CopyOfBook> rentedCopiesOfBooks = new List<CopyOfBook>();
             foreach(Rent rent in GetAllRents())
             {
-                rentedCopiesOfBooks = MergeCollections<CopyOfBook>(rentedCopiesOfBooks, GetRentedCopiesOfBooks(rent));
+                if(rent.DateOfReturn == null)
+                {
+                    rentedCopiesOfBooks = MergeCollections<CopyOfBook>(rentedCopiesOfBooks, GetRentedCopiesOfBooks(rent));
+                }
+                
             }
             return rentedCopiesOfBooks;
         }

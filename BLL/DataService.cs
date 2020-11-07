@@ -9,7 +9,7 @@ using System.ComponentModel;
 
 namespace BLL
 {
-    public class DataService
+    public class DataService : IBusinessLogicLayerAPI
     {
         private IDataLayerAPI _dataLayer;
 
@@ -30,11 +30,6 @@ namespace BLL
             if (_dataLayer.GetAllBooks().FirstOrDefault(b => b.Author.Equals(author)) != default)
                 throw new ArgumentException("At least one book has reference to author!");
             _dataLayer.DeleteAuthor(author);
-        }
-
-        public Author GetAuthor(Author author)
-        {
-            return _dataLayer.GetAuthor(author.Id);
         }
 
         public IEnumerable<Author> GetAllAuthors()
@@ -61,11 +56,6 @@ namespace BLL
             if (_dataLayer.GetAllCopiesOfBook().FirstOrDefault(b => b.Book.Equals(book)) != default)
                 throw new ArgumentException("At least one copy of book has reference to book!");
             _dataLayer.DeleteBook(book);
-        }
-
-        public Book GetBook(Book book)
-        {
-            return _dataLayer.GetBook(_dataLayer.GetBookPosition(book));
         }
 
         public IEnumerable<Book> GetAllBooks()
@@ -101,11 +91,6 @@ namespace BLL
             IEnumerable<CopyOfBook> rentedBooks = GetRentedCopiesOfBooks();
             return rentedBooks.Contains(copyOfBook);
         } 
-    
-        public CopyOfBook GetCopyOfBook(CopyOfBook copyOfBook)
-        {
-            return _dataLayer.GetCopyOfBook(copyOfBook.Id);
-        }
 
         public IEnumerable<CopyOfBook> GetAllCopiesOfBook()
         {
@@ -258,9 +243,16 @@ namespace BLL
             return rents;
         }
 
+        // Events methods
+
         public Event FindEvent(Predicate<Event> parameter)
         {
             return _dataLayer.FindEvent(parameter);
+        }
+
+        public IEnumerable<Event> GetAllEvents()
+        {
+            return _dataLayer.GetAllEvents();
         }
 
         // Returns methods

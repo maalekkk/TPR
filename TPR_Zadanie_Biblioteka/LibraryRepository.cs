@@ -37,7 +37,7 @@ namespace DL
         {
             if (_libraryContext.Authors.Find(a => a.Id.Equals(author.Id)) != null)
             {
-                throw new Exception("Author with this ID already exists");
+                throw new ArgumentException("Author with this ID already exists");
             }
             _libraryContext.Authors.Add(author);
         }
@@ -56,12 +56,12 @@ namespace DL
         {
             if (id != author.Id)
             {
-                throw new Exception("You can't change authors id");
+                throw new ArgumentException("You can't change authors id");
             }
             Author updatingAuthor = _libraryContext.Authors.Find(a => a.Id.Equals(id));
             if (updatingAuthor == null)
             {
-                throw new Exception("Author with this ID doesn't exist");
+                throw new ArgumentException("Author with this ID doesn't exist");
             }
             _libraryContext.Authors[_libraryContext.Authors.IndexOf(updatingAuthor)] = author;
         }
@@ -76,7 +76,7 @@ namespace DL
         {
             if (_libraryContext.Books.ContainsValue(book))
             {
-                throw new Exception("This book already exists in collection!");
+                throw new ArgumentException("This book already exists in collection!");
             }
             int key = 0;
             if (_libraryContext.Books.Count() != 0)
@@ -98,7 +98,7 @@ namespace DL
         {
             if (!_libraryContext.Books.ContainsKey(position))
             {
-                throw new Exception("Book with this ID doesn't exist");
+                throw new ArgumentException("Book with this ID doesn't exist");
             }
             _libraryContext.Books[position] = book;
         }
@@ -114,15 +114,15 @@ namespace DL
         {
             if (_libraryContext.Readers.Find(r => r.Id.Equals(reader.Id)) != null)
             {
-                throw new Exception("Reader with this ID already exists!");
+                throw new ArgumentException("Reader with this ID already exists!");
             }
             if (reader.BirthDate.CompareTo(DateTime.Now) >= 0)
             {
-                throw new Exception("Unborn Reader! (birth day is future date)");
+                throw new ArgumentException("Unborn Reader! (birth day is future date)");
             }
             if (reader.DateOfRegistration.CompareTo(DateTime.Now) > 0)
             {
-                throw new Exception("Date of registration is future date!");
+                throw new ArgumentException("Date of registration is future date!");
             }
 
             _libraryContext.Readers.Add(reader);
@@ -142,12 +142,12 @@ namespace DL
         {
             if (!id.Equals(reader.Id))
             {
-                throw new Exception("You can't change Id");
+                throw new ArgumentException("You can't change Id");
             }
             Reader updatingReader = _libraryContext.Readers.Find(r => r.Equals(reader));
             if (updatingReader == null)
             {
-                throw new Exception("Employee with this ID doesn't exist");
+                throw new ArgumentException("Employee with this ID doesn't exist");
             }
             _libraryContext.Readers[_libraryContext.Readers.IndexOf(updatingReader)] = reader;
         }
@@ -162,15 +162,15 @@ namespace DL
         {
             if (_libraryContext.CopiesOfBooks.Find(c => c.Id.Equals(copyOfBook.Id)) != null)
             {
-                throw new Exception("Copy of book with this ID already exists!");
+                throw new ArgumentException("Copy of book with this ID already exists!");
             }
             if (copyOfBook.PurchaseDate.CompareTo(DateTime.Now) > 0)
             {
-                throw new Exception("Invalid purchase date! (date from future)");
+                throw new ArgumentException("Invalid purchase date! (date from future)");
             }
             if (copyOfBook.PricePerDay < 0)
             {
-                throw new Exception("Price cannot be negative!");
+                throw new ArgumentException("Price cannot be negative!");
             }
             _libraryContext.CopiesOfBooks.Add(copyOfBook);
         }
@@ -189,12 +189,12 @@ namespace DL
         {
             if (!id.Equals(copyOfBook.Id))
             {
-                throw new Exception("You can't change id");
+                throw new ArgumentException("You can't change id");
             }
             CopyOfBook updatingCopyOfBook = _libraryContext.CopiesOfBooks.Find(c => c.Id.Equals(id));
             if (updatingCopyOfBook == null)
             {
-                throw new Exception("Copy of book with this ID doesn't exist");
+                throw new ArgumentException("Copy of book with this ID doesn't exist");
             }
             _libraryContext.CopiesOfBooks[_libraryContext.CopiesOfBooks.IndexOf(updatingCopyOfBook)] = copyOfBook;
         }
@@ -209,15 +209,15 @@ namespace DL
         {
             if (_libraryContext.Employees.Find(e => e.Id.Equals(employee.Id)) != null)
             {
-                throw new Exception("Employee with this ID already exists!");
+                throw new ArgumentException("Employee with this ID already exists!");
             }
             if (employee.BirthDate.CompareTo(DateTime.Now) >= 0)
             {
-                throw new Exception("Unborn employee! (birth day is future date)");
+                throw new ArgumentException("Unborn employee! (birth day is future date)");
             }
             if (employee.DateOfEmployment.CompareTo(DateTime.Now) > 0)
             {
-                throw new Exception("Invalid Date of employment! (future date)");
+                throw new ArgumentException("Invalid Date of employment! (future date)");
             }
             _libraryContext.Employees.Add(employee);
         }
@@ -236,12 +236,12 @@ namespace DL
         {
             if (!id.Equals(employee.Id))
             {
-                throw new Exception("You can't change Id");
+                throw new ArgumentException("You can't change Id");
             }
             Employee updatingEmployee = _libraryContext.Employees.Find(e => e.Id.Equals(id));
             if (updatingEmployee == null)
             {
-                throw new Exception("Employee with this ID doesn't exist");
+                throw new ArgumentException("Employee with this ID doesn't exist");
             }
             _libraryContext.Employees[_libraryContext.Employees.IndexOf(updatingEmployee)] = employee;
         }
@@ -256,11 +256,11 @@ namespace DL
         {
             if (_libraryContext.Rents.Contains(rent))
             {
-                throw new Exception("Rent with this ID already exists!");
+                throw new ArgumentException("Rent with this ID already exists!");
             }
             if (rent.Date.CompareTo(DateTime.Now) > 0)
             {
-                throw new Exception("Invalid date of rental! (future date)");
+                throw new ArgumentException("Invalid date of rental! (future date)");
             }
             _libraryContext.Rents.Add(rent);
         }
@@ -281,11 +281,11 @@ namespace DL
         {
             if (_libraryContext.Returns.Contains(returnBooks))
             {
-                throw new Exception("Rent with this ID already exists!");
+                throw new ArgumentException("Rent with this ID already exists!");
             }
             if (returnBooks.Date.CompareTo(DateTime.Now) > 0)
             {
-                throw new Exception("Invalid date of rental! (future date)");
+                throw new ArgumentException("Invalid date of rental! (future date)");
             }
             _libraryContext.Returns.Add(returnBooks);
         }

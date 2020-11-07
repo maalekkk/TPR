@@ -17,5 +17,10 @@ namespace DL.DataObjects.EventsObjects
 
         public List<CopyOfBook> Books { get => _books; private set => _books = value; }
         public Rent Rent { get => _rent; private set => _rent = value; }
+
+        public override string ToString()
+        {
+            return $"{{{nameof(Books)}={Books}, {nameof(Rent)}={Rent}, {nameof(Date)}={Date.ToString()}, {nameof(Id)}={Id.ToString()}}}";
+        }
     }
 }

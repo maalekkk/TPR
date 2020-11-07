@@ -252,52 +252,27 @@ namespace DL
         }
 
         //Rent CRUD
-        public void AddRent(Rent rent)
+        public void AddEvent(Event eventObject)
         {
-            if (_libraryContext.Rents.Contains(rent))
+            if (_libraryContext.Events.Contains(eventObject))
             {
                 throw new ArgumentException("Rent with this ID already exists!");
             }
-            if (rent.Date.CompareTo(DateTime.Now) > 0)
+            if (eventObject.Date.CompareTo(DateTime.Now) > 0)
             {
                 throw new ArgumentException("Invalid date of rental! (future date)");
             }
-            _libraryContext.Rents.Add(rent);
+            _libraryContext.Events.Add(eventObject);
         }
 
-        public Rent GetRent(Guid id)
+        public Event GetEvent(Guid id)
         {
-            return _libraryContext.Rents.First(r => r.Id.Equals(id));
+            return _libraryContext.Events.First(r => r.Id.Equals(id));
         }
 
-        public IEnumerable<Rent> GetAllRents()
+        public IEnumerable<Event> GetAllEvents()
         {
-            return _libraryContext.Rents;
-        }
-
-        // Return CRUD
-
-        public void AddReturn(Return returnBooks)
-        {
-            if (_libraryContext.Returns.Contains(returnBooks))
-            {
-                throw new ArgumentException("Rent with this ID already exists!");
-            }
-            if (returnBooks.Date.CompareTo(DateTime.Now) > 0)
-            {
-                throw new ArgumentException("Invalid date of rental! (future date)");
-            }
-            _libraryContext.Returns.Add(returnBooks);
-        }
-
-        public Return GetReturn(Guid id)
-        {
-            return _libraryContext.Returns.First(r => r.Id.Equals(id));
-        }
-
-        public IEnumerable<Return> GetAllReturns()
-        {
-            return _libraryContext.Returns;
+            return _libraryContext.Events;
         }
     }
 }

@@ -13,8 +13,7 @@ namespace DL
         private List<CopyOfBook> _copiesOfBooks;
         private List<Employee> _employees;
         private List<Reader> _readers;
-        private ObservableCollection<Rent> _rents;
-        private ObservableCollection<Return> _returns;
+        private ObservableCollection<Event> _events;
 
         public LibraryContext()
         {
@@ -23,8 +22,7 @@ namespace DL
             _copiesOfBooks = new List<CopyOfBook>();
             _employees = new List<Employee>();
             _readers = new List<Reader>();
-            _rents = new ObservableCollection<Rent>();
-            _returns = new ObservableCollection<Return>();
+            _events = new ObservableCollection<Event>();
         }
 
         public List<Author> Authors { get => _authors;}
@@ -32,7 +30,6 @@ namespace DL
         public List<CopyOfBook> CopiesOfBooks { get => _copiesOfBooks;}
         public List<Employee> Employees { get => _employees;}
         public List<Reader> Readers { get => _readers;}
-        public ObservableCollection<Rent> Rents { get => _rents;}
-        internal ObservableCollection<Return> Returns { get => _returns; set => _returns = value; }
+        public ObservableCollection<Event> Events { get => _events;}
     }
 }

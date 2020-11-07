@@ -53,7 +53,7 @@ namespace DL.DataFillers
             context.CopiesOfBooks.Add(zik1);
             context.CopiesOfBooks.Add(zik2);
             context.CopiesOfBooks.Add(wp1);
-            context.Rents.Add(rent1);
+            context.Events.Add(rent1);
         }
     }
 }

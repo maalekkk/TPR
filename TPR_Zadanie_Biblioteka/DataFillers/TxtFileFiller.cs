@@ -55,7 +55,7 @@ namespace DL.DataFillers
                         {
                             rentBooks.Add(libraryContext.CopiesOfBooks.Find(c => c.Id.Equals(Guid.Parse(rentBookId))));
                         }
-                        libraryContext.Rents.Add(new Rent(Guid.Parse(elements["id"]), libraryContext.Readers.Find(r => r.Id.Equals(Guid.Parse(elements["reader"]))), libraryContext.Employees.Find(e => e.Id.Equals(Guid.Parse(elements["employee"]))), rentBooks, Convert.ToDateTime(elements["dateOfRental"]), Convert.ToDateTime(elements["dateOfReturn"])));
+                        libraryContext.Events.Add(new Rent(Guid.Parse(elements["id"]), libraryContext.Readers.Find(r => r.Id.Equals(Guid.Parse(elements["reader"]))), libraryContext.Employees.Find(e => e.Id.Equals(Guid.Parse(elements["employee"]))), rentBooks, Convert.ToDateTime(elements["dateOfRental"]), Convert.ToDateTime(elements["dateOfReturn"])));
                         break;
                 }
             }

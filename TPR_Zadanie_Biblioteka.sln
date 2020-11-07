@@ -12,6 +12,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BLL", "BLL\BLL.csproj", "{CC38D351-5587-4A9E-B342-A9EF97A2D4BE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,6 +28,10 @@ Global
 		{13ACBEC5-F582-438B-89A7-9C644A735E7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{13ACBEC5-F582-438B-89A7-9C644A735E7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{13ACBEC5-F582-438B-89A7-9C644A735E7D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC38D351-5587-4A9E-B342-A9EF97A2D4BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC38D351-5587-4A9E-B342-A9EF97A2D4BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC38D351-5587-4A9E-B342-A9EF97A2D4BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC38D351-5587-4A9E-B342-A9EF97A2D4BE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

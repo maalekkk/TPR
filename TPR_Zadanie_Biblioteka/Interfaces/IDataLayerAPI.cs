@@ -49,16 +49,10 @@ namespace DL.Interfaces
         IEnumerable<Reader> GetAllReaders();
         void UpdateReader(Guid id, Reader reader);
 
-        //Rent methods
+        //Event methods
 
-        void AddRent(Rent rent);
-        Rent GetRent(Guid id);
-        IEnumerable<Rent> GetAllRents();
-
-        //Return methods
-
-        void AddReturn(Return returnBooks);
-        Return GetReturn(Guid id);
-        IEnumerable<Return> GetAllReturns();
+        void AddEvent(Event eventObject);
+        Event GetEvent(Guid id);
+        IEnumerable<Event> GetAllEvents();
     }
 }

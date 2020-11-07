@@ -25,8 +25,8 @@ namespace DL.DataFillers
             XmlDocument xmlDocument = new XmlDocument();
             NumberFormatInfo nfi = new NumberFormatInfo();
             nfi.NumberDecimalSeparator = ".";
-            string solutionDir = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName;
-            string path = solutionDir + "\\TPR_Zadanie_Biblioteka\\DataFiles\\data.xml";
+            string solutionDir = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
+            string path = solutionDir + "\\DataFiles\\data.xml";
             xmlDocument.Load(path);
             foreach (XmlNode node in xmlDocument.DocumentElement)
             {

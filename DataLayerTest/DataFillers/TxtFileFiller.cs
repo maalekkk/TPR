@@ -14,8 +14,8 @@ namespace DL.DataFillers
         {
             NumberFormatInfo nfi = new NumberFormatInfo();
             nfi.NumberDecimalSeparator = ".";
-            string solutionDir = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName;
-            string path = solutionDir + "\\TPR_Zadanie_Biblioteka\\DataFiles\\data.txt";
+            string solutionDir = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
+            string path = solutionDir + "\\DataFiles\\data.txt";
             string[] lines = File.ReadAllLines(path);
             foreach (string line in lines)
             {

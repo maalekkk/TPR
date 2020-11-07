@@ -152,21 +152,38 @@ namespace DataLayerTest
         [TestMethod]
         public void AddReturnTest()
         {
-            Assert.Inconclusive();
+            _dataLayer = new LibraryRepository();
+            Assert.AreEqual(0, _dataLayer.GetAllReturns().Count());
+            Reader person1 = new Reader(Guid.NewGuid(), "Adam", "Nowak", new DateTime(1998, 05, 23),
+                "111222333", "adam.nowak@gmail.com", Person.Gender.Male, new DateTime(2019, 9, 11));
+            Employee person2 = new Employee(Guid.NewGuid(), "Katarzyna", "Kowalska", new DateTime(1967, 03, 13),
+                "123456789", "kaska123@outlook.com", Person.Gender.Female, new DateTime(2019, 9, 11));
+            Author tolkien = new Author(Guid.NewGuid(), "John Ronald Reuel", "Tolkien");
+            Book hobbit = new Book("Hobbit, czyli tam i z powrotem", tolkien,
+                "Powieœæ fantasy dla dzieci autorstwa J.R.R. Tolkiena.", Book.BookType.Fantasy);
+            Book zik = new Book("Zbrodnia i Kara", tolkien,
+                "Tematem powieœci s¹ losy by³ego studenta, Rodiona Raskolnikowa, który postanawia zamordowaæ i obrabowaæ star¹ lichwiarkê."
+                , Book.BookType.Classics);
+            CopyOfBook hobbit1 = new CopyOfBook(Guid.NewGuid(), hobbit, new DateTime(2004, 11, 21, 0, 0, 0), 0.4);
+            CopyOfBook hobbit2 = new CopyOfBook(Guid.NewGuid(), hobbit, new DateTime(2004, 12, 3, 0, 0, 0), 0.4);
+            CopyOfBook zik1 = new CopyOfBook(Guid.NewGuid(), zik, new DateTime(2001, 10, 11, 0, 0, 0), 0.5);
+            CopyOfBook zik2 = new CopyOfBook(Guid.NewGuid(), zik, new DateTime(2001, 10, 11, 0, 0, 0), 0.5);
+            List<CopyOfBook> booksForRent = new List<CopyOfBook>();
+            booksForRent.Add(hobbit1);
+            booksForRent.Add(zik1);
+            booksForRent.Add(zik2);
+            Rent rent1 = new Rent(Guid.NewGuid(), person1, person2, booksForRent, new DateTime(2010, 1, 6, 0, 0, 0));
+            _dataLayer.AddRent(rent1);
+            List<CopyOfBook> booksForReturn = new List<CopyOfBook>();
+            booksForRent.Add(hobbit1);
+            booksForRent.Add(zik1);
+            Return returnBooks = new Return(Guid.NewGuid(), new DateTime(2019, 1, 6), booksForReturn, rent1);
+            _dataLayer.AddReturn(returnBooks);
+            Assert.AreEqual(1, _dataLayer.GetAllReturns().Count());
+            Assert.ThrowsException<Exception>(() => _dataLayer.AddReturn(returnBooks));
         }
 
         // Delete Tests
-
-        //[TestMethod]
-        //public void DeleteRentTest()
-        //{
-        //    AddRentTest();
-        //    Assert.AreEqual(2, _dataLayer.GetAllRents().Count());
-        //    Rent rent = _dataLayer.GetAllRents().First();
-        //    _dataLayer.DeleteRent(rent);
-        //    Assert.AreEqual(1, _dataLayer.GetAllRents().Count());
-        //    Assert.ThrowsException<InvalidOperationException>(() => _dataLayer.GetRent(rent.Id));
-        //}
 
         [TestMethod]
         public void DeleteReaderTest()
@@ -221,12 +238,6 @@ namespace DataLayerTest
             _dataLayer.DeleteAuthor(author);
             Assert.AreEqual(1, _dataLayer.GetAllAuthors().Count());
             Assert.AreEqual(null, _dataLayer.GetAuthor(author.Id));
-        }
-
-        [TestMethod]
-        public void DeleteReturnTest()
-        {
-            Assert.Inconclusive();
         }
 
         // Get Object Tests
@@ -289,7 +300,10 @@ namespace DataLayerTest
         [TestMethod]
         public void GetReturnTest()
         {
-            Assert.Inconclusive();
+            AddReturnTest();
+            Return returnFromCollection = _dataLayer.GetAllReturns().First();
+            Assert.AreEqual(returnFromCollection, _dataLayer.GetReturn(returnFromCollection.Id));
+            Assert.ThrowsException<InvalidOperationException>(() => _dataLayer.GetReturn(Guid.NewGuid()));
         }
 
         //Get All Objects Tests
@@ -361,7 +375,19 @@ namespace DataLayerTest
         [TestMethod]
         public void GetAllReturnTest()
         {
-            Assert.Inconclusive();
+            AddReturnTest();
+            Author author = new Author(Guid.NewGuid(), "Alan", "Nijaki");
+            Book book = new Book("XYZ", author, "desc", Book.BookType.Classics);
+            CopyOfBook copyOfBook = new CopyOfBook(Guid.NewGuid(), book, new DateTime(2019, 10, 10), 0.2);
+            Employee employee = new Employee(Guid.NewGuid(), "Alan", "Nijaki", new DateTime(2000, 10, 10), "123456789", "alan@gmail.com", Person.Gender.Male, new DateTime(2019, 10, 10));
+            Reader reader = new Reader(Guid.NewGuid(), "Alan", "Nijaki", new DateTime(2000, 10, 10), "123456789", "alan@gmail.com", Person.Gender.Male, new DateTime(2019, 10, 10));
+            List<CopyOfBook> list = new List<CopyOfBook>();
+            list.Add(copyOfBook);
+            Rent rent = new Rent(Guid.NewGuid(), reader, employee, list, new DateTime(2018, 10, 10));
+            _dataLayer.AddRent(rent);
+            Return returnBooks = new Return(Guid.NewGuid(), new DateTime(2010, 10, 10), list, rent);
+            _dataLayer.AddReturn(returnBooks);
+            Assert.AreEqual(returnBooks, _dataLayer.GetAllReturns().Last());
         }
 
         // Update Tests

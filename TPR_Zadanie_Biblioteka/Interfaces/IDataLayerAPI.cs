@@ -19,7 +19,7 @@ namespace DL.Interfaces
 
         // Book methods
 
-        void AddBook(Book book, int position);
+        void AddBook(Book book);
         void DeleteBook(Book book);
         Book GetBook(int position);
         IEnumerable<Book> GetAllBooks();
@@ -52,9 +52,13 @@ namespace DL.Interfaces
         //Rent methods
 
         void AddRent(Rent rent);
-        void DeleteRent(Rent rent);
         Rent GetRent(Guid id);
         IEnumerable<Rent> GetAllRents();
-        void UpdateRents(Guid id, Rent rent);
+
+        //Return methods
+
+        void AddReturn(Return returnBooks);
+        Return GetReturn(Guid id);
+        IEnumerable<Return> GetAllReturns();
     }
 }

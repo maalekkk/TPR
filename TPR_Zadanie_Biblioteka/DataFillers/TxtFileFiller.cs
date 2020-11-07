@@ -4,7 +4,6 @@ using System.IO;
 using DL.DataObjects;
 using DL.DataObjects.EventsObjects;
 using DL.Interfaces;
-using System.Text;
 using System.Globalization;
 
 namespace DL.DataFillers
@@ -34,14 +33,14 @@ namespace DL.DataFillers
                 }
                 switch (elementName)
                 {
-                    case "authors":
+                    case "author":
                         libraryContext.Authors.Add(new Author(Guid.Parse(elements["id"]), elements["name"], elements["surname"]));
                         break;
-                    case "books":
-                        libraryContext.Books.Add(int.Parse(elements["id"]), new Book(elements["name"], libraryContext.Authors.Find(a => a.Id.Equals(Guid.Parse(elements["author"]))), elements["description"], (Book.BookType)Enum.Parse(typeof(Book.BookType), elements["bookType"])));
+                    case "book":
+                        libraryContext.Books.Add(Convert.ToInt32(elements["id"]), new Book(elements["name"], libraryContext.Authors.Find(a => a.Id.Equals(Guid.Parse(elements["author"]))), elements["description"], (Book.BookType)Enum.Parse(typeof(Book.BookType), elements["bookType"])));
                         break;
-                    case "copiesOfBook":
-                        libraryContext.CopiesOfBooks.Add(new CopyOfBook(Guid.Parse(elements["id"]), libraryContext.Books[int.Parse(elements["book"])], Convert.ToDateTime(elements["purchaseDate"]), Double.Parse(elements["pricePerDay"], nfi)));
+                    case "copyOfBook":
+                        libraryContext.CopiesOfBooks.Add(new CopyOfBook(Guid.Parse(elements["id"]), libraryContext.Books[Convert.ToInt32(elements["book"])], Convert.ToDateTime(elements["purchaseDate"]), Double.Parse(elements["pricePerDay"], nfi)));
                         break;
                     case "employee":
                         libraryContext.Employees.Add(new Employee(Guid.Parse(elements["id"]), elements["name"], elements["surname"], Convert.ToDateTime(elements["birthDate"]), elements["phoneNumber"], elements["email"], (Person.Gender)Enum.Parse(typeof(Person.Gender), elements["gender"]), Convert.ToDateTime(elements["dateOfEmployment"])));

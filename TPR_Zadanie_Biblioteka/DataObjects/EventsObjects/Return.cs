@@ -4,7 +4,7 @@ using System.Text;
 
 namespace DL.DataObjects.EventsObjects
 {
-    class Return : Event
+    public class Return : Event
     {
         private List<CopyOfBook> _books;
         private Rent _rent;
@@ -13,7 +13,6 @@ namespace DL.DataObjects.EventsObjects
         {
             _books = books;
             _rent = rent;
-            
         }
 
         public List<CopyOfBook> Books { get => _books; private set => _books = value; }

@@ -6,6 +6,11 @@
 			<name>Henryk</name>
 			<surname>Sienkiewicz</surname>
 		</author>
+		<author>
+			<id>12345678-9123-4567-8912-345468912345</id>
+			<name>Henryk2</name>
+			<surname>Sienkiewicz2</surname>
+		</author>
 	</authors>
 
 	<books>

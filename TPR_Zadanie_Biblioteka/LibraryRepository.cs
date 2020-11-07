@@ -73,13 +73,16 @@ namespace DL
         }
 
         //Book CRUD
-        public void AddBook(Book book, int position)
+        public void AddBook(Book book)
         {
-            if (_libraryContext.Books.ContainsKey(position))
+            if (_libraryContext.Books.ContainsValue(book))
             {
-                throw new Exception("Book on this position already exists!");
+                throw new Exception("This book already exists in collection!");
             }
-            _libraryContext.Books.Add(position, book);
+            int key = 0;
+            if (_libraryContext.Books.Count() != 0)
+                key = (_libraryContext.Books.Last().Key) + 1;
+            _libraryContext.Books.Add(key, book);
         }
 
         public Book GetBook(int position)
@@ -273,23 +276,29 @@ namespace DL
             return _libraryContext.Rents;
         }
 
-        public void UpdateRents(Guid id, Rent rent)
+        // Return CRUD
+
+        public void AddReturn(Return returnBooks)
         {
-            if (!id.Equals(rent.Id))
+            if (_libraryContext.Returns.Contains(returnBooks))
             {
-                throw new Exception("You can't change Id");
+                throw new Exception("Rent with this ID already exists!");
             }
-            Rent updatingRent = _libraryContext.Rents.Single(r => r.Equals(rent));
-            if (updatingRent == null)
+            if (returnBooks.Date.CompareTo(DateTime.Now) > 0)
             {
-                throw new Exception("Employee with this ID doesn't exist");
+                throw new Exception("Invalid date of rental! (future date)");
             }
-            _libraryContext.Rents[_libraryContext.Rents.IndexOf(updatingRent)] = rent;
+            _libraryContext.Returns.Add(returnBooks);
         }
 
-        public void DeleteRent(Rent rent)
+        public Return GetReturn(Guid id)
         {
-            _libraryContext.Rents.Remove(rent);
+            return _libraryContext.Returns.First(r => r.Id.Equals(id));
+        }
+
+        public IEnumerable<Return> GetAllReturns()
+        {
+            return _libraryContext.Returns;
         }
     }
 }

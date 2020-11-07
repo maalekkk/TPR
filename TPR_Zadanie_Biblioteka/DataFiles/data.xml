@@ -17,7 +17,7 @@
 			<bookType>Novel</bookType>
 		</book>
 	</books>
-	
+
 	<copiesOfBooks>
 		<copyOfBook>
 			<id>12345679-9129-4569-8919-345678912349</id>
@@ -26,7 +26,7 @@
 			<pricePerDay>1.20</pricePerDay>
 		</copyOfBook>
 	</copiesOfBooks>
-	
+
 	<employees>
 		<employee>
 			<id>12365678-9163-4667-6912-346678912345</id>
@@ -39,7 +39,7 @@
 			<dateOfEmployment>22.06.2005</dateOfEmployment>
 		</employee>
 	</employees>
-	
+
 	<readers>
 		<reader>
 			<id>12165678-1163-4617-6112-146678912345</id>
@@ -52,7 +52,7 @@
 			<dateOfRegistration>23.11.2018</dateOfRegistration>
 		</reader>
 	</readers>
-	
+
 	<rents>
 		<rent>
 			<id>12583678-9163-4667-6912-341938912345</id>
@@ -64,5 +64,5 @@
 			<totalPricePerDay>1.20</totalPricePerDay>
 		</rent>
 	</rents>
-	
+
 </libraryContext>

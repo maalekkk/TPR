@@ -14,8 +14,8 @@ namespace DL.DataFillers
         public ConstObjectsFiller() { }
         public void Fill(LibraryContext context)
         {
-            Reader person1 = new Reader(Guid.NewGuid(), "Adam", "Nowak", new DateTime(1998, 05, 23), 
-                "111222333", "adam.nowak@gmail.com",Person.Gender.Male, new DateTime(2019, 9, 11));
+            Reader person1 = new Reader(Guid.NewGuid(), "Adam", "Nowak", new DateTime(1998, 05, 23),
+                "111222333", "adam.nowak@gmail.com", Person.Gender.Male, new DateTime(2019, 9, 11));
             Employee person2 = new Employee(Guid.NewGuid(), "Katarzyna", "Kowalska", new DateTime(1967, 03, 13),
                 "123456789", "kaska123@outlook.com", Person.Gender.Female, new DateTime(2019, 9, 11));
 
@@ -28,7 +28,7 @@ namespace DL.DataFillers
                 "Tematem powieści są losy byłego studenta, Rodiona Raskolnikowa, który postanawia zamordować i obrabować starą lichwiarkę."
                 , Book.BookType.Classics);
             Book wp = new Book("Wladca Pierscieni", tolkien,
-                "Powieść high fantasy J.R.R. Tolkiena, której akcja rozgrywa się w mitologicznym świecie Śródziemia.Jest ona kontynuacją innej powieści tego autora zatytułowanej Hobbit, czyli tam i z powrotem.", 
+                "Powieść high fantasy J.R.R. Tolkiena, której akcja rozgrywa się w mitologicznym świecie Śródziemia.Jest ona kontynuacją innej powieści tego autora zatytułowanej Hobbit, czyli tam i z powrotem.",
                 Book.BookType.Fantasy);
 
             CopyOfBook hobbit1 = new CopyOfBook(Guid.NewGuid(), hobbit, new DateTime(2004, 11, 21, 0, 0, 0), 0.4);
@@ -39,7 +39,7 @@ namespace DL.DataFillers
 
             List<CopyOfBook> booksForRent1 = new List<CopyOfBook>();
             booksForRent1.Add(hobbit1);
-            Rent rent1 = new Rent(Guid.NewGuid() ,person1, person2, booksForRent1, new DateTime(2010, 1, 6, 0, 0, 0));
+            Rent rent1 = new Rent(Guid.NewGuid(), person1, person2, booksForRent1, new DateTime(2010, 1, 6, 0, 0, 0));
 
             context.Authors.Add(tolkien);
             context.Authors.Add(fDostojewski);

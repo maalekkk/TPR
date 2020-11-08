@@ -260,10 +260,6 @@ namespace DL
                 throw new ArgumentException("You can't change Id");
             }
             Employee updatingEmployee = _libraryContext.Employees.Find(e => e.Id.Equals(id));
-            if (updatingEmployee == null)
-            {
-                throw new ArgumentException("Employee with this ID doesn't exist");
-            }
             _libraryContext.Employees[_libraryContext.Employees.IndexOf(updatingEmployee)] = employee;
         }
 

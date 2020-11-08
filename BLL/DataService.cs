@@ -44,6 +44,10 @@ namespace BLL
 
         public void AddBook(string name, Author author, string description, Book.BookType bookType)
         {
+            if (author == null)
+            {
+                throw new ArgumentNullException("Reference to author is null!");
+            }
             if (_dataLayer.GetAuthor(author.Id) == null)
                 throw new ArgumentException("Author doesn't exists in repository!");
             _dataLayer.AddBook(new Book(name, author, description, bookType));
@@ -71,6 +75,10 @@ namespace BLL
         public void AddCopyOfBook(Book book, DateTime purchaseDate, double pricePerDay)
         {
             if (book == null)
+            {
+                throw new ArgumentNullException("Reference to book is null!");
+            }
+            if (book == null)
                 throw new ArgumentException("This book doesn't exists in repository!");
             _dataLayer.AddCopyOfBook(new CopyOfBook(Guid.NewGuid(), book, purchaseDate, pricePerDay));
         } 
@@ -86,6 +94,10 @@ namespace BLL
 
         public bool IsCopyOfBookRented(CopyOfBook copyOfBook)
         {
+            if (copyOfBook == null)
+            {
+                throw new ArgumentNullException("Reference to copy of book is null!");
+            }
             IEnumerable<CopyOfBook> rentedBooks = GetRentedCopiesOfBooks();
             return rentedBooks.Contains(copyOfBook);
         } 
@@ -126,6 +138,10 @@ namespace BLL
 
         public void UpdateEmployee(Guid id, Employee employee)
         {
+            if (employee == null)
+            {
+                throw new ArgumentNullException("Reference to employee is null!");
+            }
             _dataLayer.UpdateEmployee(id, employee);
         }
 
@@ -184,6 +200,10 @@ namespace BLL
 
         public void AddRent(Reader reader, Employee employee, List<CopyOfBook> books)
         {
+            if (reader == null || employee == null || books == null)
+            {
+                throw new ArgumentNullException("One of arguments is null!");
+            }
             if (!_dataLayer.GetAllReaders().Contains(reader))
             {
                 throw new ArgumentException("Reader doesn't exist in repository!");
@@ -257,6 +277,10 @@ namespace BLL
 
         public void AddReturn(Rent rent, List<CopyOfBook> books)
         {
+            if (rent == null || books == null)
+            {
+                throw new ArgumentNullException("One of arguments is null!");
+            }
             if (!GetAllRents().Contains(rent))
             {
                 throw new ArgumentException("Rent didn't happen!");
@@ -344,6 +368,14 @@ namespace BLL
 
         public void AddPayment(Reader reader, double cash)
         {
+            if (reader == null)
+            {
+                throw new ArgumentNullException("Reference to reader is null!");
+            }
+            if (cash <= 0)
+            {
+                throw new ArgumentException("Cash must be positive value!");
+            }
             if (Math.Round(cash, 2) != cash)
                 throw new ArgumentException("Cash is invalid value!");
             _dataLayer.AddEvent(new Payment(Guid.NewGuid(), DateTime.Now, reader, cash));

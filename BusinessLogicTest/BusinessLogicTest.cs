@@ -59,6 +59,7 @@ namespace BusinessLogicTest
             Assert.ThrowsException<ArgumentException>(() => _dataService.AddBook("Pan Tadeusz", new Author(Guid.NewGuid(), "Jan", "Brzechwa"), "ksiazka", Book.BookType.Classics));
             _dataService.AddBook("Pan Tadeusz", _dataService.GetAllAuthors().ElementAt(0), "ksiazka", Book.BookType.Classics);
             Assert.AreEqual(1, _dataService.GetAllBooks().Count());
+            Assert.ThrowsException<ArgumentNullException>(() => _dataService.AddBook("Pan Tadeusz", null, "ksiazka", Book.BookType.Classics));
 
         }
 
@@ -68,7 +69,7 @@ namespace BusinessLogicTest
         {
             AddBookTest();
             Assert.AreEqual(0, _dataService.GetAllCopiesOfBook().Count());
-            Assert.ThrowsException<ArgumentException>(() => _dataService.AddCopyOfBook(null, new DateTime(2010, 10, 10), 1.2));
+            Assert.ThrowsException<ArgumentNullException>(() => _dataService.AddCopyOfBook(null, new DateTime(2010, 10, 10), 1.2));
             _dataService.AddCopyOfBook(_dataService.FindBook(b => b.Name.Equals("Pan Tadeusz")), new DateTime(2010, 10, 10), 1.2);
             Assert.AreEqual(1, _dataService.GetAllCopiesOfBook().Count());
         }
@@ -88,6 +89,9 @@ namespace BusinessLogicTest
             Assert.AreEqual(true, _dataService.IsCopyOfBookRented(_dataService.GetAllCopiesOfBook().ElementAt(0)));
             Assert.AreEqual(1, _dataService.GetAllCurrentRents().Count());
             Assert.ThrowsException<ArgumentException>(() => _dataService.AddRent(_dataService.GetAllReaders().ElementAt(0), _dataService.GetAllEmployees().ElementAt(0), books));
+            Assert.ThrowsException<ArgumentNullException>(() => _dataService.AddRent(null, _dataService.GetAllEmployees().ElementAt(0), books));
+            Assert.ThrowsException<ArgumentNullException>(() => _dataService.AddRent(_dataService.GetAllReaders().ElementAt(0),null, books));
+            Assert.ThrowsException<ArgumentNullException>(() => _dataService.AddRent(_dataService.GetAllReaders().ElementAt(0), _dataService.GetAllEmployees().ElementAt(0), null));
         }
 
         [TestMethod]
@@ -97,7 +101,9 @@ namespace BusinessLogicTest
             Assert.AreEqual(0, _dataService.GetAllReturns().Count());
             List<CopyOfBook> booksFromCollection = new List<CopyOfBook> { _dataService.GetAllCopiesOfBook().ElementAt(0) };
             List<CopyOfBook> booksRandom = new List<CopyOfBook> {new CopyOfBook(Guid.NewGuid(), _dataService.GetAllBooks().ElementAt(0), new DateTime(2018, 8, 21), 1.3) };
-            Assert.ThrowsException<ArgumentException>(() => _dataService.AddReturn(null, null));
+            Assert.ThrowsException<ArgumentNullException>(() => _dataService.AddReturn(null, null));
+            Assert.ThrowsException<ArgumentNullException>(() => _dataService.AddReturn(_dataService.GetAllRents().ElementAt(0), null));
+            Assert.ThrowsException<ArgumentNullException>(() => _dataService.AddReturn(null, booksRandom));
             Assert.ThrowsException<ArgumentException>(() => _dataService.AddReturn(_dataService.GetAllRents().ElementAt(0), booksRandom));
             _dataService.AddReturn(_dataService.GetAllRents().ElementAt(0), booksFromCollection);
             Assert.AreEqual(0, _dataService.GetAllCurrentRents().Count());
@@ -112,6 +118,8 @@ namespace BusinessLogicTest
             Assert.ThrowsException<ArgumentException>(() => _dataService.AddPayment(_dataService.GetAllReaders().First(), 2.388));
             _dataService.AddPayment(_dataService.GetAllReaders().First(), 2.38);
             Assert.AreEqual(2.38, _dataService.GetAllReaders().First().Balance);
+            Assert.ThrowsException<ArgumentException>(() => _dataService.AddPayment(_dataService.GetAllReaders().First(), -1.2));
+            Assert.ThrowsException<ArgumentNullException>(() => _dataService.AddPayment(null, 1.2));
         }
 
         [TestMethod]
@@ -159,7 +167,6 @@ namespace BusinessLogicTest
             Assert.AreEqual(1, _dataService.GetAllEmployees().Count());
             _dataService.DeleteEmployee(_dataService.GetAllEmployees().ElementAt(0));
             Assert.AreEqual(0, _dataService.GetAllEmployees().Count());
-
         }
 
         [TestMethod]

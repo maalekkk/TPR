@@ -26,7 +26,9 @@ namespace BLL
         public void DeleteAuthor(Author author)
         {
             if (_dataLayer.GetAllBooks().FirstOrDefault(b => b.Author.Equals(author)) != default)
+            {
                 throw new ArgumentException("At least one book has reference to author!");
+            }
             _dataLayer.DeleteAuthor(author);
         }
 
@@ -49,14 +51,18 @@ namespace BLL
                 throw new ArgumentNullException("Reference to author is null!");
             }
             if (_dataLayer.GetAuthor(author.Id) == null)
+            {
                 throw new ArgumentException("Author doesn't exists in repository!");
+            }
             _dataLayer.AddBook(new Book(name, author, description, bookType));
         }
 
         public void DeleteBook(Book book)
         {
             if (_dataLayer.GetAllCopiesOfBook().FirstOrDefault(b => b.Book.Equals(book)) != default)
+            {
                 throw new ArgumentException("At least one copy of book has reference to book!");
+            }
             _dataLayer.DeleteBook(book);
         }
 
@@ -79,7 +85,9 @@ namespace BLL
                 throw new ArgumentNullException("Reference to book is null!");
             }
             if (book == null)
+            {
                 throw new ArgumentException("This book doesn't exists in repository!");
+            }
             _dataLayer.AddCopyOfBook(new CopyOfBook(Guid.NewGuid(), book, purchaseDate, pricePerDay));
         } 
 
@@ -118,11 +126,17 @@ namespace BLL
             string phoneNumber, string email, Employee.Gender gender, DateTime dateOfEmployment)
         {
             if ((_dataLayer.GetAllEmployees().FirstOrDefault(e => e.PhoneNumber.Equals(phoneNumber)) != default) || (_dataLayer.GetAllEmployees().FirstOrDefault(e => e.Email.Equals(email)) != default))
+            {
                 throw new ArgumentException("Person with the same email or phone number exists!");
+            }
             if (!IsValidEmail(email))
+            {
                 throw new ArgumentException("Invalid email format!");
+            }
             if (!IsValidPhoneNumber(phoneNumber))
+            {
                 throw new ArgumentException("Invalid phone number format!");
+            }
             _dataLayer.AddEmployee(new Employee(Guid.NewGuid(), name, surname, birthDate, phoneNumber, email, gender, dateOfEmployment));
         }
 
@@ -156,7 +170,9 @@ namespace BLL
             string phoneNumber, string email, Employee.Gender gender, DateTime dateOfRegistration)
         {
             if ((_dataLayer.GetAllReaders().FirstOrDefault(e => e.PhoneNumber.Equals(phoneNumber)) != default || (_dataLayer.GetAllEmployees().FirstOrDefault(e => e.Email.Equals(email)) != default)))
+            {
                 throw new ArgumentException("Person with the same email or phone number exists!");
+            }
             if (!IsValidEmail(email))
             {
                 throw new ArgumentException("Invalid email format!");
@@ -377,7 +393,9 @@ namespace BLL
                 throw new ArgumentException("Cash must be positive value!");
             }
             if (Math.Round(cash, 2) != cash)
+            {
                 throw new ArgumentException("Cash is invalid value!");
+            }
             _dataLayer.AddEvent(new Payment(Guid.NewGuid(), DateTime.Now, reader, cash));
             reader.Balance += cash;
         }

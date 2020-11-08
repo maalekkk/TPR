@@ -81,7 +81,9 @@ namespace DL
             }
             int key = 0;
             if (_libraryContext.Books.Count() != 0)
+            {
                 key = (_libraryContext.Books.Last().Key) + 1;
+            }
             _libraryContext.Books.Add(key, book);
         }
 

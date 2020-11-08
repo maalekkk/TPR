@@ -32,6 +32,5 @@ namespace DL.DataObjects
             return $"{{{nameof(Id)}={Id.ToString()}, {nameof(Book)}={Book}, {nameof(PurchaseDate)}={PurchaseDate.ToString()}, {nameof(PricePerDay)}={PricePerDay.ToString()}}}";
         }
 
-
     }
 }

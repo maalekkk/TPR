@@ -15,5 +15,10 @@ namespace DL.DataObjects.EventsObjects
 
         public double Cash { get => _cash; private set => _cash = value; }
         public Reader Reader { get => _reader; private set => _reader = value; }
+
+        public override string ToString()
+        {
+            return $"{{{nameof(Cash)}={Cash.ToString()}, {nameof(Reader)}={Reader}, {nameof(Date)}={Date.ToString()}, {nameof(Id)}={Id.ToString()}}}";
+        }
     }
 }

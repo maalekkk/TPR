@@ -51,7 +51,6 @@ namespace DL.DataObjects.EventsObjects
         }
 
 
-
         private void addBooksToDictionary(List<CopyOfBook> books)
         {
             foreach (CopyOfBook book in books)

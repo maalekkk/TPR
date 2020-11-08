@@ -30,6 +30,5 @@ namespace DL.DataObjects
             return $"{{{nameof(Id)}={Id.ToString()}, {nameof(Name)}={Name}, {nameof(Surname)}={Surname}}}";
         }
 
-
     }
 }

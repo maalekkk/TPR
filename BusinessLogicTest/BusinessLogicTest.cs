@@ -79,8 +79,7 @@ namespace BusinessLogicTest
             AddReaderTest();
             AddEmployeeTest();
             AddCopyOfBookTest();
-            List<CopyOfBook> books = new List<CopyOfBook>();
-            books.Add(_dataService.GetAllCopiesOfBook().ElementAt(0));
+            List<CopyOfBook> books = new List<CopyOfBook> {_dataService.GetAllCopiesOfBook().ElementAt(0)};
             Assert.ThrowsException<ArgumentException>(() => _dataService.AddRent(new Reader(Guid.NewGuid(), "Maciej", "Lubicz", new DateTime(1989, 8, 23), "123456789", "maciejL124", Person.Gender.Male, DateTime.Now), _dataService.GetAllEmployees().ElementAt(0), books));
             Assert.ThrowsException<ArgumentException>(() => _dataService.AddRent(_dataService.GetAllReaders().ElementAt(0), new Employee(Guid.NewGuid(), "Maciej", "Lubicz", new DateTime(1989, 8, 23), "123456789", "maciejL124", Person.Gender.Male, DateTime.Now), books));
             _dataService.AddRent(_dataService.GetAllReaders().ElementAt(0), _dataService.GetAllEmployees().ElementAt(0), books);
@@ -96,10 +95,8 @@ namespace BusinessLogicTest
         {
             AddRentTest();
             Assert.AreEqual(0, _dataService.GetAllReturns().Count());
-            List<CopyOfBook> booksFromCollection = new List<CopyOfBook>();
-            booksFromCollection.Add(_dataService.GetAllCopiesOfBook().ElementAt(0));
-            List<CopyOfBook> booksRandom = new List<CopyOfBook>();
-            booksRandom.Add(new CopyOfBook(Guid.NewGuid(), _dataService.GetAllBooks().ElementAt(0), new DateTime(2018, 8, 21), 1.3));
+            List<CopyOfBook> booksFromCollection = new List<CopyOfBook> { _dataService.GetAllCopiesOfBook().ElementAt(0) };
+            List<CopyOfBook> booksRandom = new List<CopyOfBook> {new CopyOfBook(Guid.NewGuid(), _dataService.GetAllBooks().ElementAt(0), new DateTime(2018, 8, 21), 1.3) };
             Assert.ThrowsException<ArgumentException>(() => _dataService.AddReturn(null, null));
             Assert.ThrowsException<ArgumentException>(() => _dataService.AddReturn(_dataService.GetAllRents().ElementAt(0), booksRandom));
             _dataService.AddReturn(_dataService.GetAllRents().ElementAt(0), booksFromCollection);
@@ -108,6 +105,14 @@ namespace BusinessLogicTest
             Assert.AreNotEqual(DateTime.MinValue, _dataService.GetAllRents().ElementAt(0).DateOfReturn);
         }
 
+        [TestMethod]
+        public void AddPaymentTest()
+        {
+            AddReaderTest();
+            Assert.ThrowsException<ArgumentException>(() => _dataService.AddPayment(_dataService.GetAllReaders().First(), 2.388));
+            _dataService.AddPayment(_dataService.GetAllReaders().First(), 2.38);
+            Assert.AreEqual(2.38, _dataService.GetAllReaders().First().Balance);
+        }
 
         [TestMethod]
         public void DeleteAuthorTest()
@@ -158,13 +163,12 @@ namespace BusinessLogicTest
         }
 
         [TestMethod]
-        public void DeleteCopyOfBook()
+        public void DeleteCopyOfBookTest()
         {
             AddRentTest();
             Assert.AreEqual(1, _dataService.GetAllCopiesOfBook().Count());
             Assert.ThrowsException<ArgumentException>(() => _dataService.DeleteCopyOfBook(_dataService.GetAllCopiesOfBook().ElementAt(0)));
-            List<CopyOfBook> books = new List<CopyOfBook>();
-            books.Add(_dataService.GetAllCopiesOfBook().ElementAt(0));
+            List<CopyOfBook> books = new List<CopyOfBook> {_dataService.GetAllCopiesOfBook().ElementAt(0) };
             _dataService.AddReturn(_dataService.GetAllRents().ElementAt(0), books);
             _dataService.DeleteCopyOfBook(_dataService.GetAllCopiesOfBook().ElementAt(0));
             Assert.AreEqual(0, _dataService.GetAllCopiesOfBook().Count());

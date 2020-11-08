@@ -12,12 +12,11 @@ namespace DataLayerTest
     [TestClass]
     public class DataLayerTest
     {
-        private LibraryRepository _dataLayer;
+        private LibraryRepository _dataLayer = new LibraryRepository();
 
         [TestMethod]
         public void InitTest()
         {
-            _dataLayer = new LibraryRepository();
             Assert.IsNull(_dataLayer.DataFiller);
             Assert.AreEqual(0, _dataLayer.GetAllAuthors().Count());
             Assert.AreEqual(0, _dataLayer.GetAllBooks().Count());
@@ -32,7 +31,6 @@ namespace DataLayerTest
         [TestMethod]
         public void AddAuthorTest()
         {
-            _dataLayer = new LibraryRepository();
             Assert.AreEqual(0, _dataLayer.GetAllAuthors().Count());
             Author tolkien = new Author(Guid.NewGuid(), "John Ronald Reuel", "Tolkien");
             _dataLayer.AddAuthor(tolkien);
@@ -46,22 +44,15 @@ namespace DataLayerTest
         [TestMethod]
         public void AddBookTest()
         {
-            _dataLayer = new LibraryRepository();
+            AddAuthorTest();
             Assert.AreEqual(0, _dataLayer.GetAllBooks().Count());
-            Author tolkien = new Author(Guid.NewGuid(), "John Ronald Reuel", "Tolkien");
-            Author fDostojewski = new Author(Guid.NewGuid(), "Fiodor", "Dostojewski");
-            Book hobbit = new Book("Hobbit, czyli tam i z powrotem", tolkien,
-                "Powieœæ fantasy dla dzieci autorstwa J.R.R. Tolkiena.", Book.BookType.Fantasy);
+            Book hobbit = new Book("Hobbit, czyli tam i z powrotem", _dataLayer.FindAuthor(a => a.Name.Equals("Fiodor")), "Powieœæ fantasy dla dzieci autorstwa J.R.R. Tolkiena.", Book.BookType.Fantasy);
             _dataLayer.AddBook(hobbit);
             Assert.AreEqual(1, _dataLayer.GetAllBooks().Count());
-            Book zik = new Book("Zbrodnia i Kara", fDostojewski,
-                "Tematem powieœci s¹ losy by³ego studenta, Rodiona Raskolnikowa, który postanawia zamordowaæ i obrabowaæ star¹ lichwiarkê."
-                , Book.BookType.Classics);
+            Book zik = new Book("Zbrodnia i Kara", _dataLayer.FindAuthor(a => a.Name.Equals("Fiodor")), "Tematem powieœci s¹ losy by³ego studenta, Rodiona Raskolnikowa, który postanawia zamordowaæ i obrabowaæ star¹ lichwiarkê.", Book.BookType.Classics);
             _dataLayer.AddBook(zik);
             Assert.AreEqual(2, _dataLayer.GetAllBooks().Count());
-            Book wp = new Book("Wladca Pierscieni", tolkien,
-                "Powieœæ high fantasy J.R.R. Tolkiena, której akcja rozgrywa siê w mitologicznym œwiecie Œródziemia.Jest ona kontynuacj¹ innej powieœci tego autora zatytu³owanej Hobbit, czyli tam i z powrotem.",
-                Book.BookType.Fantasy);
+            Book wp = new Book("Wladca Pierscieni", _dataLayer.FindAuthor(a => a.Surname.Equals("Tolkien")), "Powieœæ high fantasy J.R.R. Tolkiena, której akcja rozgrywa siê w mitologicznym œwiecie Œródziemia.Jest ona kontynuacj¹ innej powieœci tego autora zatytu³owanej Hobbit, czyli tam i z powrotem.", Book.BookType.Fantasy);
             _dataLayer.AddBook(wp);
             Assert.AreEqual(3, _dataLayer.GetAllBooks().Count());
             Assert.ThrowsException<ArgumentException>(() => _dataLayer.AddBook(wp));
@@ -70,28 +61,30 @@ namespace DataLayerTest
         [TestMethod]
         public void AddCopyOfBookTest()
         {
-            _dataLayer = new LibraryRepository();
-            Author tolkien = new Author(Guid.NewGuid(), "John Ronald Reuel", "Tolkien");
-            Book hobbit = new Book("Hobbit, czyli tam i z powrotem", tolkien,
-                "Powieœæ fantasy dla dzieci autorstwa J.R.R. Tolkiena.", Book.BookType.Fantasy);
-            CopyOfBook hobbit1 = new CopyOfBook(Guid.NewGuid(), hobbit, new DateTime(2004, 12, 3, 0, 0, 0), 0.6);
-            CopyOfBook hobbit2 = new CopyOfBook(Guid.NewGuid(), hobbit, new DateTime(2004, 12, 3, 0, 0, 0), 0.6);
-            Assert.AreNotEqual(hobbit1, hobbit2);
+            AddBookTest();
+            CopyOfBook cob1 = new CopyOfBook(Guid.NewGuid(), _dataLayer.FindBook(b => b.Name.Equals("Zbrodnia i Kara")), new DateTime(2004, 12, 3, 0, 0, 0), 0.6);
+            CopyOfBook cob2 = new CopyOfBook(Guid.NewGuid(), _dataLayer.FindBook(b => b.Name.Equals("Zbrodnia i Kara")), new DateTime(2014, 12, 3, 0, 0, 0), 0.6);
+            Assert.AreNotEqual(cob1, cob2);
             Assert.AreEqual(0, _dataLayer.GetAllCopiesOfBook().Count());
-            _dataLayer.AddCopyOfBook(hobbit1);
+            _dataLayer.AddCopyOfBook(cob1);
             Assert.AreEqual(1, _dataLayer.GetAllCopiesOfBook().Count());
-            _dataLayer.AddCopyOfBook(hobbit2);
+            _dataLayer.AddCopyOfBook(cob2);
             Assert.AreEqual(2, _dataLayer.GetAllCopiesOfBook().Count());
-            Assert.ThrowsException<ArgumentException>(() => _dataLayer.AddCopyOfBook(hobbit1));
+            Assert.ThrowsException<ArgumentException>(() => _dataLayer.AddCopyOfBook(cob1));
+            CopyOfBook zik1 = new CopyOfBook(Guid.NewGuid(), _dataLayer.GetAllBooks().ElementAt(0), new DateTime(2001, 10, 11, 0, 0, 0), 0.5);
+            CopyOfBook zik2 = new CopyOfBook(Guid.NewGuid(), _dataLayer.GetAllBooks().ElementAt(0), new DateTime(2002, 10, 11, 0, 0, 0), 0.5);
+            CopyOfBook wp1 = new CopyOfBook(Guid.NewGuid(), _dataLayer.GetAllBooks().ElementAt(0), new DateTime(2005, 12, 23, 0, 0, 0), 0.7);
+            _dataLayer.AddCopyOfBook(zik1);
+            _dataLayer.AddCopyOfBook(zik2);
+            _dataLayer.AddCopyOfBook(wp1);
+            Assert.AreEqual(5, _dataLayer.GetAllCopiesOfBook().Count());
         }
 
         [TestMethod]
         public void AddEmployeeTest()
         {
-            _dataLayer = new LibraryRepository();
             Assert.AreEqual(0, _dataLayer.GetAllEmployees().Count());
-            Employee person2 = new Employee(Guid.NewGuid(), "Katarzyna", "Kowalska", new DateTime(1967, 03, 13),
-             "123456789", "kaska123@outlook.com", Person.Gender.Female, new DateTime(2019, 9, 11));
+            Employee person2 = new Employee(Guid.NewGuid(), "Katarzyna", "Kowalska", new DateTime(1967, 03, 13), "123456789", "kaska123@outlook.com", Person.Gender.Female, new DateTime(2019, 9, 11));
             _dataLayer.AddEmployee(person2);
             Assert.AreEqual(1, _dataLayer.GetAllEmployees().Count());
             Assert.ThrowsException<ArgumentException>(() => _dataLayer.AddEmployee(person2));
@@ -100,10 +93,8 @@ namespace DataLayerTest
         [TestMethod]
         public void AddReaderTest()
         {
-            _dataLayer = new LibraryRepository();
             Assert.AreEqual(0, _dataLayer.GetAllReaders().Count());
-            Reader person1 = new Reader(Guid.NewGuid(), "Adam", "Nowak", new DateTime(1998, 05, 23),
-            "111222333", "adam.nowak@gmail.com", Person.Gender.Male, new DateTime(2019, 9, 11));
+            Reader person1 = new Reader(Guid.NewGuid(), "Adam", "Nowak", new DateTime(1998, 05, 23), "111222333", "adam.nowak@gmail.com", Person.Gender.Male, new DateTime(2019, 9, 11));
             _dataLayer.AddReader(person1);
             Assert.AreEqual(1, _dataLayer.GetAllReaders().Count());
             Assert.ThrowsException<ArgumentException>(() => _dataLayer.AddReader(person1));
@@ -112,38 +103,16 @@ namespace DataLayerTest
         [TestMethod]
         public void AddRentTest()
         {
-            _dataLayer = new LibraryRepository();
+            AddCopyOfBookTest();
+            AddEmployeeTest();
+            AddReaderTest();
             Assert.AreEqual(0, _dataLayer.GetAllEvents().Count());
-            Reader person1 = new Reader(Guid.NewGuid(), "Adam", "Nowak", new DateTime(1998, 05, 23),
-                "111222333", "adam.nowak@gmail.com", Person.Gender.Male, new DateTime(2019, 9, 11));
-            Employee person2 = new Employee(Guid.NewGuid(), "Katarzyna", "Kowalska", new DateTime(1967, 03, 13),
-                "123456789", "kaska123@outlook.com", Person.Gender.Female, new DateTime(2019, 9, 11));
-            Author tolkien = new Author(Guid.NewGuid(), "John Ronald Reuel", "Tolkien");
-            Author fDostojewski = new Author(Guid.NewGuid(), "Fiodor", "Dostojewski");
-            Book hobbit = new Book("Hobbit, czyli tam i z powrotem", tolkien,
-                "Powieœæ fantasy dla dzieci autorstwa J.R.R. Tolkiena.", Book.BookType.Fantasy);
-            Book zik = new Book("Zbrodnia i Kara", fDostojewski,
-                "Tematem powieœci s¹ losy by³ego studenta, Rodiona Raskolnikowa, który postanawia zamordowaæ i obrabowaæ star¹ lichwiarkê."
-                , Book.BookType.Classics);
-            Book wp = new Book("Wladca Pierscieni", tolkien,
-                "Powieœæ high fantasy J.R.R. Tolkiena, której akcja rozgrywa siê w mitologicznym œwiecie Œródziemia.Jest ona kontynuacj¹ innej powieœci tego autora zatytu³owanej Hobbit, czyli tam i z powrotem.",
-                Book.BookType.Fantasy);
-            CopyOfBook hobbit1 = new CopyOfBook(Guid.NewGuid(), hobbit, new DateTime(2004, 11, 21, 0, 0, 0), 0.4);
-            CopyOfBook hobbit2 = new CopyOfBook(Guid.NewGuid(), hobbit, new DateTime(2004, 12, 3, 0, 0, 0), 0.4);
-            CopyOfBook zik1 = new CopyOfBook(Guid.NewGuid(), zik, new DateTime(2001, 10, 11, 0, 0, 0), 0.5);
-            CopyOfBook zik2 = new CopyOfBook(Guid.NewGuid(), zik, new DateTime(2001, 10, 11, 0, 0, 0), 0.5);
-            CopyOfBook wp1 = new CopyOfBook(Guid.NewGuid(), wp, new DateTime(2005, 12, 23, 0, 0, 0), 0.7);
-            List<CopyOfBook> booksForRent = new List<CopyOfBook>();
-            booksForRent.Add(hobbit1);
-            booksForRent.Add(hobbit2);
-            Rent rent1 = new Rent(Guid.NewGuid(), person1, person2, booksForRent, new DateTime(2010, 1, 6, 0, 0, 0));
+            List<CopyOfBook> booksForRent = new List<CopyOfBook> { _dataLayer.FindCopyOfBook(c => (c.Book.Name.Equals("Zbrodnia i Kara") && c.PurchaseDate.Year.Equals(2014))), _dataLayer.FindCopyOfBook(c => (c.Book.Name.Equals("Zbrodnia i Kara") && c.PurchaseDate.Year.Equals(2004))) };
+            Rent rent1 = new Rent(Guid.NewGuid(), _dataLayer.FindReader(r => r.Name.Equals("Adam")), _dataLayer.FindEmployee(e => e.Name.Equals("Katarzyna")), booksForRent, new DateTime(2010, 1, 6, 0, 0, 0));
             _dataLayer.AddEvent(rent1);
             Assert.AreEqual(1, _dataLayer.GetAllEvents().Count());
-            List<CopyOfBook> booksForRent2 = new List<CopyOfBook>();
-            booksForRent2.Add(zik1);
-            booksForRent2.Add(zik2);
-            booksForRent2.Add(wp1);
-            Rent rent2 = new Rent(Guid.NewGuid(), person1, person2, booksForRent2, new DateTime(2019, 11, 6, 0, 0, 0));
+            List<CopyOfBook> booksForRent2 = new List<CopyOfBook> { _dataLayer.GetAllCopiesOfBook().ElementAt(2), _dataLayer.GetAllCopiesOfBook().ElementAt(3), _dataLayer.GetAllCopiesOfBook().ElementAt(4) };
+            Rent rent2 = new Rent(Guid.NewGuid(), _dataLayer.FindReader(r => r.Name.Equals("Adam")), _dataLayer.FindEmployee(e => e.Name.Equals("Katarzyna")), booksForRent2, new DateTime(2019, 11, 6, 0, 0, 0));
             _dataLayer.AddEvent(rent2);
             Assert.AreEqual(2, _dataLayer.GetAllEvents().Count());
             Assert.ThrowsException<ArgumentException>(() => _dataLayer.AddEvent(rent2));
@@ -152,34 +121,12 @@ namespace DataLayerTest
         [TestMethod]
         public void AddReturnTest()
         {
-            _dataLayer = new LibraryRepository();
-            Assert.AreEqual(0, _dataLayer.GetAllEvents().Count());
-            Reader person1 = new Reader(Guid.NewGuid(), "Adam", "Nowak", new DateTime(1998, 05, 23),
-                "111222333", "adam.nowak@gmail.com", Person.Gender.Male, new DateTime(2019, 9, 11));
-            Employee person2 = new Employee(Guid.NewGuid(), "Katarzyna", "Kowalska", new DateTime(1967, 03, 13),
-                "123456789", "kaska123@outlook.com", Person.Gender.Female, new DateTime(2019, 9, 11));
-            Author tolkien = new Author(Guid.NewGuid(), "John Ronald Reuel", "Tolkien");
-            Book hobbit = new Book("Hobbit, czyli tam i z powrotem", tolkien,
-                "Powieœæ fantasy dla dzieci autorstwa J.R.R. Tolkiena.", Book.BookType.Fantasy);
-            Book zik = new Book("Zbrodnia i Kara", tolkien,
-                "Tematem powieœci s¹ losy by³ego studenta, Rodiona Raskolnikowa, który postanawia zamordowaæ i obrabowaæ star¹ lichwiarkê."
-                , Book.BookType.Classics);
-            CopyOfBook hobbit1 = new CopyOfBook(Guid.NewGuid(), hobbit, new DateTime(2004, 11, 21, 0, 0, 0), 0.4);
-            CopyOfBook hobbit2 = new CopyOfBook(Guid.NewGuid(), hobbit, new DateTime(2004, 12, 3, 0, 0, 0), 0.4);
-            CopyOfBook zik1 = new CopyOfBook(Guid.NewGuid(), zik, new DateTime(2001, 10, 11, 0, 0, 0), 0.5);
-            CopyOfBook zik2 = new CopyOfBook(Guid.NewGuid(), zik, new DateTime(2001, 10, 11, 0, 0, 0), 0.5);
-            List<CopyOfBook> booksForRent = new List<CopyOfBook>();
-            booksForRent.Add(hobbit1);
-            booksForRent.Add(zik1);
-            booksForRent.Add(zik2);
-            Rent rent1 = new Rent(Guid.NewGuid(), person1, person2, booksForRent, new DateTime(2010, 1, 6, 0, 0, 0));
-            _dataLayer.AddEvent(rent1);
-            List<CopyOfBook> booksForReturn = new List<CopyOfBook>();
-            booksForRent.Add(hobbit1);
-            booksForRent.Add(zik1);
-            Return returnBooks = new Return(Guid.NewGuid(), new DateTime(2019, 1, 6), booksForReturn, rent1);
-            _dataLayer.AddEvent(returnBooks);
+            AddRentTest();
             Assert.AreEqual(2, _dataLayer.GetAllEvents().Count());
+            List<CopyOfBook> booksForReturn = ((Rent)_dataLayer.GetAllEvents().ElementAt(0)).Book.Keys.ToList();
+            Return returnBooks = new Return(Guid.NewGuid(), new DateTime(2019, 1, 6), booksForReturn, (Rent)_dataLayer.GetAllEvents().ElementAt(0));
+            _dataLayer.AddEvent(returnBooks);
+            Assert.AreEqual(3, _dataLayer.GetAllEvents().Count());
             Assert.ThrowsException<ArgumentException>(() => _dataLayer.AddEvent(returnBooks));
         }
 
@@ -193,7 +140,7 @@ namespace DataLayerTest
             Reader reader = _dataLayer.GetAllReaders().First();
             _dataLayer.DeleteReader(reader);
             Assert.AreEqual(0, _dataLayer.GetAllReaders().Count());
-            Assert.AreEqual(null, _dataLayer.GetReader(reader.Id));
+            Assert.IsNull(_dataLayer.GetReader(reader.Id));
         }
 
         [TestMethod]
@@ -204,18 +151,18 @@ namespace DataLayerTest
             Employee employee = _dataLayer.GetAllEmployees().First();
             _dataLayer.DeleteEmployee(employee);
             Assert.AreEqual(0, _dataLayer.GetAllEmployees().Count());
-            Assert.AreEqual(null, _dataLayer.GetEmployee(employee.Id));
+            Assert.IsNull(_dataLayer.GetEmployee(employee.Id));
         }
 
         [TestMethod]
         public void DeleteCopyOfBookTest()
         {
             AddCopyOfBookTest();
-            Assert.AreEqual(2, _dataLayer.GetAllCopiesOfBook().Count());
+            Assert.AreEqual(5, _dataLayer.GetAllCopiesOfBook().Count());
             CopyOfBook copy = _dataLayer.GetAllCopiesOfBook().First();
             _dataLayer.DeleteCopyOfBook(copy);
-            Assert.AreEqual(1, _dataLayer.GetAllCopiesOfBook().Count());
-            Assert.AreEqual(null, _dataLayer.GetCopyOfBook(copy.Id));
+            Assert.AreEqual(4, _dataLayer.GetAllCopiesOfBook().Count());
+            Assert.IsNull(_dataLayer.GetCopyOfBook(copy.Id));
         }
 
         [TestMethod]
@@ -365,8 +312,7 @@ namespace DataLayerTest
             CopyOfBook copyOfBook = new CopyOfBook(Guid.NewGuid(), book, new DateTime(2019, 10, 10), 0.2);
             Employee employee = new Employee(Guid.NewGuid(), "Alan", "Nijaki", new DateTime(2000, 10, 10), "123456789", "alan@gmail.com", Person.Gender.Male, new DateTime(2019, 10, 10));
             Reader reader = new Reader(Guid.NewGuid(), "Alan", "Nijaki", new DateTime(2000, 10, 10), "123456789", "alan@gmail.com", Person.Gender.Male, new DateTime(2019, 10, 10));
-            List<CopyOfBook> list = new List<CopyOfBook>();
-            list.Add(copyOfBook);
+            List<CopyOfBook> list = new List<CopyOfBook> {copyOfBook};
             Rent rent = new Rent(Guid.NewGuid(), reader, employee, list, new DateTime(2018, 10, 10));
             _dataLayer.AddEvent(rent);
             Assert.AreEqual(rent, _dataLayer.GetAllEvents().Last());
@@ -381,8 +327,7 @@ namespace DataLayerTest
             CopyOfBook copyOfBook = new CopyOfBook(Guid.NewGuid(), book, new DateTime(2019, 10, 10), 0.2);
             Employee employee = new Employee(Guid.NewGuid(), "Alan", "Nijaki", new DateTime(2000, 10, 10), "123456789", "alan@gmail.com", Person.Gender.Male, new DateTime(2019, 10, 10));
             Reader reader = new Reader(Guid.NewGuid(), "Alan", "Nijaki", new DateTime(2000, 10, 10), "123456789", "alan@gmail.com", Person.Gender.Male, new DateTime(2019, 10, 10));
-            List<CopyOfBook> list = new List<CopyOfBook>();
-            list.Add(copyOfBook);
+            List<CopyOfBook> list = new List<CopyOfBook> {copyOfBook};
             Rent rent = new Rent(Guid.NewGuid(), reader, employee, list, new DateTime(2018, 10, 10));
             _dataLayer.AddEvent(rent);
             Return returnBooks = new Return(Guid.NewGuid(), new DateTime(2010, 10, 10), list, rent);

@@ -1,6 +1,10 @@
-﻿namespace DL.DataObjects
+﻿using System;
+using System.Runtime.Serialization;
+
+namespace DL.DataObjects
 {
-    public class Book
+    [Serializable]
+    public class Book : ISerializable
     {
         public enum BookType
         {
@@ -27,6 +31,14 @@
             _bookType = bookType;
         }
 
+        public Book(SerializationInfo info, StreamingContext context)
+        {
+            _name = info.GetString("name");
+            _author = (Author)info.GetValue("author", typeof(Author));
+            _description = info.GetString("description");
+            _bookType = (BookType)info.GetValue("bookType", typeof(BookType));
+        }
+
         public string Name { get => _name; set => _name = value; }
         public Author Author { get => _author; set => _author = value; }
         public string Description { get => _description; set => _description = value; }
@@ -42,6 +54,14 @@
             return obj is Book book &&
                    _name == book._name &&
                    Author.Equals(_author, book._author);
+        }
+
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            info.AddValue("name", _name);
+            info.AddValue("author", _author, typeof(Author));
+            info.AddValue("description", _description);
+            info.AddValue("bookType", _bookType, typeof(BookType));
         }
     }
 }

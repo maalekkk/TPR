@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Runtime.Serialization;
 
 namespace DL.DataObjects
 {
-    public class Person
+    public class Person : ISerializable
     {
         public enum Gender
         {
@@ -27,11 +28,23 @@ namespace DL.DataObjects
             _email = email;
             _gender = gender;
         }
-        public Guid Id { get => _id; private set => _id = value; }
+
+        public Person(SerializationInfo info, StreamingContext context)
+        {
+            _id = (Guid)info.GetValue("id", typeof(Guid));
+            _name = info.GetString("name");
+            _surname = info.GetString("surname");
+            _phoneNumber = info.GetString("phoneNumber");
+            _birthDate = info.GetDateTime("birthDate");
+            _email = info.GetString("email");
+            _gender = (Gender)info.GetValue("gender", typeof(Gender));
+        }
+
+        public Guid Id { get => _id; set => _id = value; }
         public string Name { get => _name; set => _name = value; }
         public string Surname { get => _surname; set => _surname = value; }
         
-        public DateTime BirthDate { get => _birthDate; private set => _birthDate = value; }
+        public DateTime BirthDate { get => _birthDate; set => _birthDate = value; }
         public string PhoneNumber { get => _phoneNumber; set => _phoneNumber = value; }
         public string Email { get => _email; set => _email = value; }
         public Gender Gender1 { get => _gender; set => _gender = value; }
@@ -45,6 +58,17 @@ namespace DL.DataObjects
         {
             return obj is Person person &&
                    _id.Equals(person._id);
+        }
+
+        public virtual void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            info.AddValue("id", _id, typeof(Guid));
+            info.AddValue("name", _name);
+            info.AddValue("surname", _surname);
+            info.AddValue("phoneNumber", _phoneNumber);
+            info.AddValue("birthDate", _birthDate);
+            info.AddValue("email", _email);
+            info.AddValue("gender", _gender, typeof(Gender));
         }
     }
 }

@@ -1,3 +1,9 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=C_003A_005CUsers_005CBartek_005CDysk_0020Google_005CFTIMS_005F_005CSemestr_00205_005CTPR_005CTPR_005CDL_002Edll/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=C_003A_005CUsers_005CBartek_005CDysk_0020Google_005CFTIMS_005F_005CSemestr_00205_005CTPR_005CTPR_005CTPR_002DTask1_005CTPR_005FZadanie_005FBiblioteka_002Esln/@EntryIndexedValue">True</s:Boolean>
-	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=C_003A_005CUsers_005CBartek_005CDysk_0020Google_005CFTIMS_005F_005CSemestr_00205_005CTPR_005CTPR_005CTPR_002DTask1_005CTPR_005FZadanie_005FBiblioteka_005CDL_002Ecsproj/@EntryIndexedValue">True</s:Boolean></wpf:ResourceDictionary>
+	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=C_003A_005CUsers_005CBartek_005CDysk_0020Google_005CFTIMS_005F_005CSemestr_00205_005CTPR_005CTPR_005CTPR_002DTask1_005CTPR_005FZadanie_005FBiblioteka_005CDL_002Ecsproj/@EntryIndexedValue">True</s:Boolean>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=ea5321e9_002Dc3e8_002D4796_002D999c_002D0502a338b2ca/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="All tests from UnitTest1.cs" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;MSTest::99BA7D27-9250-418A-8349-4428E6370986::.NETCoreApp,Version=v3.1::Tests.UnitTest1&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

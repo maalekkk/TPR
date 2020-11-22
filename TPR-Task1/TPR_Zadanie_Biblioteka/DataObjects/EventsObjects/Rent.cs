@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace DL.DataObjects.EventsObjects
 {
-    public class Rent : Event
+    [Serializable]
+    public class Rent : Event, ISerializable
     {
         private Reader _reader;
         private Employee _employee;
@@ -28,6 +30,23 @@ namespace DL.DataObjects.EventsObjects
             _books = new Dictionary<CopyOfBook, double>();
             addBooksToDictionary(books);
         }
+
+        public Rent(Guid id, Reader reader, Employee employee, Dictionary<CopyOfBook, double> books, DateTime dateOfRental) :
+            base(id, dateOfRental)
+        {
+            _reader = reader;
+            _employee = employee;
+            _books = books;
+        }
+
+        public Rent(SerializationInfo info, StreamingContext context) : base(info, context)
+        {
+            _reader = (Reader)info.GetValue("reader", typeof(Reader));
+            _employee = (Employee)info.GetValue("employee", typeof(Employee));
+            _dateOfReturn = info.GetDateTime("dateOfReturn");
+            _books = (Dictionary<CopyOfBook, double>)info.GetValue("books", typeof(Dictionary<CopyOfBook, double>));
+        }
+
 
         public Reader Reader { get => _reader; private set => _reader = value; }
         public Employee Employee { get => _employee; private set => _employee = value; }
@@ -63,6 +82,15 @@ namespace DL.DataObjects.EventsObjects
         {
             return obj is Rent rent &&
                    Id.Equals(rent.Id);
+        }
+
+        public override void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            base.GetObjectData(info, context);
+            info.AddValue("reader", _reader, typeof(Reader));
+            info.AddValue("employee", _employee, typeof(Employee));
+            info.AddValue("books", _books, typeof(Dictionary<CopyOfBook, double>));
+            info.AddValue("dateOfReturn", _dateOfReturn);
         }
     }
 }

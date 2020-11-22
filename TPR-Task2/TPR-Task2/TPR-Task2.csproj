@@ -6,4 +6,10 @@
         <RootNamespace>TPR_Task2</RootNamespace>
     </PropertyGroup>
 
+    <ItemGroup>
+      <Reference Include="DL">
+        <HintPath>..\..\DL.dll</HintPath>
+      </Reference>
+    </ItemGroup>
+
 </Project>

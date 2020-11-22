@@ -9,7 +9,7 @@ namespace DL.DataObjects.EventsObjects
     {
         private Reader _reader;
         private Employee _employee;
-        private Dictionary<CopyOfBook, double> _books;
+        private List<CopyOfBook> _books;
         private DateTime _dateOfReturn;
 
         public Rent(Guid id, Reader reader, Employee employee, List<CopyOfBook> books, DateTime dateOfRental, 
@@ -18,8 +18,7 @@ namespace DL.DataObjects.EventsObjects
             _reader = reader;
             _employee = employee;
             _dateOfReturn = dateOfReturn;
-            _books = new Dictionary<CopyOfBook, double>();
-            addBooksToDictionary(books);
+            _books = new List<CopyOfBook>();
         }
 
         public Rent(Guid id, Reader reader, Employee employee, List<CopyOfBook> books, DateTime dateOfRental) : 
@@ -27,31 +26,23 @@ namespace DL.DataObjects.EventsObjects
         {
             _reader = reader;
             _employee = employee;
-            _books = new Dictionary<CopyOfBook, double>();
-            addBooksToDictionary(books);
-        }
-
-        public Rent(Guid id, Reader reader, Employee employee, Dictionary<CopyOfBook, double> books, DateTime dateOfRental) :
-            base(id, dateOfRental)
-        {
-            _reader = reader;
-            _employee = employee;
             _books = books;
         }
+        
 
         public Rent(SerializationInfo info, StreamingContext context) : base(info, context)
         {
             _reader = (Reader)info.GetValue("reader", typeof(Reader));
             _employee = (Employee)info.GetValue("employee", typeof(Employee));
             _dateOfReturn = info.GetDateTime("dateOfReturn");
-            _books = (Dictionary<CopyOfBook, double>)info.GetValue("books", typeof(Dictionary<CopyOfBook, double>));
+            _books = (List<CopyOfBook>) info.GetValue("books", typeof(List<CopyOfBook>));
         }
 
 
         public Reader Reader { get => _reader; private set => _reader = value; }
         public Employee Employee { get => _employee; private set => _employee = value; }
         public DateTime DateOfReturn { get => _dateOfReturn; set => _dateOfReturn = value; }
-        public Dictionary<CopyOfBook, double> Book { get => _books; private set => _books = value; }
+        public List<CopyOfBook> Book { get => _books; private set => _books = value; }
 
         public override string ToString()
         {
@@ -68,15 +59,7 @@ namespace DL.DataObjects.EventsObjects
 
             return returnString;
         }
-
-
-        private void addBooksToDictionary(List<CopyOfBook> books)
-        {
-            foreach (CopyOfBook book in books)
-            {
-                _books.Add(book, book.PricePerDay);
-            }
-        }
+        
 
         public override bool Equals(object obj)
         {

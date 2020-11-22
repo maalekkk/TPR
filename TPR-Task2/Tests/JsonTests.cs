@@ -73,7 +73,8 @@ namespace Tests
             using(Stream stream = File.Open("serializeRent.json", FileMode.Open, FileAccess.Read))
                 rent1Copy = jsonFormatter.Deserialize(stream);
             
-            Assert.AreEqual(rent1.Book, rent1Copy.Book);
+            Assert.AreEqual(rent1Copy.Book.ElementAt(0), cob1);
+            Assert.AreEqual(rent1Copy.Book.ElementAt(1), cob2);
             Assert.AreEqual(rent1.Employee, rent1Copy.Employee);
             Assert.AreEqual(rent1.Reader, rent1Copy.Reader);
             Assert.AreEqual(rent1.DateOfReturn, rent1Copy.DateOfReturn);

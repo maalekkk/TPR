@@ -46,13 +46,13 @@ namespace DataLayerTest
         {
             AddAuthorTest();
             Assert.AreEqual(0, _dataLayer.GetAllBooks().Count());
-            Book hobbit = new Book("Hobbit, czyli tam i z powrotem", _dataLayer.FindAuthor(a => a.Name.Equals("Fiodor")), "Powieœæ fantasy dla dzieci autorstwa J.R.R. Tolkiena.", Book.BookType.Fantasy);
+            Book hobbit = new Book("Hobbit, czyli tam i z powrotem", _dataLayer.FindAuthor(a => a.Name.Equals("Fiodor")), "Powieï¿½ï¿½ fantasy dla dzieci autorstwa J.R.R. Tolkiena.", Book.BookType.Fantasy);
             _dataLayer.AddBook(hobbit);
             Assert.AreEqual(1, _dataLayer.GetAllBooks().Count());
-            Book zik = new Book("Zbrodnia i Kara", _dataLayer.FindAuthor(a => a.Name.Equals("Fiodor")), "Tematem powieœci s¹ losy by³ego studenta, Rodiona Raskolnikowa, który postanawia zamordowaæ i obrabowaæ star¹ lichwiarkê.", Book.BookType.Classics);
+            Book zik = new Book("Zbrodnia i Kara", _dataLayer.FindAuthor(a => a.Name.Equals("Fiodor")), "Tematem powieï¿½ci sï¿½ losy byï¿½ego studenta, Rodiona Raskolnikowa, ktï¿½ry postanawia zamordowaï¿½ i obrabowaï¿½ starï¿½ lichwiarkï¿½.", Book.BookType.Classics);
             _dataLayer.AddBook(zik);
             Assert.AreEqual(2, _dataLayer.GetAllBooks().Count());
-            Book wp = new Book("Wladca Pierscieni", _dataLayer.FindAuthor(a => a.Surname.Equals("Tolkien")), "Powieœæ high fantasy J.R.R. Tolkiena, której akcja rozgrywa siê w mitologicznym œwiecie Œródziemia.Jest ona kontynuacj¹ innej powieœci tego autora zatytu³owanej Hobbit, czyli tam i z powrotem.", Book.BookType.Fantasy);
+            Book wp = new Book("Wladca Pierscieni", _dataLayer.FindAuthor(a => a.Surname.Equals("Tolkien")), "Powieï¿½ï¿½ high fantasy J.R.R. Tolkiena, ktï¿½rej akcja rozgrywa siï¿½ w mitologicznym ï¿½wiecie ï¿½rï¿½dziemia.Jest ona kontynuacjï¿½ innej powieï¿½ci tego autora zatytuï¿½owanej Hobbit, czyli tam i z powrotem.", Book.BookType.Fantasy);
             _dataLayer.AddBook(wp);
             Assert.AreEqual(3, _dataLayer.GetAllBooks().Count());
             Assert.ThrowsException<ArgumentException>(() => _dataLayer.AddBook(wp));
@@ -123,7 +123,7 @@ namespace DataLayerTest
         {
             AddRentTest();
             Assert.AreEqual(2, _dataLayer.GetAllEvents().Count());
-            List<CopyOfBook> booksForReturn = ((Rent)_dataLayer.GetAllEvents().ElementAt(0)).Book.Keys.ToList();
+            List<CopyOfBook> booksForReturn = ((Rent)_dataLayer.GetAllEvents().ElementAt(0)).Book;
             Return returnBooks = new Return(Guid.NewGuid(), new DateTime(2019, 1, 6), booksForReturn, (Rent)_dataLayer.GetAllEvents().ElementAt(0));
             _dataLayer.AddEvent(returnBooks);
             Assert.AreEqual(3, _dataLayer.GetAllEvents().Count());
@@ -305,11 +305,11 @@ namespace DataLayerTest
             _dataLayer = new LibraryRepository();
             _dataLayer.DataFiller = cof;
             _dataLayer.FillData();
-            Employee newEmployee = new Employee(Guid.NewGuid(), "Robert", "Mak³owicz", new DateTime(1973, 3, 12), "123456789", "rm@123.com", Person.Gender.Male, DateTime.Now);
+            Employee newEmployee = new Employee(Guid.NewGuid(), "Robert", "Makï¿½owicz", new DateTime(1973, 3, 12), "123456789", "rm@123.com", Person.Gender.Male, DateTime.Now);
             Guid id = _dataLayer.GetAllEmployees().ElementAt(0).Id;
             Assert.ThrowsException<ArgumentException>(() => _dataLayer.UpdateEmployee(id, newEmployee));
             Assert.ThrowsException<ArgumentException>(() => _dataLayer.UpdateEmployee(Guid.NewGuid(), newEmployee));
-            newEmployee = new Employee(id, "Robert", "Mak³owicz", new DateTime(1973, 3, 12), "123456789", "rm@123.com", Person.Gender.Male, DateTime.Now);
+            newEmployee = new Employee(id, "Robert", "Makï¿½owicz", new DateTime(1973, 3, 12), "123456789", "rm@123.com", Person.Gender.Male, DateTime.Now);
             _dataLayer.UpdateEmployee(id, newEmployee);
             Assert.AreEqual(newEmployee.Email, _dataLayer.GetEmployee(id).Email);
             Assert.AreEqual(newEmployee.Name, _dataLayer.GetEmployee(id).Name);
@@ -322,11 +322,11 @@ namespace DataLayerTest
             _dataLayer = new LibraryRepository();
             _dataLayer.DataFiller = cof;
             _dataLayer.FillData();
-            Reader newReader = new Reader(Guid.NewGuid(), "Andrzej", "Go³ota", new DateTime(1973, 10, 10), "987654321", "goandrew@hotmail.com", Person.Gender.Male, DateTime.Now);
+            Reader newReader = new Reader(Guid.NewGuid(), "Andrzej", "Goï¿½ota", new DateTime(1973, 10, 10), "987654321", "goandrew@hotmail.com", Person.Gender.Male, DateTime.Now);
             Guid id = _dataLayer.GetAllReaders().ElementAt(0).Id;
             Assert.ThrowsException<ArgumentException>(() => _dataLayer.UpdateReader(id, newReader));
             Assert.ThrowsException<ArgumentException>(() => _dataLayer.UpdateReader(Guid.NewGuid(), newReader));
-            newReader = new Reader(id, "Andrzej", "Go³ota", new DateTime(1973, 10, 10), "987654321", "goandrew@hotmail.com", Person.Gender.Male, DateTime.Now);
+            newReader = new Reader(id, "Andrzej", "Goï¿½ota", new DateTime(1973, 10, 10), "987654321", "goandrew@hotmail.com", Person.Gender.Male, DateTime.Now);
             _dataLayer.UpdateReader(id, newReader);
             Assert.AreEqual(newReader.Email, _dataLayer.GetReader(id).Email);
             Assert.AreEqual(newReader.Name, _dataLayer.GetReader(id).Name);

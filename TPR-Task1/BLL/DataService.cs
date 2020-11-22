@@ -321,7 +321,7 @@ namespace BLL
             double cash = 0.0;
             foreach(CopyOfBook book in books)
             {
-                cash += numberOfDays * rent.Book[book];
+                cash += numberOfDays * book.PricePerDay;
             }
             rent.Reader.Balance -= cash;
         }
@@ -368,7 +368,7 @@ namespace BLL
 
         public IEnumerable<CopyOfBook> GetRentedCopiesOfBooks(Rent rent)
         {
-            List<CopyOfBook> rentedCopiesOfBooks = new List<CopyOfBook>(rent.Book.Keys);
+            List<CopyOfBook> rentedCopiesOfBooks = new List<CopyOfBook>(rent.Book);
             IEnumerable<Return> returns = GetAllReturnsByRent(rent);
             foreach(Return _return in returns)
             {

@@ -23,7 +23,7 @@ namespace DL.DataObjects
         {
             _id = (Guid)info.GetValue("id", typeof(Guid));
             _book = (Book)info.GetValue("book", typeof(Book));
-            _purchaseDate = info.GetDateTime("pruchaseDate");
+            _purchaseDate = info.GetDateTime("purchaseDate");
             _pricePerDay = info.GetDouble("pricePerDay");
         }
 

@@ -19,13 +19,6 @@ namespace DL.DataObjects
 
         public Reader(SerializationInfo info, StreamingContext context) : base(info, context)
         {
-            //base.Id = (Guid)info.GetValue("id", typeof(Guid));
-            //base.Name = info.GetString("name");
-            //base.Surname = info.GetString("surname");
-            //base.PhoneNumber = info.GetString("phoneNumber");
-            //base.BirthDate = info.GetDateTime("birthDate");
-            //base.Email = info.GetString("email");
-            //base.Gender1 = (Gender)info.GetValue("gender", typeof(Gender));
             _dateOfRegistration = info.GetDateTime("dateOfRegistration");
             _balance = info.GetDouble("balance");
         }
@@ -43,13 +36,6 @@ namespace DL.DataObjects
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             base.GetObjectData(info, context);
-            //info.AddValue("id", base.Id, typeof(Guid));
-            //info.AddValue("name", base.Name);
-            //info.AddValue("surname", base.Surname);
-            //info.AddValue("phoneNumber", base.PhoneNumber);
-            //info.AddValue("birthDate", base.BirthDate);
-            //info.AddValue("email", base.Email);
-            //info.AddValue("gender", base.Gender1, typeof(Gender));
             info.AddValue("dateOfRegistration", _dateOfRegistration);
             info.AddValue("balance", _balance);
         }

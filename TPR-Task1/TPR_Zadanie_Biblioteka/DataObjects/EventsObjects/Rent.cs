@@ -12,7 +12,7 @@ namespace DL.DataObjects.EventsObjects
         private List<CopyOfBook> _books;
         private DateTime _dateOfReturn;
 
-        public Rent(Guid id, Reader reader, Employee employee, List<CopyOfBook> books, DateTime dateOfRental, 
+        public Rent(Guid id, Reader reader, Employee employee, List<CopyOfBook> books, DateTime dateOfRental,
             DateTime dateOfReturn) : base(id, dateOfRental)
         {
             _reader = reader;
@@ -21,34 +21,54 @@ namespace DL.DataObjects.EventsObjects
             _books = books;
         }
 
-        public Rent(Guid id, Reader reader, Employee employee, List<CopyOfBook> books, DateTime dateOfRental) : 
+        public Rent(Guid id, Reader reader, Employee employee, List<CopyOfBook> books, DateTime dateOfRental) :
             base(id, dateOfRental)
         {
             _reader = reader;
             _employee = employee;
             _books = books;
         }
-        
+
 
         public Rent(SerializationInfo info, StreamingContext context) : base(info, context)
         {
-            _reader = (Reader)info.GetValue("reader", typeof(Reader));
-            _employee = (Employee)info.GetValue("employee", typeof(Employee));
+            _reader = (Reader) info.GetValue("reader", typeof(Reader));
+            _employee = (Employee) info.GetValue("employee", typeof(Employee));
             _dateOfReturn = info.GetDateTime("dateOfReturn");
             _books = (List<CopyOfBook>) info.GetValue("books", typeof(List<CopyOfBook>));
         }
 
 
-        public Reader Reader { get => _reader; private set => _reader = value; }
-        public Employee Employee { get => _employee; private set => _employee = value; }
-        public DateTime DateOfReturn { get => _dateOfReturn; set => _dateOfReturn = value; }
-        public List<CopyOfBook> Book { get => _books; private set => _books = value; }
+        public Reader Reader
+        {
+            get => _reader;
+            private set => _reader = value;
+        }
+
+        public Employee Employee
+        {
+            get => _employee;
+            private set => _employee = value;
+        }
+
+        public DateTime DateOfReturn
+        {
+            get => _dateOfReturn;
+            set => _dateOfReturn = value;
+        }
+
+        public List<CopyOfBook> Book
+        {
+            get => _books;
+            private set => _books = value;
+        }
 
         public override string ToString()
         {
-            string returnString = "Rent[GUID{" + Id.ToString() + "}, Reader{" + Reader.ToString() + "}, Employee{" + Employee.ToString()
-                + "}, Rent_Date{" + Date.ToString() + "}, Return_Date{";
-            if(_dateOfReturn != null)
+            string returnString = "Rent[GUID{" + Id.ToString() + "}, Reader{" + Reader.ToString() + "}, Employee{" +
+                                  Employee.ToString()
+                                  + "}, Rent_Date{" + Date.ToString() + "}, Return_Date{";
+            if (_dateOfReturn != null)
             {
                 returnString += DateOfReturn.ToString() + "}";
             }
@@ -59,7 +79,7 @@ namespace DL.DataObjects.EventsObjects
 
             return returnString;
         }
-        
+
 
         public override bool Equals(object obj)
         {
@@ -76,4 +96,4 @@ namespace DL.DataObjects.EventsObjects
             info.AddValue("dateOfReturn", _dateOfReturn);
         }
     }
-
+}

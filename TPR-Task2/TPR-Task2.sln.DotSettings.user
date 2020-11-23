@@ -7,9 +7,20 @@
     &lt;TestId&gt;MSTest::99BA7D27-9250-418A-8349-4428E6370986::.NETCoreApp,Version=v3.1::Tests.JsonSerializationTests.ObjectsWithComplexMembers&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=2ca072ab_002D8e16_002D4340_002Da4c5_002D74bc38450d31/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="LibraryContextSerialization #4" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=2ca072ab_002D8e16_002D4340_002Da4c5_002D74bc38450d31/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="LibraryContextSerialization #4" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;MSTest::99BA7D27-9250-418A-8349-4428E6370986::.NETCoreApp,Version=v3.1::Tests.JsonSerializationTests.ObjectsWithComplexMembers.LibraryContextSerialization&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;MSTest::99BA7D27-9250-418A-8349-4428E6370986::.NETCoreApp,Version=v3.1::Tests.OwnSerializationTests.SimpleObjectsSerializationTest.BookSerializationTest&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=58e0e538_002D1eba_002D4059_002D81e5_002Dfdddd203e215/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="BookSerializationTest #4" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;MSTest::99BA7D27-9250-418A-8349-4428E6370986::.NETCoreApp,Version=v3.1::Tests.OwnSerializationTests.SimpleObjectsSerializationTest.BookSerializationTest&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=5f07b04c_002D850c_002D474c_002D94fe_002D770018099ee6/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="BookSerializationTest #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;MSTest::99BA7D27-9250-418A-8349-4428E6370986::.NETCoreApp,Version=v3.1::Tests.OwnSerializationTests.SimpleObjectsSerializationTest.BookSerializationTest&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=6e4486ea_002Dce80_002D4fbe_002D9d13_002D59a606f36dac/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="LibraryContextSerialization" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
@@ -22,14 +33,35 @@
     &lt;TestId&gt;MSTest::99BA7D27-9250-418A-8349-4428E6370986::.NETCoreApp,Version=v3.1::Tests.JsonSerializationTests.ObjectsWithComplexMembers.LibraryContextSerialization&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=c4197e3f_002D43cf_002D4540_002D8791_002Dbc44d1adca95/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="BookSerializationTest" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;MSTest::99BA7D27-9250-418A-8349-4428E6370986::.NETCoreApp,Version=v3.1::Tests.OwnSerializationTests.SimpleObjectsSerializationTest.BookSerializationTest&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=c7f9d958_002D2dd7_002D43f8_002D978f_002Ddceed9ef4206/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="LibraryContextSerialization #3" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;MSTest::99BA7D27-9250-418A-8349-4428E6370986::.NETCoreApp,Version=v3.1::Tests.JsonSerializationTests.ObjectsWithComplexMembers.LibraryContextSerialization&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=d01b4cc9_002Dcf1d_002D4e4e_002Dbd5b_002Db4f9d16d4716/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="BookSerializationTest #3" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;MSTest::99BA7D27-9250-418A-8349-4428E6370986::.NETCoreApp,Version=v3.1::Tests.OwnSerializationTests.SimpleObjectsSerializationTest.BookSerializationTest&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=d164da76_002Df999_002D4771_002D8514_002D161cc150b622/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="BookSerializationTest #5" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;MSTest::99BA7D27-9250-418A-8349-4428E6370986::.NETCoreApp,Version=v3.1::Tests.OwnSerializationTests.SimpleObjectsSerializationTest.BookSerializationTest&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=d547d36c_002Da386_002D4de6_002D9d5e_002D1fd822c50b82/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="ObjectsWithComplexMembers" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;MSTest::99BA7D27-9250-418A-8349-4428E6370986::.NETCoreApp,Version=v3.1::Tests.JsonSerializationTests.ObjectsWithComplexMembers&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=e6f78538_002D1f4e_002D42ac_002Db64e_002Dca340834866b/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="AuthorSerialization" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;MSTest::99BA7D27-9250-418A-8349-4428E6370986::.NETCoreApp,Version=v3.1::Tests.JsonSerializationTests.ObjectsWithoutComplexMembersTests.AuthorSerialization&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;MSTest::99BA7D27-9250-418A-8349-4428E6370986::.NETCoreApp,Version=v3.1::Tests.OwnSerializationTests.SimpleObjectsSerializationTest&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=ea5321e9_002Dc3e8_002D4796_002D999c_002D0502a338b2ca/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="All tests from UnitTest1.cs" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;

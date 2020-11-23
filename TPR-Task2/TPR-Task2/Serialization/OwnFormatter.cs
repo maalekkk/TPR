@@ -33,26 +33,30 @@ namespace TPR_Task2.Serialization
                 {
                     WriteMember(entry.Name, entry.Value);
                 }
+                
                 fileContent += (char) 30 + "\n";
-                byte[] content = Encoding.UTF8.GetBytes(fileContent);
-                serializationStream.Write(content, 0, content.Length);
-                fileContent = "";
-                foreach (KeyValuePair<string, object> entry in entries)
+                
+                // if (entry.Value is ISerializable && entry.Value != null &&
+                //     entry.Value.GetType() != typeof(DateTime) && entry.Value.GetType() != typeof(Guid) && firstTime)
+                //     {
+                //         Serialize(serializationStream, entry.Value);
+                // }
+
+                while (this.m_objectQueue.Count != 0)
                 {
-                    if (entry.Value is ISerializable && entry.Value != null &&
-                        entry.Value.GetType() != typeof(DateTime) && entry.Value.GetType() != typeof(Guid) && firstTime)
-                    {
-                        Serialize(serializationStream, entry.Value);
-                    }
+                    Serialize(null,this.m_objectQueue.Dequeue());
                 }
 
-                if (!entries.ContainsValue(graph))
+                if (this.m_objectQueue.Count == 0)
                 {
-                    entries = new Dictionary<string, object>();
+                    byte[] content = Encoding.UTF8.GetBytes(fileContent);
+                    serializationStream.Write(content, 0, content.Length);
+                    fileContent = "";
                 }
             }
             else 
             {
+                Console.WriteLine(graph.GetType().ToString());
                 throw new ArgumentException("Objects dont implement ISerializable");
             }
         }
@@ -69,7 +73,10 @@ namespace TPR_Task2.Serialization
                 foreach (object it in (object[])obj)
                 {
                     fileContent += RefIdGenerator.GetId(it, out firstTime) + (char) 29;
-                    entries.Add(name, it);
+                    if (firstTime)
+                    {
+                        this.m_objectQueue.Enqueue(it);
+                    }
                 }
                 fileContent += "]";
             }
@@ -133,7 +140,10 @@ namespace TPR_Task2.Serialization
             else
             {
                 fileContent += name + "==" + RefIdGenerator.GetId(obj, out firstTime) + (char) 31;
-                entries.Add(name, obj);
+                if (firstTime)
+                {
+                    this.m_objectQueue.Enqueue(obj);
+                }
             }
         }
 
@@ -179,6 +189,5 @@ namespace TPR_Task2.Serialization
 
         bool firstTime;
         private string fileContent;
-        private Dictionary<string, object> entries = new Dictionary<string, object>();
     }
 }

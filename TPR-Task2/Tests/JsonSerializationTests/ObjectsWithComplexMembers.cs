@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using DL;
 using DL.DataObjects;
 using DL.DataObjects.EventsObjects;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -175,6 +177,109 @@ namespace Tests.JsonSerializationTests
             Assert.AreEqual(orgPayment.Cash, paymentCopy.Cash);
             Assert.AreEqual(orgPayment.Reader.Id, paymentCopy.Reader.Id);
             Assert.AreEqual(orgPayment.Reader.DateOfRegistration, paymentCopy.Reader.DateOfRegistration);
+        }
+        
+        [TestMethod]
+        public void LibraryContextSerialization()
+        {
+            Author author1 = new Author(Guid.NewGuid(), "Adam", "Malysz");
+            Author author2 = new Author(Guid.NewGuid(), "Robert", "Maklowicz");
+            Author author3 = new Author(Guid.NewGuid(), "Edyta", "Gorniak");
+            Book book1 = new Book("DSJ 2.1 Jurii Kosela Tutorial", author1, "How to beat super bots", 
+                Book.BookType.Detective);
+            Book book2 = new Book("Goplana the best chocolate", author1, "Explanation why i love Goplana",
+                Book.BookType.Biographie);
+            Book book3 = new Book("How to cook water", author2,
+                "Best chef in the word shows how to properly cook water", Book.BookType.Romance);
+            Book book4 = new Book("EEEEEEEEEEEE", author2, "EEEEEEE PAPRYKA EEEEEEEE", Book.BookType.Novel);
+            Book book5 = new Book("KOKOKOKO EUROSPOKO, next time I'll beat you", author3, "leelelelel",
+                Book.BookType.Romance);
+            CopyOfBook book1copy1 = new CopyOfBook(Guid.NewGuid(), book1, DateTime.Now, 100);
+            CopyOfBook book1copy2 = new CopyOfBook(Guid.NewGuid(), book1, DateTime.Now, 100);
+            CopyOfBook book2copy1 = new CopyOfBook(Guid.NewGuid(), book2, DateTime.Now, 50);
+            CopyOfBook book2copy2 = new CopyOfBook(Guid.NewGuid(), book2, DateTime.Now, 50);
+            CopyOfBook book3copy1 = new CopyOfBook(Guid.NewGuid(), book3, DateTime.Now, 200);
+            CopyOfBook book3copy2 = new CopyOfBook(Guid.NewGuid(), book3, DateTime.Now, 200);
+            CopyOfBook book4copy1 = new CopyOfBook(Guid.NewGuid(), book4, DateTime.Now, 30);
+            CopyOfBook book4copy2 = new CopyOfBook(Guid.NewGuid(), book4, DateTime.Now, 30);
+            CopyOfBook book5copy1 = new CopyOfBook(Guid.NewGuid(), book5, DateTime.Now, 10);
+            CopyOfBook book5copy2 = new CopyOfBook(Guid.NewGuid(), book5, DateTime.Now, 10);
+            Reader reader1 = new Reader(Guid.NewGuid(), "Agnieszka", "Kleczkowska", 
+                new DateTime(1970, 3, 1), "111111111", 
+                "agnieszka.kleczkowska@p.lodz.pl", Person.Gender.Female, DateTime.Now);
+            Reader reader2 = new Reader(Guid.NewGuid(), "Adam", "Nowak", new DateTime(1998, 05, 23),
+                "111222333", "adam.nowak@gmail.com", Person.Gender.Male, new DateTime(2019, 9, 11));
+            Employee employee1 = new Employee(Guid.NewGuid(), "Katarzyna", "Kowalska", new DateTime(1967, 03, 13),
+                "123456789", "kaska123@outlook.com", Person.Gender.Female, new DateTime(2019, 9, 11));
+            List<CopyOfBook> booksForRent1 = new List<CopyOfBook>() { book1copy1, book2copy1, book3copy1 };
+            List<CopyOfBook> booksForRent2 = new List<CopyOfBook>() { book4copy1, book5copy1, book1copy2, book2copy2};
+            List<CopyOfBook> booksForRent3 = new List<CopyOfBook>() { book3copy2, book4copy2, book5copy2 };
+            Rent rent1 = new Rent(Guid.NewGuid(), reader1, employee1, booksForRent1, DateTime.Now);
+            Rent rent2 = new Rent(Guid.NewGuid(), reader2, employee1, booksForRent2, DateTime.Now);
+            Rent rent3 = new Rent(Guid.NewGuid(), reader1, employee1, booksForRent3, DateTime.Now);
+            Return return1 = new Return(Guid.NewGuid(), DateTime.Now, booksForRent1, rent1);
+            Return return2 = new Return(Guid.NewGuid(), DateTime.Now, booksForRent2, rent2);
+            Return return3 = new Return(Guid.NewGuid(), DateTime.Now, booksForRent3, rent1);
+            Payment payment1 = new Payment(Guid.NewGuid(), DateTime.Now, reader1, 100);
+            Payment payment2 = new Payment(Guid.NewGuid(), DateTime.Now, reader2, 200);
+            Payment payment3 = new Payment(Guid.NewGuid(), DateTime.Now, reader1, 300);
+            List<Author> authors = new List<Author>() { author1, author2, author3 };
+            Dictionary<int, Book> books = new Dictionary<int, Book>() { {1, book1}, {2, book2}, {3, book3}, {4, book4},
+                {5, book5} };
+            List<CopyOfBook> copiesOfBooks = new List<CopyOfBook>()  { book1copy1, book1copy2, book2copy1, book2copy2,
+                book3copy1, book3copy2, book4copy1, book4copy2, book5copy1, book5copy2 };
+            List<Employee> employees = new List<Employee>() { employee1 };
+            List<Reader> readers = new List<Reader>() { reader1, reader2 };
+            ObservableCollection<Event> events = new ObservableCollection<Event>() { rent1, rent2, rent3, return1,
+                return2, return3, payment1, payment2, payment3 };
+            
+            LibraryContext context = new LibraryContext();
+            context.Authors.AddRange(authors);
+            foreach (KeyValuePair<int, Book> book in books)
+            {
+                context.Books.Add(book.Key, book.Value);
+            }
+            context.CopiesOfBooks.AddRange(copiesOfBooks);
+            context.Employees.AddRange(employees);
+            context.Readers.AddRange(readers);
+            foreach (Event _event in events)
+            {
+                context.Events.Add(_event);
+            }
+            
+            JsonFormatter<LibraryContext> jsonFormatter = new JsonFormatter<LibraryContext>();
+            using (Stream stream = File.Open("serializedContext.json", FileMode.Create, FileAccess.ReadWrite))
+            {
+                jsonFormatter.Serialize(stream, context);
+            }
+
+            LibraryContext contextCopy;
+            using (Stream stream = File.Open("serializedContext.json", FileMode.Open, FileAccess.ReadWrite))
+            {
+                contextCopy = jsonFormatter.Deserialize(stream);
+            }
+            
+            Assert.AreSame(contextCopy.Books.ElementAt(0).Value.Author, 
+                contextCopy.Books.ElementAt(1).Value.Author);
+            Assert.AreSame(contextCopy.Books.ElementAt(2).Value.Author, 
+                contextCopy.Books.ElementAt(3).Value.Author);
+            Assert.AreSame(contextCopy.CopiesOfBooks.ElementAt(0).Book, 
+                contextCopy.CopiesOfBooks.ElementAt(1).Book);
+            Assert.AreSame(contextCopy.CopiesOfBooks.ElementAt(2).Book, 
+                contextCopy.CopiesOfBooks.ElementAt(3).Book);
+            Assert.AreSame(contextCopy.CopiesOfBooks.ElementAt(4).Book, 
+                contextCopy.CopiesOfBooks.ElementAt(5).Book);
+            Assert.AreSame(contextCopy.CopiesOfBooks.ElementAt(6).Book, 
+                contextCopy.CopiesOfBooks.ElementAt(7).Book);
+            Assert.AreSame(contextCopy.CopiesOfBooks.ElementAt(8).Book, 
+                contextCopy.CopiesOfBooks.ElementAt(9).Book);
+            Assert.AreSame(((Rent)contextCopy.Events.ElementAt(0)).Reader, 
+                ((Rent)contextCopy.Events.ElementAt(2)).Reader);
+            Assert.AreSame(((Rent)contextCopy.Events.ElementAt(0)).Employee, 
+                ((Rent)contextCopy.Events.ElementAt(2)).Employee);
+            Assert.AreSame(((Return)contextCopy.Events.ElementAt(3)).Rent, ((Return)contextCopy.Events.ElementAt(5)).Rent);
+            Assert.AreSame(((Payment)contextCopy.Events.ElementAt(6)).Reader, ((Payment)contextCopy.Events.ElementAt(8)).Reader);
+
         }
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -8,6 +9,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using DL;
 using DL.DataObjects;
 using DL.DataObjects.EventsObjects;
+using Newtonsoft.Json;
 using TPR_Task2.Serialization;
 
 namespace Tests.JsonSerializationTests
@@ -108,9 +110,9 @@ namespace Tests.JsonSerializationTests
         {
             // Creating Employee
             Employee orgEmployee = new Employee(Guid.NewGuid(), "Katarzyna", "Kowalska",
-                new DateTime(1990, 3, 15), "123454321", "k_kowalska@gmail.com", 
+                new DateTime(1990, 3, 15), "123454321", "k_kowalska@gmail.com",
                 Person.Gender.Female, DateTime.Now);
-            
+
             // Serialize Employee
             JsonFormatter<Employee> jsonFormatter = new JsonFormatter<Employee>();
             using (Stream stream = File.Open("serializedEmployee.json", FileMode.Create, FileAccess.ReadWrite))
@@ -124,7 +126,7 @@ namespace Tests.JsonSerializationTests
             {
                 employeeCopy = jsonFormatter.Deserialize(stream);
             }
-            
+
             // Check
             Assert.AreEqual(orgEmployee.Id, employeeCopy.Id);
             Assert.AreEqual(orgEmployee.Name, employeeCopy.Name);
@@ -134,7 +136,7 @@ namespace Tests.JsonSerializationTests
             Assert.AreEqual(orgEmployee.Email, employeeCopy.Email);
             Assert.AreEqual(orgEmployee.Gender1, employeeCopy.Gender1);
             Assert.AreEqual(orgEmployee.DateOfEmployment, employeeCopy.DateOfEmployment);
-            
+
         }
     }
 }

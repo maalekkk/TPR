@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 namespace DL.DataObjects.EventsObjects
 {
     [Serializable]
-    public class Rent : Event, ISerializable
+    public class Rent : Event
     {
         private Reader _reader;
         private Employee _employee;
@@ -18,7 +18,7 @@ namespace DL.DataObjects.EventsObjects
             _reader = reader;
             _employee = employee;
             _dateOfReturn = dateOfReturn;
-            _books = new List<CopyOfBook>();
+            _books = books;
         }
 
         public Rent(Guid id, Reader reader, Employee employee, List<CopyOfBook> books, DateTime dateOfRental) : 
@@ -72,8 +72,8 @@ namespace DL.DataObjects.EventsObjects
             base.GetObjectData(info, context);
             info.AddValue("reader", _reader, typeof(Reader));
             info.AddValue("employee", _employee, typeof(Employee));
-            info.AddValue("books", _books, typeof(Dictionary<CopyOfBook, double>));
+            info.AddValue("books", _books, typeof(List<CopyOfBook>));
             info.AddValue("dateOfReturn", _dateOfReturn);
         }
     }
-}
+

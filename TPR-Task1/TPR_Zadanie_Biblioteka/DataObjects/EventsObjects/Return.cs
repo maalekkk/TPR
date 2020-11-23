@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 namespace DL.DataObjects.EventsObjects
 {
     [Serializable]
-    public class Return : Event, ISerializable
+    public class Return : Event
     {
         private List<CopyOfBook> _books;
         private Rent _rent;

@@ -2,7 +2,37 @@
 	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=C_003A_005CUsers_005CBartek_005CDysk_0020Google_005CFTIMS_005F_005CSemestr_00205_005CTPR_005CTPR_005CDL_002Edll/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=C_003A_005CUsers_005CBartek_005CDysk_0020Google_005CFTIMS_005F_005CSemestr_00205_005CTPR_005CTPR_005CTPR_002DTask1_005CTPR_005FZadanie_005FBiblioteka_002Esln/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=C_003A_005CUsers_005CBartek_005CDysk_0020Google_005CFTIMS_005F_005CSemestr_00205_005CTPR_005CTPR_005CTPR_002DTask1_005CTPR_005FZadanie_005FBiblioteka_005CDL_002Ecsproj/@EntryIndexedValue">True</s:Boolean>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=ea5321e9_002Dc3e8_002D4796_002D999c_002D0502a338b2ca/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="All tests from UnitTest1.cs" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=17a842e3_002Da278_002D48d4_002Db6b3_002D88e31a1cb9c1/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="ObjectsWithComplexMembers #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;MSTest::99BA7D27-9250-418A-8349-4428E6370986::.NETCoreApp,Version=v3.1::Tests.JsonSerializationTests.ObjectsWithComplexMembers&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=2ca072ab_002D8e16_002D4340_002Da4c5_002D74bc38450d31/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="LibraryContextSerialization #4" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;MSTest::99BA7D27-9250-418A-8349-4428E6370986::.NETCoreApp,Version=v3.1::Tests.JsonSerializationTests.ObjectsWithComplexMembers.LibraryContextSerialization&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=6e4486ea_002Dce80_002D4fbe_002D9d13_002D59a606f36dac/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="LibraryContextSerialization" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;MSTest::99BA7D27-9250-418A-8349-4428E6370986::.NETCoreApp,Version=v3.1::Tests.JsonSerializationTests.ObjectsWithComplexMembers.LibraryContextSerialization&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=c3327387_002D2491_002D4f7d_002Dae3f_002Da1ac942b6d25/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="LibraryContextSerialization #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;MSTest::99BA7D27-9250-418A-8349-4428E6370986::.NETCoreApp,Version=v3.1::Tests.JsonSerializationTests.ObjectsWithComplexMembers.LibraryContextSerialization&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=c7f9d958_002D2dd7_002D43f8_002D978f_002Ddceed9ef4206/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="LibraryContextSerialization #3" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;MSTest::99BA7D27-9250-418A-8349-4428E6370986::.NETCoreApp,Version=v3.1::Tests.JsonSerializationTests.ObjectsWithComplexMembers.LibraryContextSerialization&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=d547d36c_002Da386_002D4de6_002D9d5e_002D1fd822c50b82/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="ObjectsWithComplexMembers" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;MSTest::99BA7D27-9250-418A-8349-4428E6370986::.NETCoreApp,Version=v3.1::Tests.JsonSerializationTests.ObjectsWithComplexMembers&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=ea5321e9_002Dc3e8_002D4796_002D999c_002D0502a338b2ca/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="All tests from UnitTest1.cs" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;MSTest::99BA7D27-9250-418A-8349-4428E6370986::.NETCoreApp,Version=v3.1::Tests.JsonSerializationTests.ObjectsWithoutComplexMembersTests&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;MSTest::99BA7D27-9250-418A-8349-4428E6370986::.NETCoreApp,Version=v3.1::Tests.JsonSerializationTests.ObjectsWithComplexMembers&lt;/TestId&gt;&#xD;

@@ -7,7 +7,8 @@ namespace DL.DataObjects
     {
         public enum Gender
         {
-            Male, Female
+            Male,
+            Female
         };
 
         private Guid _id;

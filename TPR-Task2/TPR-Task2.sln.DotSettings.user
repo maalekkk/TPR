@@ -2,11 +2,15 @@
 	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=C_003A_005CUsers_005CBartek_005CDysk_0020Google_005CFTIMS_005F_005CSemestr_00205_005CTPR_005CTPR_005CDL_002Edll/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=C_003A_005CUsers_005CBartek_005CDysk_0020Google_005CFTIMS_005F_005CSemestr_00205_005CTPR_005CTPR_005CTPR_002DTask1_005CTPR_005FZadanie_005FBiblioteka_002Esln/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=C_003A_005CUsers_005CBartek_005CDysk_0020Google_005CFTIMS_005F_005CSemestr_00205_005CTPR_005CTPR_005CTPR_002DTask1_005CTPR_005FZadanie_005FBiblioteka_005CDL_002Ecsproj/@EntryIndexedValue">True</s:Boolean>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=7ad8ac8d_002D1907_002D4807_002Da49c_002D244a32983b3b/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="BookSerializationTest" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=5ca684da_002Ddf8b_002D486e_002Db682_002D61b4ff9f7052/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="SimpleModelObjectTests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;MSTest::99BA7D27-9250-418A-8349-4428E6370986::.NETCoreApp,Version=v3.1::Tests.OwnSerializationTests.SimpleObjectsSerializationTest.BookSerializationTest&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;MSTest::99BA7D27-9250-418A-8349-4428E6370986::.NETCoreApp,Version=v3.1::Tests.JsonSerializationTests.SimpleModelObjectTests&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=7ab4a490_002Da251_002D4c18_002D9d60_002Ddff3b2f9fe0a/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="TestJson" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;Project Location="C:\Users\Bartek\Dysk Google\FTIMS_\Semestr 5\TPR\TPR_Git\TPR-Task2\Tests" Presentation="&amp;lt;Tests&amp;gt;" /&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	
 	
 	
 	

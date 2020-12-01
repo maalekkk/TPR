@@ -82,13 +82,13 @@ namespace TPR_Task2.Serialization
                     {
                         info.AddValue(fields[j+1], Guid.Parse(fields[j+2]));
                     }
-                    else if ((fields[j].StartsWith("DL")) && (fields[j].Contains("+")))
-                    {
-                        object enumField;
-                        Enum.TryParse(GetTypeFromString(fields[j]), fields[j + 2], out enumField);
-                        info.AddValue(fields[j+1], enumField);
-                    }
-                    else if (fields[j].StartsWith("DL"))
+                    // else if ((fields[j].StartsWith("DL")) && (fields[j].Contains("+")))
+                    // {
+                    //     object enumField;
+                    //     Enum.TryParse(GetTypeFromString(fields[j]), fields[j + 2], out enumField);
+                    //     info.AddValue(fields[j+1], enumField);
+                    // }
+                    else if (fields[j].StartsWith("Test"))
                     {
                         info.AddValue(fields[j+1], null);
                         referencesInCurrentObject.Add(fields[j+2]);

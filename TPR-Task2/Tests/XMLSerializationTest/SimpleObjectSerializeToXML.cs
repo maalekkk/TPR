@@ -11,12 +11,10 @@ namespace Tests.XMLSerializationTest
     [TestClass]
     public class SimpleObjectSerializeToXML
     {
-
         [TestMethod]
-        public void test()
+        public void XMLSerializeTest()
         {
             D classD = new D(15.32, "Czesc", false);
-            
             XmlSerializer xmlSerializer = new XmlSerializer(typeof(D));
             XmlWriterSettings settings = new XmlWriterSettings();
             settings.Indent = true;

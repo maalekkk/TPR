@@ -45,13 +45,14 @@ namespace TPR_Task2.Serialization
             }
             else 
             {
-                throw new ArgumentException("Objects dont implement ISerializable");
+                throw new ArgumentException("Objects don't implement ISerializable");
             }
         }
 
         public override object Deserialize(Stream serializationStream)
         {
-            StreamReader streamReader = new StreamReader(serializationStream ?? throw new ArgumentNullException(nameof(serializationStream)));
+            StreamReader streamReader = new StreamReader(
+                serializationStream ?? throw new ArgumentNullException(nameof(serializationStream)));
             string serializedText = streamReader.ReadToEnd();
             Context = new StreamingContext();
             List<string> serializedObject = serializedText.Split(rowSeparator).ToList();
@@ -82,13 +83,7 @@ namespace TPR_Task2.Serialization
                     {
                         info.AddValue(fields[j+1], Guid.Parse(fields[j+2]));
                     }
-                    // else if ((fields[j].StartsWith("DL")) && (fields[j].Contains("+")))
-                    // {
-                    //     object enumField;
-                    //     Enum.TryParse(GetTypeFromString(fields[j]), fields[j + 2], out enumField);
-                    //     info.AddValue(fields[j+1], enumField);
-                    // }
-                    else if (fields[j].StartsWith("Test"))
+                    else if (fields[j].StartsWith(GetNamespaceFromStringType(fields[5])))
                     {
                         info.AddValue(fields[j+1], null);
                         referencesInCurrentObject.Add(fields[j+2]);
@@ -100,10 +95,16 @@ namespace TPR_Task2.Serialization
                 }
                 if (referencesInCurrentObject.Count != 0)
                     referencesToObject.Add(fields[2], referencesInCurrentObject);
-                createdObjects.Add(fields[2], Activator.CreateInstance(GetTypeFromString(fields[5]), info, Context));
+                createdObjects.Add(fields[2], Activator.CreateInstance(GetTypeFromString(fields[5]), 
+                    info, Context));
             }
             PutReferencesToObject(createdObjects, referencesToObject);
             return createdObjects.First().Value;
+        }
+        
+        private string GetNamespaceFromStringType(string type)
+        {
+            return type.Split('.').ToList()[0];
         }
 
         private Type GetTypeFromString(string type)
@@ -111,7 +112,8 @@ namespace TPR_Task2.Serialization
             return Type.GetType(type + ", " + type.Split(".").ToList()[0]);
         }
 
-        private void PutReferencesToObject(Dictionary<string, object> createdObjects, Dictionary<string, List<string>> referencesToObject)
+        private void PutReferencesToObject(Dictionary<string, object> createdObjects,
+            Dictionary<string, List<string>> referencesToObject)
         {
             foreach (string id in referencesToObject.Keys)
             {
@@ -137,33 +139,40 @@ namespace TPR_Task2.Serialization
 
         protected override void WriteDateTime(DateTime val, string name)
         {
-            _fileContent += val.GetType() + fieldInfoSeparator + name + fieldInfoSeparator + val.ToString("g", CultureInfo.CreateSpecificCulture("fr-FR")) + fieldSeparator;
+            _fileContent += val.GetType() + fieldInfoSeparator + name + fieldInfoSeparator + 
+                            val.ToString("g", CultureInfo.CreateSpecificCulture("fr-FR"))
+                            + fieldSeparator;
         }
 
         protected override void WriteDouble(double val, string name)
         {
-            _fileContent += val.GetType() + fieldInfoSeparator + name + fieldInfoSeparator + val.ToString() + fieldSeparator;
+            _fileContent += val.GetType() + fieldInfoSeparator + name + fieldInfoSeparator + 
+                            val + fieldSeparator;
         }
 
         protected override void WriteInt32(int val, string name)
         {
-            _fileContent += val.GetType() + fieldInfoSeparator + name + fieldInfoSeparator + val.ToString() + fieldSeparator;
+            _fileContent += val.GetType() + fieldInfoSeparator + name + fieldInfoSeparator + 
+                            val + fieldSeparator;
         }
 
         protected override void WriteInt64(long val, string name)
         {
-            _fileContent += val.GetType() + fieldInfoSeparator + name + fieldInfoSeparator + val.ToString() + fieldSeparator;
+            _fileContent += val.GetType() + fieldInfoSeparator + name + fieldInfoSeparator
+                            + val + fieldSeparator;
         }
 
         protected override void WriteObjectRef(object obj, string name, Type memberType)
         {
             if (memberType.Equals(typeof(string)))
             {
-                _fileContent += obj.GetType() + fieldInfoSeparator + name + fieldInfoSeparator + (string) obj + fieldSeparator;
+                _fileContent += obj.GetType() + fieldInfoSeparator + 
+                                name + fieldInfoSeparator + (string) obj + fieldSeparator;
             }
             else
             {
-                _fileContent += obj.GetType() + fieldInfoSeparator + name + fieldInfoSeparator + RefIdGenerator.GetId(obj, out _firstTime) + fieldSeparator;
+                _fileContent += obj.GetType() + fieldInfoSeparator + name + fieldInfoSeparator + 
+                                RefIdGenerator.GetId(obj, out _firstTime) + fieldSeparator;
                 if (_firstTime)
                 {
                     this.m_objectQueue.Enqueue(obj);
@@ -179,27 +188,7 @@ namespace TPR_Task2.Serialization
         
         protected override void WriteArray(object obj, string name, Type memberType)
         {
-            if (memberType.Equals(typeof(Dictionary<int, Book>)))
-            {
-                
-            }
-            else if (memberType.Equals(typeof(List<>)))
-            {
-                _fileContent += name + fieldInfoSeparator + '[';
-                foreach (object it in (object[])obj)
-                {
-                    _fileContent += RefIdGenerator.GetId(it, out _firstTime) + (char) 29;
-                    if (_firstTime)
-                    {
-                        this.m_objectQueue.Enqueue(it);
-                    }
-                }
-                _fileContent += ']';
-            }
-            else
-            {
-                throw new NotImplementedException();
-            }
+            throw new NotImplementedException();
         }
         
         protected override void WriteDecimal(decimal val, string name)
@@ -267,6 +256,5 @@ namespace TPR_Task2.Serialization
         private string rowSeparator = (char) 30 + "\n";
         private char fieldSeparator = (char) 31;
         private string fieldInfoSeparator = "==";
-        
     }
 }

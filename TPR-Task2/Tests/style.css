@@ -1,9 +1,27 @@
+D {
+    display: block;
+    border: 2px solid black;
+    height: fit-content;
+    width: fit-content;
+    margin: 40px;
+}
+
+D::before {
+    content: "Class D: ";
+    font-family: Arial, serif;
+    font-weight: bolder;
+    font-size: 30px;
+}
+
 Number
 {
     display: block;
-    font-family: "Comic Sans MS";
+    font-family: Comic Sans MS, serif;
     font-size: 20px;
     color: red;
+    justify-content: center;
+    align-items: center;
+
 }
 Number::before
 {
@@ -13,7 +31,7 @@ Number::before
 Name
 {
     display: block;
-    font-family: "Arial Black";
+    font-family: Arial Black, serif;
     font-size: 20px;
     color: brown;
 }
@@ -26,7 +44,7 @@ Name::before
 IsTrue
 {
     display: block;
-    font-family: "Impact";
+    font-family: Impact, serif;
     font-size: 16px;
     color: darkgreen;
 }

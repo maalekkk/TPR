@@ -1,0 +1,36 @@
+Number
+{
+    display: block;
+    font-family: "Comic Sans MS";
+    font-size: 20px;
+    color: red;
+}
+Number::before
+{
+    content: "Number: ";    
+}
+
+Name
+{
+    display: block;
+    font-family: "Arial Black";
+    font-size: 20px;
+    color: brown;
+}
+
+Name::before
+{
+    content: "Name: ";
+}
+
+IsTrue
+{
+    display: block;
+    font-family: "Impact";
+    font-size: 16px;
+    color: darkgreen;
+}
+IsTrue::before
+{
+    content: "IsTrue: ";
+}

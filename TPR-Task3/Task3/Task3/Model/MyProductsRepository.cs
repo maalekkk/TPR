@@ -8,5 +8,6 @@ namespace Task3.Model
 {
     class MyProductsRepository
     {
+        public List<>
     }
 }

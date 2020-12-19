@@ -42,7 +42,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="ExtensionMethods.cs" />
+    <Compile Include="MethodSyntaxMethods.cs" />
+    <Compile Include="Model\MyProduct.cs" />
+    <Compile Include="Model\MyProductsRepository.cs" />
+    <Compile Include="QuerySyntaxMethods.cs" />
     <Compile Include="DataClasses1.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

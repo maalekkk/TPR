@@ -25,5 +25,21 @@ namespace Task3
             return output.ToList();
         }
 
+        public List<Product> GetNProducts(int n)
+        {
+            var output = from product in Products
+                         select product;
+
+            return output.Take(n).ToList();
+        }
+
+        public List<ProductVendor> GetNProductVendors(int n)
+        {
+            var output = from vendor in ProductVendors
+                         select vendor;
+
+            return output.Take(n).ToList();
+        }
+
     }
 }

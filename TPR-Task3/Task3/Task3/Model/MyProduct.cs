@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Task3.Model
 {
-    class MyProduct : Product
+    public class MyProduct : Product
     {
         public MyProduct(Product product)
         {

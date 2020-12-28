@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Task3.Model
 {
-    class MyProductsRepository
+    public class MyProductsRepository
     {
         private List<MyProduct> _myProductsList;
 
@@ -16,6 +16,21 @@ namespace Task3.Model
             {
                 _myProductsList = new List<MyProduct>();
                 List<Product> products = db.GetProducts();
+                int i = 0;
+                foreach (Product product in products)
+                {
+                    _myProductsList.Add(new MyProduct(product));
+                }
+            }
+        }
+
+        public MyProductsRepository(int n)
+        {
+            using (ProductDataContext db = new ProductDataContext())
+            {
+                _myProductsList = new List<MyProduct>();
+                List<Product> products = db.GetNProducts(n);
+                int i = 0;
                 foreach (Product product in products)
                 {
                     _myProductsList.Add(new MyProduct(product));
@@ -33,7 +48,8 @@ namespace Task3.Model
 
         public List<MyProduct> GetNMyProductsFromCategory(string categoryName, int n)
         {
-            var result = from myProduct in _myProductsList
+            List<MyProduct> withoutNulls = _myProductsList.Where(prod => prod.ProductSubcategory != null).Select(prod => prod).ToList();
+            var result = from myProduct in withoutNulls
                          orderby myProduct.Name descending
                          where myProduct.ProductSubcategory.ProductCategory.Name.Equals(categoryName)
                          select myProduct;

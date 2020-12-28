@@ -78,7 +78,7 @@ namespace Task3
                 var result = db.Products.OrderByDescending(product => product.Name)
                                         .Where(product => product.ProductSubcategory.ProductCategory.Name.Equals(categoryName))
                                         .Select(product => product);
-                return result.ToList();
+                return result.Take(n).ToList();
             }
         }
 
@@ -86,7 +86,7 @@ namespace Task3
         {
             using (ProductDataContext db = new ProductDataContext())
             {
-                var result = db.Products.Where(product => product.ProductSubcategory.ProductCategory.Equals(category))
+                var result = db.Products.Where(product => product.ProductSubcategory.ProductCategory.Name.Equals(category.Name))
                                         .Select(product => product.StandardCost);
                 return result.Sum();
             }

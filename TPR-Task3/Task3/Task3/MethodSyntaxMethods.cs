@@ -63,12 +63,10 @@ namespace Task3
         {
             using (ProductDataContext db = new ProductDataContext())
             {
-                var result = db.ProductReviews.OrderByDescending(productReview => productReview.ReviewDate).GroupBy(productReview => productReview.ProductID)
+                var result = db.Products.Join(db.ProductReviews, product => product.ProductID, review => review.ProductID, (product, review) => new { Product = product, Review = review })
+                    .OrderByDescending(review => review.Review.ReviewDate)
+                    .Select(product => product.Product);
 
-                var result1 = from productReview in db.ProductReviews
-                             orderby productReview.ReviewDate descending
-                             group productReview.Product by productReview.ProductID into _group
-                             select _group.First();
                 return result.Take(howManyProducts).ToList();
             }
         }
@@ -77,10 +75,9 @@ namespace Task3
         {
             using (ProductDataContext db = new ProductDataContext())
             {
-                var result = from product in db.Products
-                             orderby product.Name descending
-                             where product.ProductSubcategory.ProductCategory.Name.Equals(categoryName)
-                             select product;
+                var result = db.Products.OrderByDescending(product => product.Name)
+                                        .Where(product => product.ProductSubcategory.ProductCategory.Name.Equals(categoryName))
+                                        .Select(product => product);
                 return result.ToList();
             }
         }
@@ -89,9 +86,8 @@ namespace Task3
         {
             using (ProductDataContext db = new ProductDataContext())
             {
-                var result = from product in db.Products
-                             where product.ProductSubcategory.ProductCategory.Equals(category)
-                             select product.StandardCost;
+                var result = db.Products.Where(product => product.ProductSubcategory.ProductCategory.Equals(category))
+                                        .Select(product => product.StandardCost);
                 return result.Sum();
             }
         }

@@ -43,9 +43,9 @@ namespace Task3
                          where productVendor.ProductID == product.ProductID
                          select new { Product = product.Name, Vendor = productVendor.Vendor.Name };
             StringBuilder resultString = new StringBuilder();
-            foreach (var productVendor in result)
+            foreach (var res in result)
             {
-                resultString.Append(productVendor.Product).Append("-").Append(productVendor.Vendor).AppendLine();
+                resultString.Append(res.Product).Append("-").Append(res.Vendor).AppendLine();
             }
             return resultString.ToString();
         }
@@ -55,7 +55,7 @@ namespace Task3
             var result = products.Join(productVendors, product => product.ProductID, productVendor => productVendor.ProductID, (product, productVendor)
                                      => new { Product = product.Name, Vendor = productVendor.Vendor.Name });
             StringBuilder resultString = new StringBuilder();
-            foreach (var productVendor in result)
+            foreach (var productVendor in result.ToList())
             {
                 resultString.Append(productVendor.Product).Append("-").Append(productVendor.Vendor).AppendLine();
             }

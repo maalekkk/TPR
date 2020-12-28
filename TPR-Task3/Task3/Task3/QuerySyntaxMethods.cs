@@ -8,28 +8,6 @@ namespace Task3
 {
     public static class QuerySyntaxMethods
     {
-        public static List<Product> GetFirstNProducts()
-        {
-            using (ProductDataContext db = new ProductDataContext())
-            {
-                var output = from product in db.Products
-                             select product;
-
-                return output.ToList();
-            }
-
-        }
-
-        public static List<ProductVendor> GetFirstNProductVendor(int number)
-        {
-            using (ProductDataContext db = new ProductDataContext())
-            {
-                var output = from vendor in db.ProductVendors
-                             select vendor;
-
-                return output.Take(number).ToList();
-            }
-        }
 
         public static List<Product> GetProductsByName(String namePart)
         {

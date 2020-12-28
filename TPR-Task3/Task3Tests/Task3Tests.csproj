@@ -53,6 +53,7 @@
     <Compile Include="QuerySyntaxMethodsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MethodSyntaxMethodsTests.cs" />
+    <Compile Include="ExtensionMethodsTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

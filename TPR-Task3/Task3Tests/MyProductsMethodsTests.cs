@@ -6,7 +6,7 @@ using Task3.Model;
 namespace Task3Tests
 {
     [TestClass]
-    public class UnitTest1
+    public class MyProductsMethodsTests
     {
         [TestMethod]
         public void GetMyProductsByNameTest()

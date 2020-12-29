@@ -16,7 +16,7 @@ namespace Task3.Model
         private System.Nullable<int> _ProductSubcategoryID;
         private EntitySet<ProductReview> _ProductReviews;
         private EntitySet<ProductVendor> _ProductVendors;
-        private ProductSubcategory _ProductSubcategory;
+        private ProductCategory _ProductSubcategory;
         public MyProduct(Product product)
         {
             ProductID = product.ProductID;
@@ -25,7 +25,14 @@ namespace Task3.Model
             ProductSubcategoryID = product.ProductSubcategoryID;
             ProductVendors = product.ProductVendors;
             ProductReviews = product.ProductReviews;
-            ProductSubcategory = product.ProductSubcategory;
+            if (product.ProductSubcategory != null)
+            {
+                ProductCategory = product.ProductSubcategory.ProductCategory;
+            }
+            else
+            {
+                ProductCategory = null;
+            }
         }
 
         public int ProductID { get => _ProductID; set => _ProductID = value; }
@@ -34,6 +41,6 @@ namespace Task3.Model
         public int? ProductSubcategoryID { get => _ProductSubcategoryID; set => _ProductSubcategoryID = value; }
         public EntitySet<ProductReview> ProductReviews { get => _ProductReviews; set => _ProductReviews = value; }
         public EntitySet<ProductVendor> ProductVendors { get => _ProductVendors; set => _ProductVendors = value; }
-        public ProductSubcategory ProductSubcategory { get => _ProductSubcategory; set => _ProductSubcategory = value; }
+        public ProductCategory ProductCategory { get => _ProductSubcategory; set => _ProductSubcategory = value; }
     }
 }

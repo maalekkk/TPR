@@ -48,10 +48,10 @@ namespace Task3.Model
 
         public List<MyProduct> GetNMyProductsFromCategory(string categoryName, int n)
         {
-            List<MyProduct> withoutNulls = _myProductsList.Where(prod => prod.ProductSubcategory != null).Select(prod => prod).ToList();
+            List<MyProduct> withoutNulls = _myProductsList.Where(prod => prod.ProductCategory != null).Select(prod => prod).ToList();
             var result = from myProduct in withoutNulls
                          orderby myProduct.Name descending
-                         where myProduct.ProductSubcategory.ProductCategory.Name.Equals(categoryName)
+                         where myProduct.ProductCategory.Name.Equals(categoryName)
                          select myProduct;
             return result.ToList();
         }

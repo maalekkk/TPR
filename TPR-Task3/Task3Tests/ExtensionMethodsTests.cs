@@ -12,8 +12,13 @@ namespace Task3Tests
         {
             using (ProductDataContext db = new ProductDataContext())
             {
-                List<Product> result = db.GetProducts();
-                Assert.AreEqual(209, result.GetProductsWithoutCategory_QuerySyntax().Count);
+                List<Product> products = db.GetProducts();
+                List<Product> result = products.GetProductsWithoutCategory_QuerySyntax();
+                Assert.AreEqual(209, result.Count);
+                foreach(Product res in result)
+                {
+                    Assert.IsNull(res.ProductSubcategory);
+                }
             }
         }
 
@@ -22,8 +27,13 @@ namespace Task3Tests
         {
             using (ProductDataContext db = new ProductDataContext())
             {
-                List<Product> result = db.GetProducts();
-                Assert.AreEqual(209, result.GetProductsWithoutCategory_MethodSyntax().Count);
+                List<Product> products = db.GetProducts();
+                List<Product> result = products.GetProductsWithoutCategory_MethodSyntax();
+                Assert.AreEqual(209, result.Count);
+                foreach (Product res in result)
+                {
+                    Assert.IsNull(res.ProductSubcategory);
+                }
             }
         }
 
@@ -32,9 +42,13 @@ namespace Task3Tests
         {
             using (ProductDataContext db = new ProductDataContext())
             {
-                List<Product> result = db.GetProducts();
-                Assert.AreEqual(20, result.GetPaginatedProducts_QuerySyntax(20, 1).Count);
-                Assert.AreEqual(332, result.GetPaginatedProducts_QuerySyntax(20, 1)[0].ProductID);
+                List<Product> products = db.GetProducts();
+                List<Product> page0 = products.GetPaginatedProducts_QuerySyntax(20, 0);
+                List<Product> page1 = products.GetPaginatedProducts_QuerySyntax(20, 1);
+                Assert.AreEqual(20, page0.Count);
+                Assert.AreEqual(20, page1.Count);
+                Assert.AreEqual(1, page0[0].ProductID);
+                Assert.AreEqual(332, page1[0].ProductID);
             }
         }
 
@@ -43,9 +57,13 @@ namespace Task3Tests
         {
             using (ProductDataContext db = new ProductDataContext())
             {
-                List<Product> result = db.GetProducts();
-                Assert.AreEqual(20, result.GetPaginatedProducts_MethodSyntax(20, 1).Count);
-                Assert.AreEqual(332, result.GetPaginatedProducts_MethodSyntax(20, 1)[0].ProductID);
+                List<Product> products = db.GetProducts();
+                List<Product> page0 = products.GetPaginatedProducts_MethodSyntax(20, 0);
+                List<Product> page1 = products.GetPaginatedProducts_MethodSyntax(20, 1);
+                Assert.AreEqual(20, page0.Count);
+                Assert.AreEqual(20, page1.Count);
+                Assert.AreEqual(1, page0[0].ProductID);
+                Assert.AreEqual(332, page1[0].ProductID);
             }
         }
 

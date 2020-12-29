@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Task3;
 
@@ -10,43 +11,54 @@ namespace Task3Tests
         [TestMethod]
         public void GetProductByNameTest()
         {
-            Assert.AreEqual(5, MethodSyntaxMethods.GetProductsByName("Chain").Count);
+            List<Product> result = MethodSyntaxMethods.GetProductsByName("Chain");
+            Assert.AreEqual(5, result.Count);
+            foreach (Product res in result)
+            {
+                Assert.IsTrue(res.Name.Contains("Chain"));
+            }
         }
 
         [TestMethod]
         public void GetProductsByVendorNameTest()
         {
-            Assert.AreEqual(1, MethodSyntaxMethods.GetProductsByVendorName("International").Count);
+            List<Product> result = MethodSyntaxMethods.GetProductsByVendorName("International");
+            Assert.AreEqual(1, result.Count);
         }
 
         [TestMethod]
         public void GetProductNameByVendorNameTest()
         {
-            Assert.AreEqual(1, MethodSyntaxMethods.GetProtuctNamesByVendorName("International").Count);
+            List<string> result = MethodSyntaxMethods.GetProtuctNamesByVendorName("International");
+            Assert.AreEqual(1, result.Count);
         }
 
         [TestMethod]
         public void GetProduvtVendorByProductNameTest()
         {
-            Assert.AreEqual("Varsity Sport Co.", MethodSyntaxMethods.GetProductVendorByProductName("Chain"));
+            string result = MethodSyntaxMethods.GetProductVendorByProductName("Chain");
+            Assert.AreEqual("Varsity Sport Co.", result);
         }
 
         [TestMethod]
         public void GetProductsWithRecentReviewsTest()
         {
-            Assert.AreEqual(3, MethodSyntaxMethods.GetProductsWithRecentReviews(3).Count);
+            List<Product> result = MethodSyntaxMethods.GetProductsWithRecentReviews(3);
+            Assert.AreEqual(3, result.Count);
         }
 
         [TestMethod]
         public void GetNRecentlyReviewdProductdTest()
         {
-            Assert.AreEqual(3, MethodSyntaxMethods.GetNRecentlyReviewedProductd(3).Count);
+            List<Product> result = MethodSyntaxMethods.GetNRecentlyReviewedProductd(3);
+            Assert.AreEqual(3, result.Count);
         }
 
         [TestMethod]
         public void GetNProductsFromCategoryTest()
         {
-            Assert.AreEqual(5, MethodSyntaxMethods.GetNProductsFromCategory("Bikes", 5).Count);
+            List<Product> result = MethodSyntaxMethods.GetNProductsFromCategory("Bikes", 5);
+            Assert.AreEqual(5, result.Count);
         }
 
         [TestMethod]

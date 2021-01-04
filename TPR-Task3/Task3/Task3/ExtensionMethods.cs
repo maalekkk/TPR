@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Task3
 {
@@ -10,7 +8,7 @@ namespace Task3
     {
         public static List<Product> GetProductsWithoutCategory_QuerySyntax(this List<Product> products)
         {
-            var result = from product in products
+            IEnumerable<Product> result = from product in products
                          where product.ProductSubcategoryID == null
                          select product;
             return result.ToList();
@@ -18,21 +16,21 @@ namespace Task3
 
         public static List<Product> GetProductsWithoutCategory_MethodSyntax(this List<Product> products)
         {
-            var result = products.Where(product => product.ProductSubcategoryID == null)
+            IEnumerable<Product> result = products.Where(product => product.ProductSubcategoryID == null)
                                     .Select(product => product);
             return result.ToList();
         }
 
         public static List<Product> GetPaginatedProducts_QuerySyntax(this List<Product> products, int size ,int page)
         {
-            var result = from product in products
+            IEnumerable<Product> result = from product in products
                          select product;
             return result.Skip(size * page).Take(size).ToList();
         }
 
         public static List<Product> GetPaginatedProducts_MethodSyntax(this List<Product> products, int size, int page)
         {
-            var result = products.Select(product => product);
+            IEnumerable<Product> result = products.Select(product => product);
             return result.Skip(size * page).Take(size).ToList();
         }
 

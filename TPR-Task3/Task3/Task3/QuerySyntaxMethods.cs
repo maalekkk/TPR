@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Task3
 {
@@ -13,7 +11,7 @@ namespace Task3
         {
             using (ProductDataContext db = new ProductDataContext())
             {
-                var result = from product in db.Products
+                IQueryable<Product> result = from product in db.Products
                              where product.Name.Contains(namePart)
                              select product;
 
@@ -26,7 +24,7 @@ namespace Task3
         {
             using (ProductDataContext db = new ProductDataContext())
             {
-                var result = from productVendor in db.ProductVendors
+                IQueryable<Product> result = from productVendor in db.ProductVendors
                              where productVendor.Vendor.Name.Equals(vendorName)
                              select productVendor.Product;
                 return result.ToList();
@@ -37,7 +35,7 @@ namespace Task3
         {
             using (ProductDataContext db = new ProductDataContext())
             {
-                var result = from productVendor in db.ProductVendors
+                IQueryable<string> result = from productVendor in db.ProductVendors
                              where productVendor.Vendor.Name.Equals(vendorName)
                              select productVendor.Product.Name;
                 return result.ToList();
@@ -48,7 +46,7 @@ namespace Task3
         {
             using (ProductDataContext db = new ProductDataContext())
             {
-                var result = from productVendor in db.ProductVendors
+                IQueryable<string> result = from productVendor in db.ProductVendors
                              where productVendor.Product.Name.Equals(productName)
                              select productVendor.Vendor.Name;
                 return result.Single();
@@ -59,7 +57,7 @@ namespace Task3
         {
             using (ProductDataContext db = new ProductDataContext())
             {
-                var result = from productReview in db.ProductReviews
+                IQueryable<Product> result = from productReview in db.ProductReviews
                              orderby productReview.ReviewDate descending
                              select productReview.Product;
                 return result.Take(howManyReviews).ToList();
@@ -70,7 +68,7 @@ namespace Task3
         {
             using (ProductDataContext db = new ProductDataContext())
             {
-                var result = from product in db.Products
+                IQueryable<Product> result = from product in db.Products
                              join review in db.ProductReviews on product.ProductID equals review.ProductID
                              orderby review.ReviewDate descending
                              select product;
@@ -82,7 +80,7 @@ namespace Task3
         {
             using (ProductDataContext db = new ProductDataContext())
             {
-                var result = from product in db.Products
+                IQueryable<Product> result = from product in db.Products
                              orderby product.Name descending
                              where product.ProductSubcategory.ProductCategory.Name.Equals(categoryName)
                              select product;
@@ -94,7 +92,7 @@ namespace Task3
         {
             using (ProductDataContext db = new ProductDataContext())
             {
-                var result = from product in db.Products
+                IQueryable<decimal> result = from product in db.Products
                              where product.ProductSubcategory.ProductCategory.Name.Equals(category.Name)
                              select product.StandardCost;
                 return result.Sum();

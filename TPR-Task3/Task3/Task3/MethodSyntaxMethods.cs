@@ -12,7 +12,7 @@ namespace Task3
         {
             using (ProductDataContext db = new ProductDataContext())
             {
-                var result = db.Products.Where(product => product.Name.Contains(namePart))
+                IQueryable<Product> result = db.Products.Where(product => product.Name.Contains(namePart))
                                         .Select(product => product);
                 return result.ToList();
             }
@@ -23,7 +23,7 @@ namespace Task3
         {
             using (ProductDataContext db = new ProductDataContext())
             {
-                var result = db.ProductVendors.Where(productVendor => productVendor.Vendor.Name.Equals(vendorName))
+                IQueryable<Product> result = db.ProductVendors.Where(productVendor => productVendor.Vendor.Name.Equals(vendorName))
                                                 .Select(productVendor => productVendor.Product);
                 return result.ToList();
             }
@@ -33,7 +33,7 @@ namespace Task3
         {
             using (ProductDataContext db = new ProductDataContext())
             {
-                var result = db.ProductVendors.Where(productVendor => productVendor.Vendor.Name.Equals(vendorName))
+                IQueryable<string> result = db.ProductVendors.Where(productVendor => productVendor.Vendor.Name.Equals(vendorName))
                                                 .Select(productVendor => productVendor.Product.Name);
                 return result.ToList();
             }
@@ -43,7 +43,7 @@ namespace Task3
         {
             using (ProductDataContext db = new ProductDataContext())
             {
-                var result = db.ProductVendors.Where(productVendor => productVendor.Product.Name.Equals(productName))
+                IQueryable<string> result = db.ProductVendors.Where(productVendor => productVendor.Product.Name.Equals(productName))
                                                 .Select(productVendor => productVendor.Vendor.Name);
                 return result.Single();
             }
@@ -53,7 +53,7 @@ namespace Task3
         {
             using (ProductDataContext db = new ProductDataContext())
             {
-                var result = db.ProductReviews.OrderByDescending(productReview => productReview.ReviewDate)
+                IQueryable<Product> result = db.ProductReviews.OrderByDescending(productReview => productReview.ReviewDate)
                                                 .Select(productReview => productReview.Product);
                 return result.Take(howManyReviews).ToList();
             }
@@ -63,7 +63,7 @@ namespace Task3
         {
             using (ProductDataContext db = new ProductDataContext())
             {
-                var result = db.Products.Join(db.ProductReviews, product => product.ProductID, review => review.ProductID, (product, review) => new { Product = product, Review = review })
+                IQueryable<Product> result = db.Products.Join(db.ProductReviews, product => product.ProductID, review => review.ProductID, (product, review) => new { Product = product, Review = review })
                     .OrderByDescending(review => review.Review.ReviewDate)
                     .Select(product => product.Product);
 
@@ -75,7 +75,7 @@ namespace Task3
         {
             using (ProductDataContext db = new ProductDataContext())
             {
-                var result = db.Products.OrderByDescending(product => product.Name)
+                IQueryable<Product> result = db.Products.OrderByDescending(product => product.Name)
                                         .Where(product => product.ProductSubcategory.ProductCategory.Name.Equals(categoryName))
                                         .Select(product => product);
                 return result.Take(n).ToList();
@@ -86,7 +86,7 @@ namespace Task3
         {
             using (ProductDataContext db = new ProductDataContext())
             {
-                var result = db.Products.Where(product => product.ProductSubcategory.ProductCategory.Name.Equals(category.Name))
+                IQueryable<decimal> result = db.Products.Where(product => product.ProductSubcategory.ProductCategory.Name.Equals(category.Name))
                                         .Select(product => product.StandardCost);
                 return result.Sum();
             }

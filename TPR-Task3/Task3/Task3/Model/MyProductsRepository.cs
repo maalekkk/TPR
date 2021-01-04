@@ -16,7 +16,6 @@ namespace Task3.Model
             {
                 _myProductsList = new List<MyProduct>();
                 List<Product> products = db.GetProducts();
-                int i = 0;
                 foreach (Product product in products)
                 {
                     _myProductsList.Add(new MyProduct(product));
@@ -30,7 +29,6 @@ namespace Task3.Model
             {
                 _myProductsList = new List<MyProduct>();
                 List<Product> products = db.GetNProducts(n);
-                int i = 0;
                 foreach (Product product in products)
                 {
                     _myProductsList.Add(new MyProduct(product));

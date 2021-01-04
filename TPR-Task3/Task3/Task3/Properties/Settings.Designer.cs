@@ -26,7 +26,8 @@ namespace Task3.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DESKTOP-SOSN1Q8;Initial Catalog=AdventureWorks2019;User ID=test;Password=test123")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DESKTOP-QA6GTSO\\SQLEXPRESS;Initial Catalog=AdventureWorks2019;Integra" +
+            "ted Security=True")]
         public string AdventureWorks2019ConnectionString {
             get {
                 return ((string)(this["AdventureWorks2019ConnectionString"]));
@@ -36,7 +37,8 @@ namespace Task3.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DESKTOP-SOSN1Q8;Initial Catalog=AdventureWorks2019;User ID=test;Password=test123")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DESKTOP-QA6GTSO\\SQLEXPRESS;Initial Catalog=AdventureWorks2019;Integra" +
+            "ted Security=True")]
         public string AdventureWorks2019ConnectionString1 {
             get {
                 return ((string)(this["AdventureWorks2019ConnectionString1"]));

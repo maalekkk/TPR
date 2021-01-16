@@ -25,27 +25,21 @@ namespace SL
 
         public void AddLocation(short id,string name, decimal costRate, decimal avaibility, DateTime modifiedDate)
         {
-/*            Task.Run(() =>
-            {*/
-                Location newLocation = new Location();
-                newLocation.LocationID = id;
-                newLocation.Name = name;
-                newLocation.CostRate = costRate;
-                newLocation.Availability = avaibility;
-                newLocation.ModifiedDate = modifiedDate;
-                _dataContext.Add(newLocation);
+            Location newLocation = new Location();
+            newLocation.LocationID = id;
+            newLocation.Name = name;
+            newLocation.CostRate = costRate;
+            newLocation.Availability = avaibility;
+            newLocation.ModifiedDate = modifiedDate;
+            _dataContext.Add(newLocation);
             OnRepositoryChange?.Invoke();
-            /*            });*/
         }
 
         public void DeleteLocation(short id)
         {
-/*            Task.Run(() =>
-            {*/
-                Location deletingLocation = _dataContext.Get(id);
-                _dataContext.Delete(deletingLocation);
+            Location deletingLocation = _dataContext.Get(id);
+            _dataContext.Delete(deletingLocation);
             OnRepositoryChange?.Invoke();
-            /*            });*/
         }
 
         public decimal GetLocationAvaibility(short id)
@@ -80,17 +74,14 @@ namespace SL
 
         public void UpdateLocation(short id, string name, decimal costRate, decimal avaibility, DateTime modifiedDate)
         {
-/*            Task.Run(() =>
-            {*/
-                Location location = new Location();
-                location.LocationID = id;
-                location.Name = name;
-                location.CostRate = costRate;
-                location.Availability = avaibility;
-                location.ModifiedDate = modifiedDate;
-                _dataContext.Update(id, location);
+            Location location = new Location();
+            location.LocationID = id;
+            location.Name = name;
+            location.CostRate = costRate;
+            location.Availability = avaibility;
+            location.ModifiedDate = modifiedDate;
+            _dataContext.Update(id, location);
             OnRepositoryChange?.Invoke();
-            /*            });*/
         }
     }
 }

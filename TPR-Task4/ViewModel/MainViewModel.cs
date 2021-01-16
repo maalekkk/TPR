@@ -30,6 +30,7 @@ namespace ViewModel
         private decimal _costRate;
         private decimal _availability;
         private DateTime _modifiedData;
+        private string _errorMessage;
 
         public ObservableCollection<LocationView> Locations { get => _locations; set => _locations = value; }
         public LocationView Location { 
@@ -91,6 +92,7 @@ namespace ViewModel
         public ICommand ModifyLocation1 { get => _modifyLocation;}
         public ICommand AddLocation { get => _addLocation;}
         public ICommand DeleteLocation { get => _deleteLocation;}
+        public string ErrorMessage { get => _errorMessage; set => _errorMessage = value; }
 
         public MainViewModel()
         {
@@ -102,6 +104,7 @@ namespace ViewModel
             _addLocation = new Command(AddLocationMethod);
             _deleteLocation = new Command(DeleteLocationMethod);
             _modifyLocation = new Command(ModifyLocation);
+            ErrorMessage = "";
             Init();
         }
         private void Init()
@@ -158,7 +161,15 @@ namespace ViewModel
             GetLocationFromTextBoxes();
             if (Location.Id > 0 && !DataRepository.GetLocationsIds().Contains(Location.Id))
             {
-                DataRepository.AddLocation(Location.Id, Location.Name, Location.CostRate, Location.Availability, Location.ModifiedDate);
+                try
+                {
+                    DataRepository.AddLocation(Location.Id, Location.Name, Location.CostRate, Location.Availability, Location.ModifiedDate);
+                    ErrorMessage = "";
+                }
+                catch
+                {
+                    ErrorMessage = "Cannot add location to database!";
+                }
             }
             
         }
@@ -168,14 +179,30 @@ namespace ViewModel
             short id = Location.Id;
             if (id > 0 && DataRepository.GetLocationsIds().Contains(id))
             {
-                DataRepository.DeleteLocation(id);
+                try
+                {
+                    DataRepository.DeleteLocation(id);
+                    ErrorMessage = "";
+                }
+                catch
+                {
+                    ErrorMessage = "Cannot delete location!";
+                }
             }
         }
 
         private void ModifyLocation()
         {
-            GetLocationFromTextBoxes();
-            DataRepository.UpdateLocation(Location.Id, Location.Name, Location.CostRate, Location.Availability, Location.ModifiedDate);
+            try
+            {
+                GetLocationFromTextBoxes();
+                DataRepository.UpdateLocation(Location.Id, Location.Name, Location.CostRate, Location.Availability, Location.ModifiedDate);
+                ErrorMessage = "";
+            }
+            catch
+            {
+                ErrorMessage = "Cannot update location!";
+            }
         }
         private void GetLocationFromTextBoxes() 
         {

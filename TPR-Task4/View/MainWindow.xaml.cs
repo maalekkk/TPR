@@ -15,5 +15,11 @@ namespace View
             InitializeComponent();
         }
 
+        protected override void OnInitialized(EventArgs e)
+        {
+            base.OnInitialized(e);
+            MainViewModel main = (MainViewModel)DataContext;
+        }
+
     }
 }

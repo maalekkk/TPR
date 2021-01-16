@@ -1,0 +1,41 @@
+﻿<Window x:Class="View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ViewModel;assembly=ViewModel"
+        xmlns:view="clr-namespace:View"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Window.DataContext>
+        <local:MainViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <ListView HorizontalAlignment="Left" Height="339" Margin="10,70,0,0" VerticalAlignment="Top" Width="410" ItemsSource="{Binding Locations}" SelectedItem="{Binding Location}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Id}"/>
+                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}"/>
+                    <GridViewColumn Header="CostRate" DisplayMemberBinding="{Binding CostRate}"/>
+                    <GridViewColumn Header="Availability" DisplayMemberBinding="{Binding Availability}"/>
+                    <GridViewColumn Header="ModifiedDate" DisplayMemberBinding="{Binding ModifiedDate}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button x:Name="DeleteButton" Content="Delete Location" HorizontalAlignment="Left" Margin="267,10,0,0" VerticalAlignment="Top" Width="255" Height="55" Command="{Binding DeleteLocation}"/>
+        <Button x:Name="ModifyButton" Content="Modify Location" HorizontalAlignment="Left" Margin="527,10,0,0" VerticalAlignment="Top" Width="255" Height="55" Command="{Binding ModifyLocation1}" />
+        <Button x:Name="AddButton" Content="Add Location" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="252" Height="55" Command="{Binding AddLocation}"/>
+        <Grid HorizontalAlignment="Left" Height="339" Margin="425,70,0,0" VerticalAlignment="Top" Width="357">
+            <Label Content="ID" HorizontalAlignment="Left" Margin="25,10,0,0" VerticalAlignment="Top" Width="90" Height="35" />
+            <Label Content="Name" HorizontalAlignment="Left" Margin="25,60,0,0" VerticalAlignment="Top" Width="90" Height="35"/>
+            <Label Content="Cost Rate" HorizontalAlignment="Left" Margin="25,110,0,0" VerticalAlignment="Top" Width="90" Height="35"/>
+            <Label Content="Availability" HorizontalAlignment="Left" Margin="25,150,0,0" VerticalAlignment="Top" Width="90" Height="35"/>
+            <Label Content="Modified Date" HorizontalAlignment="Left" Margin="25,200,0,0" VerticalAlignment="Top" Width="90" Height="35"/>
+            <TextBox x:Name="NameText" HorizontalAlignment="Left" Height="30" Margin="130,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="237" Text="{Binding Name}"/>
+            <TextBox x:Name="CostRateText" HorizontalAlignment="Left" Height="30" Margin="130,110,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="237" Text="{Binding CostRate}"/>
+            <TextBox x:Name="AvailabilityText" HorizontalAlignment="Left" Height="30" Margin="130,150,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="237" Text="{Binding Availability}"/>
+            <TextBox x:Name="ModifiedDateText" HorizontalAlignment="Left" Height="30" Margin="130,200,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="237" Text="{Binding ModifiedData}"/>
+            <TextBox x:Name="IdText" HorizontalAlignment="Left" Height="30" Margin="130,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="237" Text="{Binding Id}"/>
+        </Grid>
+    </Grid>
+</Window>

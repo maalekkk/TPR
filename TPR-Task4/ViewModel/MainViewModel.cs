@@ -159,35 +159,32 @@ namespace ViewModel
         private void AddLocationMethod()
         {
             GetLocationFromTextBoxes();
-            if (Location.Id > 0 && !DataRepository.GetLocationsIds().Contains(Location.Id))
-            {
                 try
                 {
                     DataRepository.AddLocation(Location.Id, Location.Name, Location.CostRate, Location.Availability, Location.ModifiedDate);
                     ErrorMessage = "";
+                    RaisePropertyChanged("ErrorMessage");
                 }
                 catch
                 {
                     ErrorMessage = "Cannot add location to database!";
-                }
-            }
-            
+                    RaisePropertyChanged("ErrorMessage");
+                }  
         }
 
         private void DeleteLocationMethod()
         {
             short id = Location.Id;
-            if (id > 0 && DataRepository.GetLocationsIds().Contains(id))
+            try
             {
-                try
-                {
-                    DataRepository.DeleteLocation(id);
-                    ErrorMessage = "";
-                }
-                catch
-                {
-                    ErrorMessage = "Cannot delete location!";
-                }
+                DataRepository.DeleteLocation(id);
+                ErrorMessage = "";
+                RaisePropertyChanged("ErrorMessage");
+            }
+            catch
+            {
+                ErrorMessage = "Cannot delete location!";
+                RaisePropertyChanged("ErrorMessage");
             }
         }
 
@@ -198,10 +195,12 @@ namespace ViewModel
                 GetLocationFromTextBoxes();
                 DataRepository.UpdateLocation(Location.Id, Location.Name, Location.CostRate, Location.Availability, Location.ModifiedDate);
                 ErrorMessage = "";
+                RaisePropertyChanged("ErrorMessage");
             }
             catch
             {
                 ErrorMessage = "Cannot update location!";
+                RaisePropertyChanged("ErrorMessage");
             }
         }
         private void GetLocationFromTextBoxes() 

@@ -25,21 +25,35 @@ namespace SL
 
         public void AddLocation(short id,string name, decimal costRate, decimal avaibility, DateTime modifiedDate)
         {
-            Location newLocation = new Location();
-            newLocation.LocationID = id;
-            newLocation.Name = name;
-            newLocation.CostRate = costRate;
-            newLocation.Availability = avaibility;
-            newLocation.ModifiedDate = modifiedDate;
-            _dataContext.Add(newLocation);
-            OnRepositoryChange?.Invoke();
+            if (id > 0 && !GetLocationsIds().Contains(id))
+            {
+                Location newLocation = new Location();
+                newLocation.LocationID = id;
+                newLocation.Name = name;
+                newLocation.CostRate = costRate;
+                newLocation.Availability = avaibility;
+                newLocation.ModifiedDate = modifiedDate;
+                _dataContext.Add(newLocation);
+                OnRepositoryChange?.Invoke();
+            }
+            else
+            {
+                throw new ArgumentException();
+            }
         }
 
         public void DeleteLocation(short id)
         {
-            Location deletingLocation = _dataContext.Get(id);
-            _dataContext.Delete(deletingLocation);
-            OnRepositoryChange?.Invoke();
+            if (id > 0 && GetLocationsIds().Contains(id))
+            {
+                Location deletingLocation = _dataContext.Get(id);
+                _dataContext.Delete(deletingLocation);
+                OnRepositoryChange?.Invoke();
+            }
+            else
+            {
+                throw new ArgumentException();
+            }
         }
 
         public decimal GetLocationAvaibility(short id)

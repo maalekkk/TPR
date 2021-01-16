@@ -80,7 +80,15 @@
                     </Binding>
                 </TextBox.Text>
             </TextBox>
-            <TextBox x:Name="ModifiedDateText" HorizontalAlignment="Left" Height="30" Margin="130,200,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217" Text="{Binding ModifiedData}"/>
+            <TextBox Name="ModifiedData" HorizontalAlignment="Left" Height="30" Margin="130,200,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" Style="{StaticResource TextBoxInError}">
+                <TextBox.Text>
+                    <Binding Path="ModifiedData" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <validation:DateTimeValidator/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
             <TextBox Name="Id" HorizontalAlignment="Left" Height="30" Margin="130,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" Style="{StaticResource TextBoxInError}">
                 <TextBox.Text>
                     <Binding Path="Id" UpdateSourceTrigger="PropertyChanged">

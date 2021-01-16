@@ -35,7 +35,7 @@ namespace SL
                 newLocation.ModifiedDate = modifiedDate;
                 _dataContext.Add(newLocation);
             OnRepositoryChange?.Invoke();
-/*            });*/
+            /*            });*/
         }
 
         public void DeleteLocation(short id)

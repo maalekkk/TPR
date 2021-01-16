@@ -112,6 +112,7 @@ namespace ViewModel
         private void ConvertToLocationViewList()
         {
             List<short> ids = DataRepository.GetLocationsIds();
+            _locations.Clear();
             foreach (short id in ids)
             {
                 _locations.Add(ConvertToLocationView(id));

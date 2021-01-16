@@ -31,11 +31,13 @@
             <Label Content="Cost Rate" HorizontalAlignment="Left" Margin="25,110,0,0" VerticalAlignment="Top" Width="90" Height="35"/>
             <Label Content="Availability" HorizontalAlignment="Left" Margin="25,150,0,0" VerticalAlignment="Top" Width="90" Height="35"/>
             <Label Content="Modified Date" HorizontalAlignment="Left" Margin="25,200,0,0" VerticalAlignment="Top" Width="90" Height="35"/>
-            <TextBox x:Name="NameText" HorizontalAlignment="Left" Height="30" Margin="130,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="237" Text="{Binding Name}"/>
-            <TextBox x:Name="CostRateText" HorizontalAlignment="Left" Height="30" Margin="130,110,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="237" Text="{Binding CostRate}"/>
-            <TextBox x:Name="AvailabilityText" HorizontalAlignment="Left" Height="30" Margin="130,150,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="237" Text="{Binding Availability}"/>
-            <TextBox x:Name="ModifiedDateText" HorizontalAlignment="Left" Height="30" Margin="130,200,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="237" Text="{Binding ModifiedData}"/>
-            <TextBox x:Name="IdText" HorizontalAlignment="Left" Height="30" Margin="130,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="237" Text="{Binding Id}"/>
+            <TextBox x:Name="NameText" HorizontalAlignment="Left" Height="30" Margin="130,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217" Text="{Binding Name}"/>
+            <TextBox x:Name="CostRateText" HorizontalAlignment="Left" Height="30" Margin="130,110,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217" Text="{Binding CostRate}"/>
+            <TextBox x:Name="AvailabilityText" HorizontalAlignment="Left" Height="30" Margin="130,150,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217" Text="{Binding Availability}"/>
+            <TextBox x:Name="ModifiedDateText" HorizontalAlignment="Left" Height="30" Margin="130,200,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217" Text="{Binding ModifiedData}"/>
+            <TextBox x:Name="IdText" HorizontalAlignment="Left" Height="30" Margin="130,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217" Text="{Binding Id}"/>
+            <Label Content="Message" HorizontalAlignment="Left" Margin="10,271,0,0" VerticalAlignment="Top" Width="73"/>
+            <Label x:Name="errorMessage" HorizontalAlignment="Left" Margin="10,302,0,0" VerticalAlignment="Top" Width="337" Content="{Binding ErrorMessage}" Height="27"/>
         </Grid>
     </Grid>
 </Window>

@@ -1,6 +1,7 @@
 ﻿using SL;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -14,7 +15,7 @@ namespace ViewModel
     public class MainViewModel : INotifyPropertyChanged
     {
         private IDataRepository _dataRepository;
-        private List<LocationView> _locations;
+        private ObservableCollection<LocationView> _locations;
         private LocationView _location;
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -30,7 +31,7 @@ namespace ViewModel
         private decimal _availability;
         private DateTime _modifiedData;
 
-        public List<LocationView> Locations { get => _locations; set => _locations = value; }
+        public ObservableCollection<LocationView> Locations { get => _locations; set => _locations = value; }
         public LocationView Location { 
             get => _location;
             set
@@ -96,7 +97,7 @@ namespace ViewModel
             DataRepository = new DataRepository();
             DataRepository.OnRepositoryChange += OnLocationsChanged;
             _location = new LocationView();
-            _locations = new List<LocationView>();
+            _locations = new ObservableCollection<LocationView>();
             _onSelectedLocationChanged = new Command(OnLocationChanged);
             _addLocation = new Command(AddLocationMethod);
             _deleteLocation = new Command(DeleteLocationMethod);

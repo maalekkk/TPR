@@ -53,9 +53,33 @@
             <Label Content="Cost Rate" HorizontalAlignment="Left" Margin="25,110,0,0" VerticalAlignment="Top" Width="90" Height="35"/>
             <Label Content="Availability" HorizontalAlignment="Left" Margin="25,150,0,0" VerticalAlignment="Top" Width="90" Height="35"/>
             <Label Content="Modified Date" HorizontalAlignment="Left" Margin="25,200,0,0" VerticalAlignment="Top" Width="90" Height="35"/>
-            <TextBox x:Name="NameText" HorizontalAlignment="Left" Height="30" Margin="130,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217" Text="{Binding Name}"/>
-            <TextBox x:Name="CostRateText" HorizontalAlignment="Left" Height="30" Margin="130,110,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217" Text="{Binding CostRate}"/>
-            <TextBox x:Name="AvailabilityText" HorizontalAlignment="Left" Height="30" Margin="130,150,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217" Text="{Binding Availability}"/>
+            <TextBox x:Name="Name" HorizontalAlignment="Left" Height="30" Margin="130,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" Style="{StaticResource TextBoxInError}">
+                <TextBox.Text>
+                    <Binding Path="Name" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <validation:NameValidation/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+            <TextBox x:Name="CostRate" HorizontalAlignment="Left" Height="30" Margin="130,110,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" Style="{StaticResource TextBoxInError}">
+                <TextBox.Text>
+                    <Binding Path="CostRate" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <validation:DecimalValidation/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+            <TextBox x:Name="Availability" HorizontalAlignment="Left" Height="30" Margin="130,150,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" Style="{StaticResource TextBoxInError}">
+                <TextBox.Text>
+                    <Binding Path="Availability" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <validation:DecimalValidation/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
             <TextBox x:Name="ModifiedDateText" HorizontalAlignment="Left" Height="30" Margin="130,200,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217" Text="{Binding ModifiedData}"/>
             <TextBox Name="Id" HorizontalAlignment="Left" Height="30" Margin="130,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" Style="{StaticResource TextBoxInError}">
                 <TextBox.Text>

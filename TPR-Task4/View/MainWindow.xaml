@@ -5,11 +5,33 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ViewModel;assembly=ViewModel"
         xmlns:view="clr-namespace:View"
+        xmlns:validation="clr-namespace:View.Validators"
+        xmlns:model="clr-namespace:ViewModel.Model;assembly=ViewModel"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Window.DataContext>
         <local:MainViewModel/>
     </Window.DataContext>
+
+    <Window.Resources>
+        <model:LocationView x:Key="location"/>
+        <ControlTemplate x:Key="ValidationTemplate">
+            <DockPanel>
+                <TextBlock Foreground="Red" FontSize="20">Error</TextBlock>
+                <AdornedElementPlaceholder/>
+            </DockPanel>
+        </ControlTemplate>
+
+        <Style x:Key="TextBoxInError" TargetType="{x:Type TextBox}">
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="true">
+                    <Setter Property="ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self},
+                        Path=(Validation.Errors)[0].ErrorContent}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
     <Grid>
         <ListView HorizontalAlignment="Left" Height="339" Margin="10,70,0,0" VerticalAlignment="Top" Width="410" ItemsSource="{Binding Locations}" SelectedItem="{Binding Location}">
             <ListView.View>
@@ -35,7 +57,15 @@
             <TextBox x:Name="CostRateText" HorizontalAlignment="Left" Height="30" Margin="130,110,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217" Text="{Binding CostRate}"/>
             <TextBox x:Name="AvailabilityText" HorizontalAlignment="Left" Height="30" Margin="130,150,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217" Text="{Binding Availability}"/>
             <TextBox x:Name="ModifiedDateText" HorizontalAlignment="Left" Height="30" Margin="130,200,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217" Text="{Binding ModifiedData}"/>
-            <TextBox x:Name="IdText" HorizontalAlignment="Left" Height="30" Margin="130,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217" Text="{Binding Id}"/>
+            <TextBox Name="Id" HorizontalAlignment="Left" Height="30" Margin="130,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" Style="{StaticResource TextBoxInError}">
+                <TextBox.Text>
+                    <Binding Path="Id" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <validation:IdValidator/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
             <Label Content="Message" HorizontalAlignment="Left" Margin="10,271,0,0" VerticalAlignment="Top" Width="73"/>
             <Label x:Name="errorMessage" HorizontalAlignment="Left" Margin="10,302,0,0" VerticalAlignment="Top" Width="337" Content="{Binding ErrorMessage}" Height="27"/>
         </Grid>

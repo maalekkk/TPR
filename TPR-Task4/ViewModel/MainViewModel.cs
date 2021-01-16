@@ -42,7 +42,7 @@ namespace ViewModel
                 OnSelectedLocationChanged.Execute(null);
             } }
         public IDataRepository DataRepository { get => _dataRepository; set => _dataRepository = value; }
-        public short Id 
+        public short Id
         { 
             get => _id; 
             set
@@ -100,6 +100,7 @@ namespace ViewModel
             DataRepository.OnRepositoryChange += OnLocationsChanged;
             _location = new LocationView();
             _locations = new ObservableCollection<LocationView>();
+            _modifiedData = DateTime.Today;
             _onSelectedLocationChanged = new Command(OnLocationChanged);
             _addLocation = new Command(AddLocationMethod);
             _deleteLocation = new Command(DeleteLocationMethod);
@@ -146,31 +147,24 @@ namespace ViewModel
             }
             CostRate = Location.CostRate;
             Availability = Location.Availability;
-            if (!Location.ModifiedDate.Equals(DateTime.MinValue))
-            {
-                ModifiedData = Location.ModifiedDate;
-            }
-            else
-            {
-                ModifiedData = DateTime.MinValue;
-            }
+            ModifiedData = DateTime.Today;
         }
 
         private void AddLocationMethod()
         {
             GetLocationFromTextBoxes();
-                try
-                {
-                    DataRepository.AddLocation(Location.Id, Location.Name, Location.CostRate, Location.Availability, Location.ModifiedDate);
-                    ErrorMessage = "";
-                    RaisePropertyChanged("ErrorMessage");
-                }
-                catch
-                {
-                    ErrorMessage = "Cannot add location to database!";
-                    RaisePropertyChanged("ErrorMessage");
-                }  
-        }
+            try
+            {
+                DataRepository.AddLocation(Location.Id, Location.Name, Location.CostRate, Location.Availability, Location.ModifiedDate);
+                ErrorMessage = "";
+                RaisePropertyChanged("ErrorMessage");
+            }
+            catch
+            {
+                ErrorMessage = "Cannot add location to database!";
+                RaisePropertyChanged("ErrorMessage");
+            }
+}
 
         private void DeleteLocationMethod()
         {
@@ -180,6 +174,7 @@ namespace ViewModel
                 DataRepository.DeleteLocation(id);
                 ErrorMessage = "";
                 RaisePropertyChanged("ErrorMessage");
+                ClearTextBoxes();
             }
             catch
             {
@@ -205,11 +200,26 @@ namespace ViewModel
         }
         private void GetLocationFromTextBoxes() 
         {
-            Location.Id = Id;
-            Location.Name = Name;
-            Location.CostRate = CostRate;
-            Location.Availability = Availability;
-            Location.ModifiedDate = ModifiedData;
+            Location.Id = _id;
+            Location.Name = _name;
+            Location.CostRate = _costRate;
+            Location.Availability = _availability;
+            Location.ModifiedDate = _modifiedData;
+        }
+
+        private void ClearTextBoxes()
+        {
+            Location = new LocationView();
+            _id = 0;
+            _name = "";
+            _costRate = 0;
+            _availability = 0;
+            _modifiedData = DateTime.Today;
+            RaisePropertyChanged("Id");
+            RaisePropertyChanged("Name");
+            RaisePropertyChanged("CostRate");
+            RaisePropertyChanged("Availability");
+            RaisePropertyChanged("ModifiedData");
         }
 
         protected virtual void RaisePropertyChanged([CallerMemberName] string propertyName = null)

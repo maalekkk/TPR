@@ -11,13 +11,10 @@ namespace SL
     {
         private IDataContext _dataContext;
 
-        public event IDataRepository.OwnHandler OnRepositoryChange;
-
         public DataRepository(IDataContext data)
         {
             _dataContext = data;
         }
-
 
         public DataRepository()
         {
@@ -35,7 +32,6 @@ namespace SL
                 newLocation.Availability = avaibility;
                 newLocation.ModifiedDate = modifiedDate;
                 _dataContext.Add(newLocation);
-                OnRepositoryChange?.Invoke();
             }
             else
             {
@@ -49,7 +45,6 @@ namespace SL
             {
                 Location deletingLocation = _dataContext.Get(id);
                 _dataContext.Delete(deletingLocation);
-                OnRepositoryChange?.Invoke();
             }
             else
             {
@@ -96,7 +91,6 @@ namespace SL
             location.Availability = avaibility;
             location.ModifiedDate = modifiedDate;
             _dataContext.Update(id, location);
-            OnRepositoryChange?.Invoke();
         }
     }
 }

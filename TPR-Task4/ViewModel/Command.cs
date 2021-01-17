@@ -11,15 +11,23 @@ namespace ViewModel
     {
         public event EventHandler CanExecuteChanged;
         private readonly Action _execute;
+        private bool _canExecute;
 
         public Command(Action execute)
         {
             _execute = execute;
+            _canExecute = true;
+        }
+
+        public Command(Action execute, bool canExecute)
+        {
+            _execute = execute;
+            _canExecute = canExecute;
         }
 
         public bool CanExecute(object parameter)
         {
-            return true;
+            return _canExecute;
         }
 
         public void Execute(object parameter)

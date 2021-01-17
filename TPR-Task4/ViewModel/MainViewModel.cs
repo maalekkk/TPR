@@ -97,7 +97,6 @@ namespace ViewModel
         public MainViewModel()
         {
             DataRepository = new DataRepository();
-            DataRepository.OnRepositoryChange += OnLocationsChanged;
             _location = new LocationView();
             _locations = new ObservableCollection<LocationView>();
             _modifiedData = DateTime.Today;
@@ -108,6 +107,21 @@ namespace ViewModel
             ErrorMessage = "";
             Init();
         }
+
+        public MainViewModel(IDataRepository data)
+        {
+            DataRepository = data;
+            _location = new LocationView();
+            _locations = new ObservableCollection<LocationView>();
+            _modifiedData = DateTime.Today;
+            _onSelectedLocationChanged = new Command(OnLocationChanged);
+            _addLocation = new Command(AddLocationMethod);
+            _deleteLocation = new Command(DeleteLocationMethod);
+            _modifyLocation = new Command(ModifyLocation);
+            ErrorMessage = "";
+            Init();
+        }
+
         private void Init()
         {
             ConvertToLocationViewList();
@@ -158,6 +172,7 @@ namespace ViewModel
                 DataRepository.AddLocation(Location.Id, Location.Name, Location.CostRate, Location.Availability, Location.ModifiedDate);
                 ErrorMessage = "";
                 RaisePropertyChanged("ErrorMessage");
+                OnLocationsChanged();
             }
             catch
             {
@@ -175,6 +190,7 @@ namespace ViewModel
                 ErrorMessage = "";
                 RaisePropertyChanged("ErrorMessage");
                 ClearTextBoxes();
+                OnLocationsChanged();
             }
             catch
             {
@@ -191,6 +207,7 @@ namespace ViewModel
                 DataRepository.UpdateLocation(Location.Id, Location.Name, Location.CostRate, Location.Availability, Location.ModifiedDate);
                 ErrorMessage = "";
                 RaisePropertyChanged("ErrorMessage");
+                OnLocationsChanged();
             }
             catch
             {
@@ -233,7 +250,7 @@ namespace ViewModel
                 SelectLocation();
         }
 
-        public void OnLocationsChanged()
+        private void OnLocationsChanged()
         {
             ConvertToLocationViewList();
         }

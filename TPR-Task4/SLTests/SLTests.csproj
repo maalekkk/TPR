@@ -5,7 +5,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9CA1F817-F92D-4E33-B144-244E408C9E3C}</ProjectGuid>
+    <ProjectGuid>{6DF2BD5D-6221-4F6C-B641-D514B917C156}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SLTests</RootNamespace>
@@ -49,16 +49,16 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="SLTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Models\DL.csproj">
-      <Project>{4CC46F13-E263-4736-A930-B38FE68E1076}</Project>
-      <Name>DL</Name>
+    <ProjectReference Include="..\SL\SL.csproj">
+      <Project>{c8b8cddc-9489-4c00-8668-4c42fe1f1b71}</Project>
+      <Name>SL</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

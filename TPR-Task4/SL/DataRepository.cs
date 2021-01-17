@@ -18,6 +18,7 @@ namespace SL
             _dataContext = data;
         }
 
+
         public DataRepository()
         {
             _dataContext = new DataContext();

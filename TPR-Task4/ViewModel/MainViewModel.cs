@@ -93,15 +93,16 @@ namespace ViewModel
         public ICommand DeleteLocation { get => _deleteLocation;}
         public string ErrorMessage { get => _errorMessage; set => _errorMessage = value; }
 
-        public MainViewModel()
+        public MainViewModel(bool dataInMemory = false)
         {
-            DataRepository = new DataRepository();
-            Init();
-        }
-
-        public MainViewModel(IDataRepository data)
-        {
-            DataRepository = data;
+            if (dataInMemory)
+            {
+                DataRepository = new DataRepositoryInMemory();
+            }
+            else
+            {
+                DataRepository = new DataRepository();
+            }
             Init();
         }
 

@@ -11,13 +11,9 @@ namespace View
     {
         public MainWindow()
         {
+            MainViewModel mainViewModel = new MainViewModel(false);
+            this.DataContext = mainViewModel;
             InitializeComponent();
-        }
-
-        protected override void OnInitialized(EventArgs e)
-        {
-            base.OnInitialized(e);
-            MainViewModel main = (MainViewModel)DataContext;
         }
     }
 }

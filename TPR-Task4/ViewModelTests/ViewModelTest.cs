@@ -1,7 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ViewModel;
-using SL;
 
 namespace ViewModelTests
 {
@@ -10,15 +9,24 @@ namespace ViewModelTests
     {
         MainViewModel viewModel;
 
-        public void Init()
+        private void Init()
         {
-            DataRepositoryInMemory dataRepository = new DataRepositoryInMemory();
-            dataRepository.AddLocation(1, "A", 10, 20, new DateTime(2020, 1, 1));
-            dataRepository.AddLocation(2, "B", 10, 20, new DateTime(2020, 1, 1));
-            dataRepository.AddLocation(3, "C", 10, 20, new DateTime(2020, 1, 1));
-            dataRepository.AddLocation(4, "D", 10, 20, new DateTime(2020, 1, 1));
-            dataRepository.AddLocation(5, "E", 10, 20, new DateTime(2020, 1, 1));
-            viewModel = new MainViewModel(dataRepository);
+            viewModel = new MainViewModel(true);
+            Fill(1, "A", 10, 20, new DateTime(2020, 1, 1));
+            Fill(2, "B", 10, 20, new DateTime(2020, 1, 1));
+            Fill(3, "C", 10, 20, new DateTime(2020, 1, 1));
+            Fill(4, "D", 10, 20, new DateTime(2020, 1, 1));
+            Fill(5, "E", 10, 20, new DateTime(2020, 1, 1));
+        }
+
+        private void Fill(short id, string name, decimal costRate, decimal avaiability, DateTime modyfiDate)
+        {
+            viewModel.Id = id;
+            viewModel.Name = name;
+            viewModel.CostRate = costRate;
+            viewModel.Availability = avaiability;
+            viewModel.ModifiedData = modyfiDate;
+            viewModel.AddLocation.Execute(null);
         }
 
         [TestMethod]

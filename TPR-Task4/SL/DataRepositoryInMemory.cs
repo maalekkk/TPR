@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using SL.Model;
 
 namespace SL
@@ -23,7 +21,6 @@ namespace SL
             {
                 throw new ArgumentException();
             }
-
         }
 
         public void DeleteLocation(short id)
@@ -37,7 +34,6 @@ namespace SL
             {
                 throw new ArgumentException();
             }
-            
         }
 
         public decimal GetLocationAvaibility(short id)

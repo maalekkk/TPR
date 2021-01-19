@@ -3,10 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using ViewModel.Model;
 
@@ -33,15 +30,17 @@ namespace ViewModel
         private string _errorMessage;
 
         public ObservableCollection<LocationView> Locations { get => _locations; set => _locations = value; }
-        public LocationView Location { 
+        public IDataRepository DataRepository { get => _dataRepository; set => _dataRepository = value; }
+        public LocationView Location
+        {
             get => _location;
             set
             {
                 _location = value;
                 RaisePropertyChanged("Location");
                 OnSelectedLocationChanged.Execute(null);
-            } }
-        public IDataRepository DataRepository { get => _dataRepository; set => _dataRepository = value; }
+            }
+        }
         public short Id
         { 
             get => _id; 
@@ -97,20 +96,17 @@ namespace ViewModel
         public MainViewModel()
         {
             DataRepository = new DataRepository();
-            _location = new LocationView();
-            _locations = new ObservableCollection<LocationView>();
-            _modifiedData = DateTime.Today;
-            _onSelectedLocationChanged = new Command(OnLocationChanged);
-            _addLocation = new Command(AddLocationMethod);
-            _deleteLocation = new Command(DeleteLocationMethod);
-            _modifyLocation = new Command(ModifyLocation);
-            ErrorMessage = "";
             Init();
         }
 
         public MainViewModel(IDataRepository data)
         {
             DataRepository = data;
+            Init();
+        }
+
+        private void Init()
+        {
             _location = new LocationView();
             _locations = new ObservableCollection<LocationView>();
             _modifiedData = DateTime.Today;
@@ -119,11 +115,6 @@ namespace ViewModel
             _deleteLocation = new Command(DeleteLocationMethod);
             _modifyLocation = new Command(ModifyLocation);
             ErrorMessage = "";
-            Init();
-        }
-
-        private void Init()
-        {
             ConvertToLocationViewList();
         }
 
@@ -254,6 +245,5 @@ namespace ViewModel
         {
             ConvertToLocationViewList();
         }
-
     }
 }

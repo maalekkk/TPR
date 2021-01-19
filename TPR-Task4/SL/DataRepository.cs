@@ -1,9 +1,6 @@
 ﻿using DL;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SL
 {
@@ -54,7 +51,7 @@ namespace SL
 
         public decimal GetLocationAvaibility(short id)
         {
-             return _dataContext.Get(id).Availability;
+            return _dataContext.Get(id).Availability;
         }
 
         public decimal GetLocationCostRate(short id)

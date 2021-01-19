@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SL.Model
 {
@@ -21,10 +16,7 @@ namespace SL.Model
         public decimal Availability { get => _availability; set => _availability = value; }
         public DateTime ModifiedDate { get => _modifiedDate; set => _modifiedDate = value; }
 
-        public LocationTest()
-        {
-
-        }
+        public LocationTest() {}
 
         public LocationTest(short id, string name, decimal costRate, decimal availability, DateTime modifiedDate)
         {

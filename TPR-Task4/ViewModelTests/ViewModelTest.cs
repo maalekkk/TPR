@@ -48,7 +48,7 @@ namespace ViewModelTests
             viewModel.Availability = 20;
             viewModel.ModifiedData = new DateTime(2020, 2, 2);
             viewModel.AddLocation.Execute(null);
-            Assert.AreEqual(viewModel.DataRepository.GetLocationsIds().Count, 6);
+            Assert.AreEqual(viewModel.CountLocations(), 6);
             Assert.AreEqual(viewModel.ErrorMessage, "");
         }
 
@@ -62,7 +62,7 @@ namespace ViewModelTests
             viewModel.Availability = 20;
             viewModel.ModifiedData = new DateTime(2020, 2, 2);
             viewModel.AddLocation.Execute(null);
-            Assert.AreEqual(viewModel.DataRepository.GetLocationsIds().Count, 5);
+            Assert.AreEqual(viewModel.CountLocations(), 5);
             Assert.AreNotEqual(viewModel.ErrorMessage, "");
         }
 
@@ -72,7 +72,7 @@ namespace ViewModelTests
             Init();
             viewModel.Location.Id = 1;
             viewModel.DeleteLocation.Execute(null);
-            Assert.AreEqual(viewModel.DataRepository.GetLocationsIds().Count, 4);
+            Assert.AreEqual(viewModel.CountLocations(), 4);
             Assert.AreEqual(viewModel.ErrorMessage, "");
             Assert.AreEqual(viewModel.Id, 0);
             Assert.AreEqual(viewModel.Name, "");
@@ -89,7 +89,7 @@ namespace ViewModelTests
             Init();
             viewModel.Location.Id = 10;
             viewModel.DeleteLocation.Execute(null);
-            Assert.AreEqual(viewModel.DataRepository.GetLocationsIds().Count, 5);
+            Assert.AreEqual(viewModel.CountLocations(), 5);
             Assert.AreNotEqual(viewModel.ErrorMessage, "");
             Assert.AreEqual(viewModel.Location.Id, 10);
             Assert.AreNotEqual(viewModel.ErrorMessage, "");
@@ -106,8 +106,8 @@ namespace ViewModelTests
             viewModel.Availability = 20;
             viewModel.ModifiedData = new DateTime(2020, 2, 2);
             viewModel.ModifyLocation1.Execute(null);
-            Assert.AreEqual(viewModel.DataRepository.GetLocationName(2), "U");
-            Assert.AreEqual(viewModel.DataRepository.GetLocationsIds().Count, 5);
+            Assert.AreEqual(viewModel.GetLocationName(2), "U");
+            Assert.AreEqual(viewModel.CountLocations(), 5);
             Assert.AreEqual(viewModel.ErrorMessage, "");
         }
 
@@ -121,8 +121,8 @@ namespace ViewModelTests
             viewModel.Availability = 20;
             viewModel.ModifiedData = new DateTime(2020, 2, 2);
             viewModel.ModifyLocation1.Execute(null);
-            Assert.AreEqual(viewModel.DataRepository.GetLocationName(2), "B");
-            Assert.AreEqual(viewModel.DataRepository.GetLocationsIds().Count, 5);
+            Assert.AreEqual(viewModel.GetLocationName(2), "B");
+            Assert.AreEqual(viewModel.CountLocations(), 5);
             Assert.AreNotEqual(viewModel.ErrorMessage, "");
         }
     }

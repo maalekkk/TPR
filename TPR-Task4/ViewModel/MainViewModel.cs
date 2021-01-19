@@ -246,5 +246,15 @@ namespace ViewModel
         {
             ConvertToLocationViewList();
         }
+
+        internal int CountLocations()
+        {
+            return _dataRepository.GetLocationsIds().Count;
+        }
+
+        internal string GetLocationName(short id)
+        {
+            return _dataRepository.GetLocationName(id);
+        }
     }
 }
